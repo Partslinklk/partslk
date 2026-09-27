@@ -1,0 +1,1752 @@
+[
+  {
+    "code": "AF",
+    "name": "Afghanistan",
+    "flagEmoji": "🇦🇫",
+    "flagSvg": "https://flagcdn.com/af.svg",
+    "currencyCode": "AFN"
+  },
+  {
+    "code": "AX",
+    "name": "Åland Islands",
+    "flagEmoji": "🇦🇽",
+    "flagSvg": "https://flagcdn.com/ax.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "AL",
+    "name": "Albania",
+    "flagEmoji": "🇦🇱",
+    "flagSvg": "https://flagcdn.com/al.svg",
+    "currencyCode": "ALL"
+  },
+  {
+    "code": "DZ",
+    "name": "Algeria",
+    "flagEmoji": "🇩🇿",
+    "flagSvg": "https://flagcdn.com/dz.svg",
+    "currencyCode": "DZD"
+  },
+  {
+    "code": "AS",
+    "name": "American Samoa",
+    "flagEmoji": "🇦🇸",
+    "flagSvg": "https://flagcdn.com/as.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "AD",
+    "name": "Andorra",
+    "flagEmoji": "🇦🇩",
+    "flagSvg": "https://flagcdn.com/ad.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "AO",
+    "name": "Angola",
+    "flagEmoji": "🇦🇴",
+    "flagSvg": "https://flagcdn.com/ao.svg",
+    "currencyCode": "AOA"
+  },
+  {
+    "code": "AI",
+    "name": "Anguilla",
+    "flagEmoji": "🇦🇮",
+    "flagSvg": "https://flagcdn.com/ai.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "AQ",
+    "name": "Antarctica",
+    "flagEmoji": "🇦🇶",
+    "flagSvg": "https://flagcdn.com/aq.svg",
+    "currencyCode": ""
+  },
+  {
+    "code": "AG",
+    "name": "Antigua and Barbuda",
+    "flagEmoji": "🇦🇬",
+    "flagSvg": "https://flagcdn.com/ag.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "flagEmoji": "🇦🇷",
+    "flagSvg": "https://flagcdn.com/ar.svg",
+    "currencyCode": "ARS"
+  },
+  {
+    "code": "AM",
+    "name": "Armenia",
+    "flagEmoji": "🇦🇲",
+    "flagSvg": "https://flagcdn.com/am.svg",
+    "currencyCode": "AMD"
+  },
+  {
+    "code": "AW",
+    "name": "Aruba",
+    "flagEmoji": "🇦🇼",
+    "flagSvg": "https://flagcdn.com/aw.svg",
+    "currencyCode": "AWG"
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "flagEmoji": "🇦🇺",
+    "flagSvg": "https://flagcdn.com/au.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "AT",
+    "name": "Austria",
+    "flagEmoji": "🇦🇹",
+    "flagSvg": "https://flagcdn.com/at.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "AZ",
+    "name": "Azerbaijan",
+    "flagEmoji": "🇦🇿",
+    "flagSvg": "https://flagcdn.com/az.svg",
+    "currencyCode": "AZN"
+  },
+  {
+    "code": "BS",
+    "name": "Bahamas",
+    "flagEmoji": "🇧🇸",
+    "flagSvg": "https://flagcdn.com/bs.svg",
+    "currencyCode": "BSD"
+  },
+  {
+    "code": "BH",
+    "name": "Bahrain",
+    "flagEmoji": "🇧🇭",
+    "flagSvg": "https://flagcdn.com/bh.svg",
+    "currencyCode": "BHD"
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesh",
+    "flagEmoji": "🇧🇩",
+    "flagSvg": "https://flagcdn.com/bd.svg",
+    "currencyCode": "BDT"
+  },
+  {
+    "code": "BB",
+    "name": "Barbados",
+    "flagEmoji": "🇧🇧",
+    "flagSvg": "https://flagcdn.com/bb.svg",
+    "currencyCode": "BBD"
+  },
+  {
+    "code": "BY",
+    "name": "Belarus",
+    "flagEmoji": "🇧🇾",
+    "flagSvg": "https://flagcdn.com/by.svg",
+    "currencyCode": "BYN"
+  },
+  {
+    "code": "BE",
+    "name": "Belgium",
+    "flagEmoji": "🇧🇪",
+    "flagSvg": "https://flagcdn.com/be.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "BZ",
+    "name": "Belize",
+    "flagEmoji": "🇧🇿",
+    "flagSvg": "https://flagcdn.com/bz.svg",
+    "currencyCode": "BZD"
+  },
+  {
+    "code": "BJ",
+    "name": "Benin",
+    "flagEmoji": "🇧🇯",
+    "flagSvg": "https://flagcdn.com/bj.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "BM",
+    "name": "Bermuda",
+    "flagEmoji": "🇧🇲",
+    "flagSvg": "https://flagcdn.com/bm.svg",
+    "currencyCode": "BMD"
+  },
+  {
+    "code": "BT",
+    "name": "Bhutan",
+    "flagEmoji": "🇧🇹",
+    "flagSvg": "https://flagcdn.com/bt.svg",
+    "currencyCode": "BTN"
+  },
+  {
+    "code": "BO",
+    "name": "Bolivia",
+    "flagEmoji": "🇧🇴",
+    "flagSvg": "https://flagcdn.com/bo.svg",
+    "currencyCode": "BOB"
+  },
+  {
+    "code": "BA",
+    "name": "Bosnia and Herzegovina",
+    "flagEmoji": "🇧🇦",
+    "flagSvg": "https://flagcdn.com/ba.svg",
+    "currencyCode": "BAM"
+  },
+  {
+    "code": "BW",
+    "name": "Botswana",
+    "flagEmoji": "🇧🇼",
+    "flagSvg": "https://flagcdn.com/bw.svg",
+    "currencyCode": "BWP"
+  },
+  {
+    "code": "BV",
+    "name": "Bouvet Island",
+    "flagEmoji": "🇧🇻",
+    "flagSvg": "https://flagcdn.com/bv.svg",
+    "currencyCode": ""
+  },
+  {
+    "code": "BR",
+    "name": "Brazil",
+    "flagEmoji": "🇧🇷",
+    "flagSvg": "https://flagcdn.com/br.svg",
+    "currencyCode": "BRL"
+  },
+  {
+    "code": "IO",
+    "name": "British Indian Ocean Territory",
+    "flagEmoji": "🇮🇴",
+    "flagSvg": "https://flagcdn.com/io.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "VG",
+    "name": "British Virgin Islands",
+    "flagEmoji": "🇻🇬",
+    "flagSvg": "https://flagcdn.com/vg.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "BN",
+    "name": "Brunei",
+    "flagEmoji": "🇧🇳",
+    "flagSvg": "https://flagcdn.com/bn.svg",
+    "currencyCode": "BND"
+  },
+  {
+    "code": "BG",
+    "name": "Bulgaria",
+    "flagEmoji": "🇧🇬",
+    "flagSvg": "https://flagcdn.com/bg.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "BF",
+    "name": "Burkina Faso",
+    "flagEmoji": "🇧🇫",
+    "flagSvg": "https://flagcdn.com/bf.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "BI",
+    "name": "Burundi",
+    "flagEmoji": "🇧🇮",
+    "flagSvg": "https://flagcdn.com/bi.svg",
+    "currencyCode": "BIF"
+  },
+  {
+    "code": "KH",
+    "name": "Cambodia",
+    "flagEmoji": "🇰🇭",
+    "flagSvg": "https://flagcdn.com/kh.svg",
+    "currencyCode": "KHR"
+  },
+  {
+    "code": "CM",
+    "name": "Cameroon",
+    "flagEmoji": "🇨🇲",
+    "flagSvg": "https://flagcdn.com/cm.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "flagEmoji": "🇨🇦",
+    "flagSvg": "https://flagcdn.com/ca.svg",
+    "currencyCode": "CAD"
+  },
+  {
+    "code": "CV",
+    "name": "Cape Verde",
+    "flagEmoji": "🇨🇻",
+    "flagSvg": "https://flagcdn.com/cv.svg",
+    "currencyCode": "CVE"
+  },
+  {
+    "code": "BQ",
+    "name": "Caribbean Netherlands",
+    "flagEmoji": "🇧🇶",
+    "flagSvg": "https://flagcdn.com/bq.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "KY",
+    "name": "Cayman Islands",
+    "flagEmoji": "🇰🇾",
+    "flagSvg": "https://flagcdn.com/ky.svg",
+    "currencyCode": "KYD"
+  },
+  {
+    "code": "CF",
+    "name": "Central African Republic",
+    "flagEmoji": "🇨🇫",
+    "flagSvg": "https://flagcdn.com/cf.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "TD",
+    "name": "Chad",
+    "flagEmoji": "🇹🇩",
+    "flagSvg": "https://flagcdn.com/td.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "CL",
+    "name": "Chile",
+    "flagEmoji": "🇨🇱",
+    "flagSvg": "https://flagcdn.com/cl.svg",
+    "currencyCode": "CLP"
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "flagEmoji": "🇨🇳",
+    "flagSvg": "https://flagcdn.com/cn.svg",
+    "currencyCode": "CNY"
+  },
+  {
+    "code": "CX",
+    "name": "Christmas Island",
+    "flagEmoji": "🇨🇽",
+    "flagSvg": "https://flagcdn.com/cx.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "CC",
+    "name": "Cocos (Keeling) Islands",
+    "flagEmoji": "🇨🇨",
+    "flagSvg": "https://flagcdn.com/cc.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "CO",
+    "name": "Colombia",
+    "flagEmoji": "🇨🇴",
+    "flagSvg": "https://flagcdn.com/co.svg",
+    "currencyCode": "COP"
+  },
+  {
+    "code": "KM",
+    "name": "Comoros",
+    "flagEmoji": "🇰🇲",
+    "flagSvg": "https://flagcdn.com/km.svg",
+    "currencyCode": "KMF"
+  },
+  {
+    "code": "CG",
+    "name": "Congo",
+    "flagEmoji": "🇨🇬",
+    "flagSvg": "https://flagcdn.com/cg.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "CK",
+    "name": "Cook Islands",
+    "flagEmoji": "🇨🇰",
+    "flagSvg": "https://flagcdn.com/ck.svg",
+    "currencyCode": "CKD"
+  },
+  {
+    "code": "CR",
+    "name": "Costa Rica",
+    "flagEmoji": "🇨🇷",
+    "flagSvg": "https://flagcdn.com/cr.svg",
+    "currencyCode": "CRC"
+  },
+  {
+    "code": "HR",
+    "name": "Croatia",
+    "flagEmoji": "🇭🇷",
+    "flagSvg": "https://flagcdn.com/hr.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "CU",
+    "name": "Cuba",
+    "flagEmoji": "🇨🇺",
+    "flagSvg": "https://flagcdn.com/cu.svg",
+    "currencyCode": "CUC"
+  },
+  {
+    "code": "CW",
+    "name": "Curaçao",
+    "flagEmoji": "🇨🇼",
+    "flagSvg": "https://flagcdn.com/cw.svg",
+    "currencyCode": "ANG"
+  },
+  {
+    "code": "CY",
+    "name": "Cyprus",
+    "flagEmoji": "🇨🇾",
+    "flagSvg": "https://flagcdn.com/cy.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "CZ",
+    "name": "Czechia",
+    "flagEmoji": "🇨🇿",
+    "flagSvg": "https://flagcdn.com/cz.svg",
+    "currencyCode": "CZK"
+  },
+  {
+    "code": "DK",
+    "name": "Denmark",
+    "flagEmoji": "🇩🇰",
+    "flagSvg": "https://flagcdn.com/dk.svg",
+    "currencyCode": "DKK"
+  },
+  {
+    "code": "DJ",
+    "name": "Djibouti",
+    "flagEmoji": "🇩🇯",
+    "flagSvg": "https://flagcdn.com/dj.svg",
+    "currencyCode": "DJF"
+  },
+  {
+    "code": "DM",
+    "name": "Dominica",
+    "flagEmoji": "🇩🇲",
+    "flagSvg": "https://flagcdn.com/dm.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "DO",
+    "name": "Dominican Republic",
+    "flagEmoji": "🇩🇴",
+    "flagSvg": "https://flagcdn.com/do.svg",
+    "currencyCode": "DOP"
+  },
+  {
+    "code": "CD",
+    "name": "DR Congo",
+    "flagEmoji": "🇨🇩",
+    "flagSvg": "https://flagcdn.com/cd.svg",
+    "currencyCode": "CDF"
+  },
+  {
+    "code": "EC",
+    "name": "Ecuador",
+    "flagEmoji": "🇪🇨",
+    "flagSvg": "https://flagcdn.com/ec.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "EG",
+    "name": "Egypt",
+    "flagEmoji": "🇪🇬",
+    "flagSvg": "https://flagcdn.com/eg.svg",
+    "currencyCode": "EGP"
+  },
+  {
+    "code": "SV",
+    "name": "El Salvador",
+    "flagEmoji": "🇸🇻",
+    "flagSvg": "https://flagcdn.com/sv.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "GQ",
+    "name": "Equatorial Guinea",
+    "flagEmoji": "🇬🇶",
+    "flagSvg": "https://flagcdn.com/gq.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "ER",
+    "name": "Eritrea",
+    "flagEmoji": "🇪🇷",
+    "flagSvg": "https://flagcdn.com/er.svg",
+    "currencyCode": "ERN"
+  },
+  {
+    "code": "EE",
+    "name": "Estonia",
+    "flagEmoji": "🇪🇪",
+    "flagSvg": "https://flagcdn.com/ee.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "SZ",
+    "name": "Eswatini",
+    "flagEmoji": "🇸🇿",
+    "flagSvg": "https://flagcdn.com/sz.svg",
+    "currencyCode": "SZL"
+  },
+  {
+    "code": "ET",
+    "name": "Ethiopia",
+    "flagEmoji": "🇪🇹",
+    "flagSvg": "https://flagcdn.com/et.svg",
+    "currencyCode": "ETB"
+  },
+  {
+    "code": "FK",
+    "name": "Falkland Islands",
+    "flagEmoji": "🇫🇰",
+    "flagSvg": "https://flagcdn.com/fk.svg",
+    "currencyCode": "FKP"
+  },
+  {
+    "code": "FO",
+    "name": "Faroe Islands",
+    "flagEmoji": "🇫🇴",
+    "flagSvg": "https://flagcdn.com/fo.svg",
+    "currencyCode": "DKK"
+  },
+  {
+    "code": "FJ",
+    "name": "Fiji",
+    "flagEmoji": "🇫🇯",
+    "flagSvg": "https://flagcdn.com/fj.svg",
+    "currencyCode": "FJD"
+  },
+  {
+    "code": "FI",
+    "name": "Finland",
+    "flagEmoji": "🇫🇮",
+    "flagSvg": "https://flagcdn.com/fi.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "flagEmoji": "🇫🇷",
+    "flagSvg": "https://flagcdn.com/fr.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "GF",
+    "name": "French Guiana",
+    "flagEmoji": "🇬🇫",
+    "flagSvg": "https://flagcdn.com/gf.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "PF",
+    "name": "French Polynesia",
+    "flagEmoji": "🇵🇫",
+    "flagSvg": "https://flagcdn.com/pf.svg",
+    "currencyCode": "XPF"
+  },
+  {
+    "code": "TF",
+    "name": "French Southern and Antarctic Lands",
+    "flagEmoji": "🇹🇫",
+    "flagSvg": "https://flagcdn.com/tf.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "GA",
+    "name": "Gabon",
+    "flagEmoji": "🇬🇦",
+    "flagSvg": "https://flagcdn.com/ga.svg",
+    "currencyCode": "XAF"
+  },
+  {
+    "code": "GM",
+    "name": "Gambia",
+    "flagEmoji": "🇬🇲",
+    "flagSvg": "https://flagcdn.com/gm.svg",
+    "currencyCode": "GMD"
+  },
+  {
+    "code": "GE",
+    "name": "Georgia",
+    "flagEmoji": "🇬🇪",
+    "flagSvg": "https://flagcdn.com/ge.svg",
+    "currencyCode": "GEL"
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "flagEmoji": "🇩🇪",
+    "flagSvg": "https://flagcdn.com/de.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "GH",
+    "name": "Ghana",
+    "flagEmoji": "🇬🇭",
+    "flagSvg": "https://flagcdn.com/gh.svg",
+    "currencyCode": "GHS"
+  },
+  {
+    "code": "GI",
+    "name": "Gibraltar",
+    "flagEmoji": "🇬🇮",
+    "flagSvg": "https://flagcdn.com/gi.svg",
+    "currencyCode": "GIP"
+  },
+  {
+    "code": "GR",
+    "name": "Greece",
+    "flagEmoji": "🇬🇷",
+    "flagSvg": "https://flagcdn.com/gr.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "GL",
+    "name": "Greenland",
+    "flagEmoji": "🇬🇱",
+    "flagSvg": "https://flagcdn.com/gl.svg",
+    "currencyCode": "DKK"
+  },
+  {
+    "code": "GD",
+    "name": "Grenada",
+    "flagEmoji": "🇬🇩",
+    "flagSvg": "https://flagcdn.com/gd.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "GP",
+    "name": "Guadeloupe",
+    "flagEmoji": "🇬🇵",
+    "flagSvg": "https://flagcdn.com/gp.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "GU",
+    "name": "Guam",
+    "flagEmoji": "🇬🇺",
+    "flagSvg": "https://flagcdn.com/gu.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "GT",
+    "name": "Guatemala",
+    "flagEmoji": "🇬🇹",
+    "flagSvg": "https://flagcdn.com/gt.svg",
+    "currencyCode": "GTQ"
+  },
+  {
+    "code": "GG",
+    "name": "Guernsey",
+    "flagEmoji": "🇬🇬",
+    "flagSvg": "https://flagcdn.com/gg.svg",
+    "currencyCode": "GBP"
+  },
+  {
+    "code": "GN",
+    "name": "Guinea",
+    "flagEmoji": "🇬🇳",
+    "flagSvg": "https://flagcdn.com/gn.svg",
+    "currencyCode": "GNF"
+  },
+  {
+    "code": "GW",
+    "name": "Guinea-Bissau",
+    "flagEmoji": "🇬🇼",
+    "flagSvg": "https://flagcdn.com/gw.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "GY",
+    "name": "Guyana",
+    "flagEmoji": "🇬🇾",
+    "flagSvg": "https://flagcdn.com/gy.svg",
+    "currencyCode": "GYD"
+  },
+  {
+    "code": "HT",
+    "name": "Haiti",
+    "flagEmoji": "🇭🇹",
+    "flagSvg": "https://flagcdn.com/ht.svg",
+    "currencyCode": "HTG"
+  },
+  {
+    "code": "HM",
+    "name": "Heard Island and McDonald Islands",
+    "flagEmoji": "🇭🇲",
+    "flagSvg": "https://flagcdn.com/hm.svg",
+    "currencyCode": ""
+  },
+  {
+    "code": "HN",
+    "name": "Honduras",
+    "flagEmoji": "🇭🇳",
+    "flagSvg": "https://flagcdn.com/hn.svg",
+    "currencyCode": "HNL"
+  },
+  {
+    "code": "HK",
+    "name": "Hong Kong",
+    "flagEmoji": "🇭🇰",
+    "flagSvg": "https://flagcdn.com/hk.svg",
+    "currencyCode": "HKD"
+  },
+  {
+    "code": "HU",
+    "name": "Hungary",
+    "flagEmoji": "🇭🇺",
+    "flagSvg": "https://flagcdn.com/hu.svg",
+    "currencyCode": "HUF"
+  },
+  {
+    "code": "IS",
+    "name": "Iceland",
+    "flagEmoji": "🇮🇸",
+    "flagSvg": "https://flagcdn.com/is.svg",
+    "currencyCode": "ISK"
+  },
+  {
+    "code": "IN",
+    "name": "India",
+    "flagEmoji": "🇮🇳",
+    "flagSvg": "https://flagcdn.com/in.svg",
+    "currencyCode": "INR"
+  },
+  {
+    "code": "ID",
+    "name": "Indonesia",
+    "flagEmoji": "🇮🇩",
+    "flagSvg": "https://flagcdn.com/id.svg",
+    "currencyCode": "IDR"
+  },
+  {
+    "code": "IR",
+    "name": "Iran",
+    "flagEmoji": "🇮🇷",
+    "flagSvg": "https://flagcdn.com/ir.svg",
+    "currencyCode": "IRR"
+  },
+  {
+    "code": "IQ",
+    "name": "Iraq",
+    "flagEmoji": "🇮🇶",
+    "flagSvg": "https://flagcdn.com/iq.svg",
+    "currencyCode": "IQD"
+  },
+  {
+    "code": "IE",
+    "name": "Ireland",
+    "flagEmoji": "🇮🇪",
+    "flagSvg": "https://flagcdn.com/ie.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "IM",
+    "name": "Isle of Man",
+    "flagEmoji": "🇮🇲",
+    "flagSvg": "https://flagcdn.com/im.svg",
+    "currencyCode": "GBP"
+  },
+  {
+    "code": "IL",
+    "name": "Israel",
+    "flagEmoji": "🇮🇱",
+    "flagSvg": "https://flagcdn.com/il.svg",
+    "currencyCode": "ILS"
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "flagEmoji": "🇮🇹",
+    "flagSvg": "https://flagcdn.com/it.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "CI",
+    "name": "Ivory Coast",
+    "flagEmoji": "🇨🇮",
+    "flagSvg": "https://flagcdn.com/ci.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "JM",
+    "name": "Jamaica",
+    "flagEmoji": "🇯🇲",
+    "flagSvg": "https://flagcdn.com/jm.svg",
+    "currencyCode": "JMD"
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "flagEmoji": "🇯🇵",
+    "flagSvg": "https://flagcdn.com/jp.svg",
+    "currencyCode": "JPY"
+  },
+  {
+    "code": "JE",
+    "name": "Jersey",
+    "flagEmoji": "🇯🇪",
+    "flagSvg": "https://flagcdn.com/je.svg",
+    "currencyCode": "GBP"
+  },
+  {
+    "code": "JO",
+    "name": "Jordan",
+    "flagEmoji": "🇯🇴",
+    "flagSvg": "https://flagcdn.com/jo.svg",
+    "currencyCode": "JOD"
+  },
+  {
+    "code": "KZ",
+    "name": "Kazakhstan",
+    "flagEmoji": "🇰🇿",
+    "flagSvg": "https://flagcdn.com/kz.svg",
+    "currencyCode": "KZT"
+  },
+  {
+    "code": "KE",
+    "name": "Kenya",
+    "flagEmoji": "🇰🇪",
+    "flagSvg": "https://flagcdn.com/ke.svg",
+    "currencyCode": "KES"
+  },
+  {
+    "code": "KI",
+    "name": "Kiribati",
+    "flagEmoji": "🇰🇮",
+    "flagSvg": "https://flagcdn.com/ki.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "XK",
+    "name": "Kosovo",
+    "flagEmoji": "🇽🇰",
+    "flagSvg": "https://flagcdn.com/xk.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "KW",
+    "name": "Kuwait",
+    "flagEmoji": "🇰🇼",
+    "flagSvg": "https://flagcdn.com/kw.svg",
+    "currencyCode": "KWD"
+  },
+  {
+    "code": "KG",
+    "name": "Kyrgyzstan",
+    "flagEmoji": "🇰🇬",
+    "flagSvg": "https://flagcdn.com/kg.svg",
+    "currencyCode": "KGS"
+  },
+  {
+    "code": "LA",
+    "name": "Laos",
+    "flagEmoji": "🇱🇦",
+    "flagSvg": "https://flagcdn.com/la.svg",
+    "currencyCode": "LAK"
+  },
+  {
+    "code": "LV",
+    "name": "Latvia",
+    "flagEmoji": "🇱🇻",
+    "flagSvg": "https://flagcdn.com/lv.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "LB",
+    "name": "Lebanon",
+    "flagEmoji": "🇱🇧",
+    "flagSvg": "https://flagcdn.com/lb.svg",
+    "currencyCode": "LBP"
+  },
+  {
+    "code": "LS",
+    "name": "Lesotho",
+    "flagEmoji": "🇱🇸",
+    "flagSvg": "https://flagcdn.com/ls.svg",
+    "currencyCode": "LSL"
+  },
+  {
+    "code": "LR",
+    "name": "Liberia",
+    "flagEmoji": "🇱🇷",
+    "flagSvg": "https://flagcdn.com/lr.svg",
+    "currencyCode": "LRD"
+  },
+  {
+    "code": "LY",
+    "name": "Libya",
+    "flagEmoji": "🇱🇾",
+    "flagSvg": "https://flagcdn.com/ly.svg",
+    "currencyCode": "LYD"
+  },
+  {
+    "code": "LI",
+    "name": "Liechtenstein",
+    "flagEmoji": "🇱🇮",
+    "flagSvg": "https://flagcdn.com/li.svg",
+    "currencyCode": "CHF"
+  },
+  {
+    "code": "LT",
+    "name": "Lithuania",
+    "flagEmoji": "🇱🇹",
+    "flagSvg": "https://flagcdn.com/lt.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "LU",
+    "name": "Luxembourg",
+    "flagEmoji": "🇱🇺",
+    "flagSvg": "https://flagcdn.com/lu.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MO",
+    "name": "Macau",
+    "flagEmoji": "🇲🇴",
+    "flagSvg": "https://flagcdn.com/mo.svg",
+    "currencyCode": "MOP"
+  },
+  {
+    "code": "MG",
+    "name": "Madagascar",
+    "flagEmoji": "🇲🇬",
+    "flagSvg": "https://flagcdn.com/mg.svg",
+    "currencyCode": "MGA"
+  },
+  {
+    "code": "MW",
+    "name": "Malawi",
+    "flagEmoji": "🇲🇼",
+    "flagSvg": "https://flagcdn.com/mw.svg",
+    "currencyCode": "MWK"
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "flagEmoji": "🇲🇾",
+    "flagSvg": "https://flagcdn.com/my.svg",
+    "currencyCode": "MYR"
+  },
+  {
+    "code": "MV",
+    "name": "Maldives",
+    "flagEmoji": "🇲🇻",
+    "flagSvg": "https://flagcdn.com/mv.svg",
+    "currencyCode": "MVR"
+  },
+  {
+    "code": "ML",
+    "name": "Mali",
+    "flagEmoji": "🇲🇱",
+    "flagSvg": "https://flagcdn.com/ml.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "MT",
+    "name": "Malta",
+    "flagEmoji": "🇲🇹",
+    "flagSvg": "https://flagcdn.com/mt.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MH",
+    "name": "Marshall Islands",
+    "flagEmoji": "🇲🇭",
+    "flagSvg": "https://flagcdn.com/mh.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "MQ",
+    "name": "Martinique",
+    "flagEmoji": "🇲🇶",
+    "flagSvg": "https://flagcdn.com/mq.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MR",
+    "name": "Mauritania",
+    "flagEmoji": "🇲🇷",
+    "flagSvg": "https://flagcdn.com/mr.svg",
+    "currencyCode": "MRU"
+  },
+  {
+    "code": "MU",
+    "name": "Mauritius",
+    "flagEmoji": "🇲🇺",
+    "flagSvg": "https://flagcdn.com/mu.svg",
+    "currencyCode": "MUR"
+  },
+  {
+    "code": "YT",
+    "name": "Mayotte",
+    "flagEmoji": "🇾🇹",
+    "flagSvg": "https://flagcdn.com/yt.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "flagEmoji": "🇲🇽",
+    "flagSvg": "https://flagcdn.com/mx.svg",
+    "currencyCode": "MXN"
+  },
+  {
+    "code": "FM",
+    "name": "Micronesia",
+    "flagEmoji": "🇫🇲",
+    "flagSvg": "https://flagcdn.com/fm.svg",
+    "currencyCode": ""
+  },
+  {
+    "code": "MD",
+    "name": "Moldova",
+    "flagEmoji": "🇲🇩",
+    "flagSvg": "https://flagcdn.com/md.svg",
+    "currencyCode": "MDL"
+  },
+  {
+    "code": "MC",
+    "name": "Monaco",
+    "flagEmoji": "🇲🇨",
+    "flagSvg": "https://flagcdn.com/mc.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MN",
+    "name": "Mongolia",
+    "flagEmoji": "🇲🇳",
+    "flagSvg": "https://flagcdn.com/mn.svg",
+    "currencyCode": "MNT"
+  },
+  {
+    "code": "ME",
+    "name": "Montenegro",
+    "flagEmoji": "🇲🇪",
+    "flagSvg": "https://flagcdn.com/me.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "MS",
+    "name": "Montserrat",
+    "flagEmoji": "🇲🇸",
+    "flagSvg": "https://flagcdn.com/ms.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "MA",
+    "name": "Morocco",
+    "flagEmoji": "🇲🇦",
+    "flagSvg": "https://flagcdn.com/ma.svg",
+    "currencyCode": "MAD"
+  },
+  {
+    "code": "MZ",
+    "name": "Mozambique",
+    "flagEmoji": "🇲🇿",
+    "flagSvg": "https://flagcdn.com/mz.svg",
+    "currencyCode": "MZN"
+  },
+  {
+    "code": "MM",
+    "name": "Myanmar",
+    "flagEmoji": "🇲🇲",
+    "flagSvg": "https://flagcdn.com/mm.svg",
+    "currencyCode": "MMK"
+  },
+  {
+    "code": "NA",
+    "name": "Namibia",
+    "flagEmoji": "🇳🇦",
+    "flagSvg": "https://flagcdn.com/na.svg",
+    "currencyCode": "NAD"
+  },
+  {
+    "code": "NR",
+    "name": "Nauru",
+    "flagEmoji": "🇳🇷",
+    "flagSvg": "https://flagcdn.com/nr.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "NP",
+    "name": "Nepal",
+    "flagEmoji": "🇳🇵",
+    "flagSvg": "https://flagcdn.com/np.svg",
+    "currencyCode": "NPR"
+  },
+  {
+    "code": "NL",
+    "name": "Netherlands",
+    "flagEmoji": "🇳🇱",
+    "flagSvg": "https://flagcdn.com/nl.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "NC",
+    "name": "New Caledonia",
+    "flagEmoji": "🇳🇨",
+    "flagSvg": "https://flagcdn.com/nc.svg",
+    "currencyCode": "XPF"
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "flagEmoji": "🇳🇿",
+    "flagSvg": "https://flagcdn.com/nz.svg",
+    "currencyCode": "NZD"
+  },
+  {
+    "code": "NI",
+    "name": "Nicaragua",
+    "flagEmoji": "🇳🇮",
+    "flagSvg": "https://flagcdn.com/ni.svg",
+    "currencyCode": "NIO"
+  },
+  {
+    "code": "NE",
+    "name": "Niger",
+    "flagEmoji": "🇳🇪",
+    "flagSvg": "https://flagcdn.com/ne.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "flagEmoji": "🇳🇬",
+    "flagSvg": "https://flagcdn.com/ng.svg",
+    "currencyCode": "NGN"
+  },
+  {
+    "code": "NU",
+    "name": "Niue",
+    "flagEmoji": "🇳🇺",
+    "flagSvg": "https://flagcdn.com/nu.svg",
+    "currencyCode": "NZD"
+  },
+  {
+    "code": "NF",
+    "name": "Norfolk Island",
+    "flagEmoji": "🇳🇫",
+    "flagSvg": "https://flagcdn.com/nf.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "KP",
+    "name": "North Korea",
+    "flagEmoji": "🇰🇵",
+    "flagSvg": "https://flagcdn.com/kp.svg",
+    "currencyCode": "KPW"
+  },
+  {
+    "code": "MK",
+    "name": "North Macedonia",
+    "flagEmoji": "🇲🇰",
+    "flagSvg": "https://flagcdn.com/mk.svg",
+    "currencyCode": "MKD"
+  },
+  {
+    "code": "MP",
+    "name": "Northern Mariana Islands",
+    "flagEmoji": "🇲🇵",
+    "flagSvg": "https://flagcdn.com/mp.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "NO",
+    "name": "Norway",
+    "flagEmoji": "🇳🇴",
+    "flagSvg": "https://flagcdn.com/no.svg",
+    "currencyCode": "NOK"
+  },
+  {
+    "code": "OM",
+    "name": "Oman",
+    "flagEmoji": "🇴🇲",
+    "flagSvg": "https://flagcdn.com/om.svg",
+    "currencyCode": "OMR"
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "flagEmoji": "🇵🇰",
+    "flagSvg": "https://flagcdn.com/pk.svg",
+    "currencyCode": "PKR"
+  },
+  {
+    "code": "PW",
+    "name": "Palau",
+    "flagEmoji": "🇵🇼",
+    "flagSvg": "https://flagcdn.com/pw.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "PS",
+    "name": "Palestine",
+    "flagEmoji": "🇵🇸",
+    "flagSvg": "https://flagcdn.com/ps.svg",
+    "currencyCode": "EGP"
+  },
+  {
+    "code": "PA",
+    "name": "Panama",
+    "flagEmoji": "🇵🇦",
+    "flagSvg": "https://flagcdn.com/pa.svg",
+    "currencyCode": "PAB"
+  },
+  {
+    "code": "PG",
+    "name": "Papua New Guinea",
+    "flagEmoji": "🇵🇬",
+    "flagSvg": "https://flagcdn.com/pg.svg",
+    "currencyCode": "PGK"
+  },
+  {
+    "code": "PY",
+    "name": "Paraguay",
+    "flagEmoji": "🇵🇾",
+    "flagSvg": "https://flagcdn.com/py.svg",
+    "currencyCode": "PYG"
+  },
+  {
+    "code": "PE",
+    "name": "Peru",
+    "flagEmoji": "🇵🇪",
+    "flagSvg": "https://flagcdn.com/pe.svg",
+    "currencyCode": "PEN"
+  },
+  {
+    "code": "PH",
+    "name": "Philippines",
+    "flagEmoji": "🇵🇭",
+    "flagSvg": "https://flagcdn.com/ph.svg",
+    "currencyCode": "PHP"
+  },
+  {
+    "code": "PN",
+    "name": "Pitcairn Islands",
+    "flagEmoji": "🇵🇳",
+    "flagSvg": "https://flagcdn.com/pn.svg",
+    "currencyCode": "NZD"
+  },
+  {
+    "code": "PL",
+    "name": "Poland",
+    "flagEmoji": "🇵🇱",
+    "flagSvg": "https://flagcdn.com/pl.svg",
+    "currencyCode": "PLN"
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "flagEmoji": "🇵🇹",
+    "flagSvg": "https://flagcdn.com/pt.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "PR",
+    "name": "Puerto Rico",
+    "flagEmoji": "🇵🇷",
+    "flagSvg": "https://flagcdn.com/pr.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "QA",
+    "name": "Qatar",
+    "flagEmoji": "🇶🇦",
+    "flagSvg": "https://flagcdn.com/qa.svg",
+    "currencyCode": "QAR"
+  },
+  {
+    "code": "RE",
+    "name": "Réunion",
+    "flagEmoji": "🇷🇪",
+    "flagSvg": "https://flagcdn.com/re.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "RO",
+    "name": "Romania",
+    "flagEmoji": "🇷🇴",
+    "flagSvg": "https://flagcdn.com/ro.svg",
+    "currencyCode": "RON"
+  },
+  {
+    "code": "RU",
+    "name": "Russia",
+    "flagEmoji": "🇷🇺",
+    "flagSvg": "https://flagcdn.com/ru.svg",
+    "currencyCode": "RUB"
+  },
+  {
+    "code": "RW",
+    "name": "Rwanda",
+    "flagEmoji": "🇷🇼",
+    "flagSvg": "https://flagcdn.com/rw.svg",
+    "currencyCode": "RWF"
+  },
+  {
+    "code": "BL",
+    "name": "Saint Barthélemy",
+    "flagEmoji": "🇧🇱",
+    "flagSvg": "https://flagcdn.com/bl.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "SH",
+    "name": "Saint Helena, Ascension and Tristan da Cunha",
+    "flagEmoji": "🇸🇭",
+    "flagSvg": "https://flagcdn.com/sh.svg",
+    "currencyCode": "GBP"
+  },
+  {
+    "code": "KN",
+    "name": "Saint Kitts and Nevis",
+    "flagEmoji": "🇰🇳",
+    "flagSvg": "https://flagcdn.com/kn.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "LC",
+    "name": "Saint Lucia",
+    "flagEmoji": "🇱🇨",
+    "flagSvg": "https://flagcdn.com/lc.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "MF",
+    "name": "Saint Martin",
+    "flagEmoji": "🇲🇫",
+    "flagSvg": "https://flagcdn.com/mf.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "PM",
+    "name": "Saint Pierre and Miquelon",
+    "flagEmoji": "🇵🇲",
+    "flagSvg": "https://flagcdn.com/pm.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "VC",
+    "name": "Saint Vincent and the Grenadines",
+    "flagEmoji": "🇻🇨",
+    "flagSvg": "https://flagcdn.com/vc.svg",
+    "currencyCode": "XCD"
+  },
+  {
+    "code": "WS",
+    "name": "Samoa",
+    "flagEmoji": "🇼🇸",
+    "flagSvg": "https://flagcdn.com/ws.svg",
+    "currencyCode": "WST"
+  },
+  {
+    "code": "SM",
+    "name": "San Marino",
+    "flagEmoji": "🇸🇲",
+    "flagSvg": "https://flagcdn.com/sm.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "ST",
+    "name": "São Tomé and Príncipe",
+    "flagEmoji": "🇸🇹",
+    "flagSvg": "https://flagcdn.com/st.svg",
+    "currencyCode": "STN"
+  },
+  {
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "flagEmoji": "🇸🇦",
+    "flagSvg": "https://flagcdn.com/sa.svg",
+    "currencyCode": "SAR"
+  },
+  {
+    "code": "SN",
+    "name": "Senegal",
+    "flagEmoji": "🇸🇳",
+    "flagSvg": "https://flagcdn.com/sn.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "RS",
+    "name": "Serbia",
+    "flagEmoji": "🇷🇸",
+    "flagSvg": "https://flagcdn.com/rs.svg",
+    "currencyCode": "RSD"
+  },
+  {
+    "code": "SC",
+    "name": "Seychelles",
+    "flagEmoji": "🇸🇨",
+    "flagSvg": "https://flagcdn.com/sc.svg",
+    "currencyCode": "SCR"
+  },
+  {
+    "code": "SL",
+    "name": "Sierra Leone",
+    "flagEmoji": "🇸🇱",
+    "flagSvg": "https://flagcdn.com/sl.svg",
+    "currencyCode": "SLE"
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "flagEmoji": "🇸🇬",
+    "flagSvg": "https://flagcdn.com/sg.svg",
+    "currencyCode": "SGD"
+  },
+  {
+    "code": "SX",
+    "name": "Sint Maarten",
+    "flagEmoji": "🇸🇽",
+    "flagSvg": "https://flagcdn.com/sx.svg",
+    "currencyCode": "ANG"
+  },
+  {
+    "code": "SK",
+    "name": "Slovakia",
+    "flagEmoji": "🇸🇰",
+    "flagSvg": "https://flagcdn.com/sk.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "SI",
+    "name": "Slovenia",
+    "flagEmoji": "🇸🇮",
+    "flagSvg": "https://flagcdn.com/si.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "SB",
+    "name": "Solomon Islands",
+    "flagEmoji": "🇸🇧",
+    "flagSvg": "https://flagcdn.com/sb.svg",
+    "currencyCode": "SBD"
+  },
+  {
+    "code": "SO",
+    "name": "Somalia",
+    "flagEmoji": "🇸🇴",
+    "flagSvg": "https://flagcdn.com/so.svg",
+    "currencyCode": "SOS"
+  },
+  {
+    "code": "ZA",
+    "name": "South Africa",
+    "flagEmoji": "🇿🇦",
+    "flagSvg": "https://flagcdn.com/za.svg",
+    "currencyCode": "ZAR"
+  },
+  {
+    "code": "GS",
+    "name": "South Georgia",
+    "flagEmoji": "🇬🇸",
+    "flagSvg": "https://flagcdn.com/gs.svg",
+    "currencyCode": "SHP"
+  },
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "flagEmoji": "🇰🇷",
+    "flagSvg": "https://flagcdn.com/kr.svg",
+    "currencyCode": "KRW"
+  },
+  {
+    "code": "SS",
+    "name": "South Sudan",
+    "flagEmoji": "🇸🇸",
+    "flagSvg": "https://flagcdn.com/ss.svg",
+    "currencyCode": "SSP"
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "flagEmoji": "🇪🇸",
+    "flagSvg": "https://flagcdn.com/es.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "LK",
+    "name": "Sri Lanka",
+    "flagEmoji": "🇱🇰",
+    "flagSvg": "https://flagcdn.com/lk.svg",
+    "currencyCode": "LKR"
+  },
+  {
+    "code": "SD",
+    "name": "Sudan",
+    "flagEmoji": "🇸🇩",
+    "flagSvg": "https://flagcdn.com/sd.svg",
+    "currencyCode": "SDG"
+  },
+  {
+    "code": "SR",
+    "name": "Suriname",
+    "flagEmoji": "🇸🇷",
+    "flagSvg": "https://flagcdn.com/sr.svg",
+    "currencyCode": "SRD"
+  },
+  {
+    "code": "SJ",
+    "name": "Svalbard and Jan Mayen",
+    "flagEmoji": "🇸🇯",
+    "flagSvg": "https://flagcdn.com/sj.svg",
+    "currencyCode": "NOK"
+  },
+  {
+    "code": "SE",
+    "name": "Sweden",
+    "flagEmoji": "🇸🇪",
+    "flagSvg": "https://flagcdn.com/se.svg",
+    "currencyCode": "SEK"
+  },
+  {
+    "code": "CH",
+    "name": "Switzerland",
+    "flagEmoji": "🇨🇭",
+    "flagSvg": "https://flagcdn.com/ch.svg",
+    "currencyCode": "CHF"
+  },
+  {
+    "code": "SY",
+    "name": "Syria",
+    "flagEmoji": "🇸🇾",
+    "flagSvg": "https://flagcdn.com/sy.svg",
+    "currencyCode": "SYP"
+  },
+  {
+    "code": "TW",
+    "name": "Taiwan",
+    "flagEmoji": "🇹🇼",
+    "flagSvg": "https://flagcdn.com/tw.svg",
+    "currencyCode": "TWD"
+  },
+  {
+    "code": "TJ",
+    "name": "Tajikistan",
+    "flagEmoji": "🇹🇯",
+    "flagSvg": "https://flagcdn.com/tj.svg",
+    "currencyCode": "TJS"
+  },
+  {
+    "code": "TZ",
+    "name": "Tanzania",
+    "flagEmoji": "🇹🇿",
+    "flagSvg": "https://flagcdn.com/tz.svg",
+    "currencyCode": "TZS"
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "flagEmoji": "🇹🇭",
+    "flagSvg": "https://flagcdn.com/th.svg",
+    "currencyCode": "THB"
+  },
+  {
+    "code": "TL",
+    "name": "Timor-Leste",
+    "flagEmoji": "🇹🇱",
+    "flagSvg": "https://flagcdn.com/tl.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "TG",
+    "name": "Togo",
+    "flagEmoji": "🇹🇬",
+    "flagSvg": "https://flagcdn.com/tg.svg",
+    "currencyCode": "XOF"
+  },
+  {
+    "code": "TK",
+    "name": "Tokelau",
+    "flagEmoji": "🇹🇰",
+    "flagSvg": "https://flagcdn.com/tk.svg",
+    "currencyCode": "NZD"
+  },
+  {
+    "code": "TO",
+    "name": "Tonga",
+    "flagEmoji": "🇹🇴",
+    "flagSvg": "https://flagcdn.com/to.svg",
+    "currencyCode": "TOP"
+  },
+  {
+    "code": "TT",
+    "name": "Trinidad and Tobago",
+    "flagEmoji": "🇹🇹",
+    "flagSvg": "https://flagcdn.com/tt.svg",
+    "currencyCode": "TTD"
+  },
+  {
+    "code": "TN",
+    "name": "Tunisia",
+    "flagEmoji": "🇹🇳",
+    "flagSvg": "https://flagcdn.com/tn.svg",
+    "currencyCode": "TND"
+  },
+  {
+    "code": "TR",
+    "name": "Türkiye",
+    "flagEmoji": "🇹🇷",
+    "flagSvg": "https://flagcdn.com/tr.svg",
+    "currencyCode": "TRY"
+  },
+  {
+    "code": "TM",
+    "name": "Turkmenistan",
+    "flagEmoji": "🇹🇲",
+    "flagSvg": "https://flagcdn.com/tm.svg",
+    "currencyCode": "TMT"
+  },
+  {
+    "code": "TC",
+    "name": "Turks and Caicos Islands",
+    "flagEmoji": "🇹🇨",
+    "flagSvg": "https://flagcdn.com/tc.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "TV",
+    "name": "Tuvalu",
+    "flagEmoji": "🇹🇻",
+    "flagSvg": "https://flagcdn.com/tv.svg",
+    "currencyCode": "AUD"
+  },
+  {
+    "code": "UG",
+    "name": "Uganda",
+    "flagEmoji": "🇺🇬",
+    "flagSvg": "https://flagcdn.com/ug.svg",
+    "currencyCode": "UGX"
+  },
+  {
+    "code": "UA",
+    "name": "Ukraine",
+    "flagEmoji": "🇺🇦",
+    "flagSvg": "https://flagcdn.com/ua.svg",
+    "currencyCode": "UAH"
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "flagEmoji": "🇦🇪",
+    "flagSvg": "https://flagcdn.com/ae.svg",
+    "currencyCode": "AED"
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "flagEmoji": "🇬🇧",
+    "flagSvg": "https://flagcdn.com/gb.svg",
+    "currencyCode": "GBP"
+  },
+  {
+    "code": "US",
+    "name": "United States",
+    "flagEmoji": "🇺🇸",
+    "flagSvg": "https://flagcdn.com/us.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "UM",
+    "name": "United States Minor Outlying Islands",
+    "flagEmoji": "🇺🇲",
+    "flagSvg": "https://flagcdn.com/um.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "VI",
+    "name": "United States Virgin Islands",
+    "flagEmoji": "🇻🇮",
+    "flagSvg": "https://flagcdn.com/vi.svg",
+    "currencyCode": "USD"
+  },
+  {
+    "code": "UY",
+    "name": "Uruguay",
+    "flagEmoji": "🇺🇾",
+    "flagSvg": "https://flagcdn.com/uy.svg",
+    "currencyCode": "UYU"
+  },
+  {
+    "code": "UZ",
+    "name": "Uzbekistan",
+    "flagEmoji": "🇺🇿",
+    "flagSvg": "https://flagcdn.com/uz.svg",
+    "currencyCode": "UZS"
+  },
+  {
+    "code": "VU",
+    "name": "Vanuatu",
+    "flagEmoji": "🇻🇺",
+    "flagSvg": "https://flagcdn.com/vu.svg",
+    "currencyCode": "VUV"
+  },
+  {
+    "code": "VA",
+    "name": "Vatican City",
+    "flagEmoji": "🇻🇦",
+    "flagSvg": "https://flagcdn.com/va.svg",
+    "currencyCode": "EUR"
+  },
+  {
+    "code": "VE",
+    "name": "Venezuela",
+    "flagEmoji": "🇻🇪",
+    "flagSvg": "https://flagcdn.com/ve.svg",
+    "currencyCode": "VES"
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam",
+    "flagEmoji": "🇻🇳",
+    "flagSvg": "https://flagcdn.com/vn.svg",
+    "currencyCode": "VND"
+  },
+  {
+    "code": "WF",
+    "name": "Wallis and Futuna",
+    "flagEmoji": "🇼🇫",
+    "flagSvg": "https://flagcdn.com/wf.svg",
+    "currencyCode": "XPF"
+  },
+  {
+    "code": "EH",
+    "name": "Western Sahara",
+    "flagEmoji": "🇪🇭",
+    "flagSvg": "https://flagcdn.com/eh.svg",
+    "currencyCode": "DZD"
+  },
+  {
+    "code": "YE",
+    "name": "Yemen",
+    "flagEmoji": "🇾🇪",
+    "flagSvg": "https://flagcdn.com/ye.svg",
+    "currencyCode": "YER"
+  },
+  {
+    "code": "ZM",
+    "name": "Zambia",
+    "flagEmoji": "🇿🇲",
+    "flagSvg": "https://flagcdn.com/zm.svg",
+    "currencyCode": "ZMW"
+  },
+  {
+    "code": "ZW",
+    "name": "Zimbabwe",
+    "flagEmoji": "🇿🇼",
+    "flagSvg": "https://flagcdn.com/zw.svg",
+    "currencyCode": "BWP"
+  }
+]

@@ -1,0 +1,96 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { useUI } from "./UIProvider";
+import { SearchBar } from "./SearchBar";
+import { TopBar } from "./TopBar";
+import { AccountMenu } from "./AccountMenu";
+import { CategoryBar } from "./CategoryBar";
+
+export function Navbar() {
+  const { cartCount } = useUI();
+  const catbarRef = useRef<HTMLDivElement>(null);
+  const naturalOffsetRef = useRef(0);
+  const isStickyRef = useRef(false);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const catbar = catbarRef.current;
+    if (!catbar) return;
+
+    const measure = () => {
+      if (!isStickyRef.current) naturalOffsetRef.current = catbar.offsetTop;
+    };
+    measure();
+
+    let ticking = false;
+    const applyState = () => {
+      const next = window.scrollY >= naturalOffsetRef.current;
+      isStickyRef.current = next;
+      setIsSticky(next);
+      ticking = false;
+    };
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(applyState);
+      }
+    };
+
+    applyState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", measure);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", measure);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <header className="nav">
+      <TopBar />
+
+      <div className="wrap">
+        <div className="nav-top">
+          <Link className="logo" href="/" aria-label="Automize home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="logo-img" src="/logo.png" alt="Automize" />
+          </Link>
+
+          <SearchBar />
+
+          <a className="nav-help" href="tel:+19876543210">
+            <span className="nav-help-label">Need Help?</span>
+            <strong className="nav-help-num">9876-543-210</strong>
+          </a>
+
+          <div className="nav-actions">
+            <AccountMenu />
+
+            <Link className="nav-act nav-cartblock" href="/cart">
+              <span className="nav-cart-ico">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.4 18h8.4a2 2 0 0 0 2-1.6L21.5 8H6" />
+                  <circle cx="10" cy="21" r="1" />
+                  <circle cx="18" cy="21" r="1" />
+                </svg>
+                <span className="cart-count">{cartCount}</span>
+              </span>
+              <span className="nav-act-text">
+                <strong>Cart</strong>
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div ref={catbarRef} className={`catbar${isSticky ? " is-sticky" : ""}`}>
+        <div className="wrap">
+          <CategoryBar />
+        </div>
+      </div>
+    </header>
+  );
+}
