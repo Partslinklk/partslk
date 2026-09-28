@@ -8,9 +8,10 @@ import { TopBar } from "./TopBar";
 import { AccountMenu } from "./AccountMenu";
 import { CategoryBar } from "./CategoryBar";
 import { TopDealsDrawer } from "./TopDealsDrawer";
+import { CartDrawer } from "./CartDrawer";
 
 export function Navbar() {
-  const { cartCount } = useUI();
+  const { cartCount, openCart } = useUI();
   const catbarRef = useRef<HTMLDivElement>(null);
   const naturalOffsetRef = useRef(0);
   const isStickyRef = useRef(false);
@@ -70,7 +71,7 @@ export function Navbar() {
           <div className="nav-actions">
             <AccountMenu />
 
-            <Link className="nav-act nav-cartblock" href="/cart">
+            <button type="button" className="nav-act nav-cartblock" onClick={openCart}>
               <span className="nav-cart-ico">
                 <svg viewBox="0 0 24 24">
                   <path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.4 18h8.4a2 2 0 0 0 2-1.6L21.5 8H6" />
@@ -82,7 +83,7 @@ export function Navbar() {
               <span className="nav-act-text">
                 <strong>Cart</strong>
               </span>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -94,6 +95,7 @@ export function Navbar() {
       </div>
 
       <TopDealsDrawer />
+      <CartDrawer />
     </header>
   );
 }

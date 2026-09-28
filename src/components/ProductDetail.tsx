@@ -175,14 +175,16 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
 
   const handleQty = (next: number) => setQty(Math.min(stock, Math.max(1, next)));
 
+  const cartProduct = { id: product.id, name: product.name, image: product.image, price: product.price };
+
   const handleAddToCart = () => {
-    addToCart(qty);
+    addToCart(cartProduct, qty);
     setAddedLabel(true);
     window.setTimeout(() => setAddedLabel(false), 1600);
   };
 
   const handleBuyNow = () => {
-    addToCart(qty);
+    addToCart(cartProduct, qty);
   };
 
   const handleShare = async () => {

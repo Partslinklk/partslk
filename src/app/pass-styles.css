@@ -1310,6 +1310,46 @@ body.auth-open { overflow: hidden; }
 body.topdeal-open { overflow: hidden; }
 
 /* ============================================================
+   SHOPPING CART DRAWER (slide-in from right)
+   ============================================================ */
+body.cart-drawer-open { overflow: hidden; }
+
+.cart-drawer { justify-content: flex-start; }
+
+.cart-drawer-progress { padding: 18px 24px 0; }
+.cart-drawer-progress p { font-size: 14px; font-weight: 600; color: var(--brand-dark); margin-bottom: 10px; }
+.cart-drawer-bar { height: 6px; border-radius: 3px; background: var(--n-soft); overflow: hidden; }
+.cart-drawer-bar span { display: block; height: 100%; background: var(--brand-primary); transition: width .3s ease; }
+
+.cart-drawer-list { padding-top: 6px; }
+.cart-drawer-list .topdeal-row { position: relative; padding-right: 30px; }
+.cart-drawer-remove {
+  position: absolute; top: 18px; right: 0;
+  width: 22px; height: 22px; display: grid; place-items: center;
+}
+.cart-drawer-remove svg { width: 14px; height: 14px; stroke: var(--brand-text); fill: none; }
+.cart-drawer-remove:hover svg { stroke: var(--brand-primary); }
+
+.cart-drawer-foot { padding: 18px 24px 24px; border-top: 1px solid var(--n-border); }
+.cart-drawer-actions { display: flex; gap: 12px; margin-top: 4px; }
+.cart-drawer-view {
+  flex: 1; height: 50px; border-radius: 10px; border: 1px solid var(--n-border);
+  display: inline-flex; align-items: center; justify-content: center;
+  font: 700 15px var(--font); color: var(--brand-dark);
+  transition: background .15s ease;
+}
+.cart-drawer-view:hover { background: var(--n-soft); }
+.cart-drawer-checkout.checkout-btn { flex: 1; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; }
+
+.cart-drawer-empty {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 40px 30px; gap: 8px;
+}
+.cart-drawer-empty p { font-size: 19px; font-weight: 800; color: var(--brand-dark); }
+.cart-drawer-empty span { font-size: 14px; color: var(--brand-text); margin-bottom: 12px; }
+.cart-drawer-empty .checkout-btn { width: 220px; border-radius: 10px; }
+
+/* ============================================================
    CART PAGE
    ============================================================ */
 .cart-page { padding-top: 24px; }
@@ -2960,6 +3000,14 @@ body.topdeal-open { overflow: hidden; }
 .footer-col ul a { font-size: 14px; color: var(--n-mid); transition: color .14s ease; }
 .footer-col ul a:hover { color: var(--brand-primary); }
 .footer-about p { font-size: 14px; line-height: 1.6; color: var(--n-mid); max-width: 380px; }
+.footer-social { display: flex; gap: 10px; margin-top: 20px; }
+.footer-social-link {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--n-border);
+  color: var(--brand-dark); transition: background .14s ease, border-color .14s ease, color .14s ease;
+}
+.footer-social-link svg { width: 16px; height: 16px; }
+.footer-social-link:hover { background: var(--brand-primary); border-color: var(--brand-primary); color: var(--brand-white); }
 .footer-contact-list { gap: 16px !important; }
 .footer-contact-list li { display: flex; align-items: flex-start; gap: 10px; }
 .footer-contact-list svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 1px; stroke: var(--brand-primary); }

@@ -48,6 +48,26 @@ export function Footer() {
             unparalleled customer service. Our store is a haven for those who appreciate quality,
             fit, and reliability.
           </p>
+
+          <div className="footer-social">
+            <a href="#" aria-label="Facebook" className="footer-social-link">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M13.5 21v-7.5H16l.5-3H13.5V8.5c0-.9.25-1.5 1.53-1.5H16.5V4.36C16.2 4.32 15.2 4.25 14 4.25c-2.4 0-4 1.46-4 4.15V10.5H7.5v3H10V21h3.5Z" />
+              </svg>
+            </a>
+            <a href="#" aria-label="Instagram" className="footer-social-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7}>
+                <rect x="3.5" y="3.5" width="17" height="17" rx="4.5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17" cy="7" r="0.8" fill="currentColor" stroke="none" />
+              </svg>
+            </a>
+            <a href="#" aria-label="WhatsApp" className="footer-social-link">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.3A9 9 0 1 0 12 3Zm0 1.8a7.2 7.2 0 1 1-3.7 13.4l-.3-.2-2.7.8.8-2.6-.2-.3A7.2 7.2 0 0 1 12 4.8Zm-3.3 3.5c-.2 0-.5 0-.7.3-.2.3-.9.8-.9 2s.9 2.3 1 2.5c.1.1 1.7 2.7 4.3 3.7 2.1.9 2.6.7 3 .6.5 0 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.2-.2-.5-.3l-1.9-.9c-.3-.1-.4-.2-.6.1l-.6.9c-.1.2-.3.2-.5.1-.3-.1-1.1-.4-2-1.3-.8-.7-1.3-1.6-1.4-1.9-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5l-.9-2c-.2-.5-.4-.4-.6-.4Z" />
+              </svg>
+            </a>
+          </div>
         </div>
 
         <div className="footer-col">
