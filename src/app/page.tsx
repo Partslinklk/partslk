@@ -5,6 +5,7 @@ import { ShopByCategories } from "@/components/ShopByCategories";
 import { DealOfWeek } from "@/components/DealOfWeek";
 import { Testimonials } from "@/components/Testimonials";
 import { PopularProducts } from "@/components/PopularProducts";
+import { Footer } from "@/components/Footer";
 import { ScrollTop } from "@/components/ScrollTop";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
       <DealOfWeek />
       <Testimonials />
       <PopularProducts />
+      <Footer />
       <ScrollTop />
     </div>
   );

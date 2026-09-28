@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Navbar } from "@/components/Navbar";
 import { ProductDetail } from "@/components/ProductDetail";
+import { Footer } from "@/components/Footer";
 import { ScrollTop } from "@/components/ScrollTop";
 import { SHOP_PRODUCTS } from "@/lib/products-catalog";
 
@@ -28,6 +29,7 @@ export default async function Page(props: PageProps<"/products/[id]">) {
     <div className="min-h-screen bg-white">
       <Navbar />
       <ProductDetail product={product} />
+      <Footer />
       <ScrollTop />
     </div>
   );

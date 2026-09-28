@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { ProductsPage } from "@/components/ProductsPage";
+import { Footer } from "@/components/Footer";
 import { ScrollTop } from "@/components/ScrollTop";
 
 export default async function Page(props: PageProps<"/products">) {
@@ -11,6 +12,7 @@ export default async function Page(props: PageProps<"/products">) {
     <div className="min-h-screen bg-white">
       <Navbar />
       <ProductsPage initialQuery={q} />
+      <Footer />
       <ScrollTop />
     </div>
   );

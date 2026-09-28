@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useUI } from "./UIProvider";
 
 function ChevronDown() {
   return (
@@ -9,6 +12,8 @@ function ChevronDown() {
 }
 
 export function CategoryBar() {
+  const { openTopDeals } = useUI();
+
   return (
     <nav className="nav-links" aria-label="Categories">
       <div className="cat-menu">
@@ -49,13 +54,13 @@ export function CategoryBar() {
         <ChevronDown />
       </button>
 
-      <Link className="nav-link nav-today" href="/products">
+      <button className="nav-link nav-today" type="button" onClick={openTopDeals}>
         <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
           <circle cx="12" cy="12" r="9" />
           <path d="M12 7v5l3 3" />
         </svg>
         Today&apos;s Deal
-      </Link>
+      </button>
     </nav>
   );
 }

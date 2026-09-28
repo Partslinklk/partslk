@@ -1259,6 +1259,57 @@ body.auth-open { overflow: hidden; }
 }
 
 /* ============================================================
+   TOP DEAL PRODUCTS DRAWER (slide-in from right)
+   ============================================================ */
+.topdeal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(26,26,26,.55);
+  opacity: 0; visibility: hidden; transition: opacity .3s ease, visibility 0s linear .3s;
+  display: flex; justify-content: flex-end;
+  overflow: hidden;
+}
+.topdeal-overlay.open { opacity: 1; visibility: visible; transition: opacity .3s ease; }
+.topdeal-drawer {
+  position: relative; height: 100%; width: min(420px, 92vw);
+  background: var(--brand-white);
+  display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .38s cubic-bezier(.4,0,.2,1);
+  box-shadow: -16px 0 48px rgba(0,0,0,.18);
+}
+.topdeal-overlay.open .topdeal-drawer { transform: translateX(0); }
+
+.topdeal-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 24px; border-bottom: 1px solid var(--n-border);
+}
+.topdeal-head h2 { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
+.topdeal-close {
+  width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--n-border); transition: background .15s ease;
+}
+.topdeal-close:hover { background: var(--n-soft); }
+.topdeal-close svg { width: 18px; height: 18px; stroke: var(--brand-dark); fill: none; stroke-width: 2; }
+
+.topdeal-list { flex: 1; overflow-y: auto; padding: 10px 24px 24px; }
+.topdeal-row {
+  display: flex; gap: 16px; align-items: center;
+  padding: 18px 0; border-bottom: 1px solid var(--n-border);
+}
+.topdeal-row:last-child { border-bottom: none; }
+.topdeal-media { width: 84px; height: 84px; flex: 0 0 84px; }
+.topdeal-media .image-slot { width: 100%; height: 100%; display: block; }
+.topdeal-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.topdeal-name {
+  font-size: 14.5px; font-weight: 600; line-height: 1.35;
+  overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.topdeal-star-row { display: flex; gap: 2px; }
+.topdeal-star-row svg { width: 15px; height: 15px; }
+.topdeal-price { font-size: 16px; font-weight: 700; color: var(--brand-deep); }
+
+body.topdeal-open { overflow: hidden; }
+
+/* ============================================================
    CART PAGE
    ============================================================ */
 .cart-page { padding-top: 24px; }
@@ -2893,6 +2944,55 @@ body.auth-open { overflow: hidden; }
 @media (max-width: 900px) {
   .brand-row { gap: 26px 34px; }
   .brand-mark { height: 32px; }
+}
+
+/* ---------------------------------------------------------- footer */
+.site-footer { margin-top: auto; background: var(--brand-white); border-top: 1px solid var(--n-border); }
+
+.footer-cols {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr 1.3fr; gap: 32px;
+  padding: 56px 40px 44px;
+}
+.footer-logo { display: inline-block; margin-bottom: 18px; }
+.footer-logo img { height: 40px; width: auto; display: block; }
+.footer-col h3 { font-size: 18px; font-weight: 700; color: var(--brand-dark); margin-bottom: 20px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 13px; }
+.footer-col ul a { font-size: 14px; color: var(--n-mid); transition: color .14s ease; }
+.footer-col ul a:hover { color: var(--brand-primary); }
+.footer-about p { font-size: 14px; line-height: 1.6; color: var(--n-mid); max-width: 380px; }
+.footer-contact-list { gap: 16px !important; }
+.footer-contact-list li { display: flex; align-items: flex-start; gap: 10px; }
+.footer-contact-list svg { width: 18px; height: 18px; flex: 0 0 18px; margin-top: 1px; stroke: var(--brand-primary); }
+.footer-contact-list span { font-size: 14px; line-height: 1.5; color: var(--n-mid); }
+
+.footer-bottom { border-top: 1px solid var(--n-border); }
+.footer-bottom-inner {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px;
+  padding: 20px 0;
+}
+.footer-copy { font-size: 13.5px; color: var(--n-mid); text-align: center; }
+.footer-pay { display: flex; align-items: center; gap: 8px; justify-self: end; }
+.footer-paychip {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 30px; padding: 0 12px;
+  background: var(--brand-white); border: 1px solid var(--n-border); border-radius: 4px;
+}
+.footer-paychip img { height: 16px; width: auto; display: block; }
+
+@media (max-width: 1180px) {
+  .footer-cols { grid-template-columns: repeat(3, 1fr); }
+  .footer-about { grid-column: 1 / -1; }
+}
+@media (max-width: 860px) {
+  .footer-cols { grid-template-columns: repeat(2, 1fr); padding: 40px 20px; }
+  .footer-bottom-inner { grid-template-columns: 1fr; justify-items: center; }
+  .footer-pay { justify-self: center; }
+}
+@media (max-width: 540px) {
+  .footer-cols { grid-template-columns: 1fr; }
+  .footer-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .footer-about p { max-width: none; }
+  .footer-contact-list li { justify-content: center; }
 }
 
 /* ============================================================

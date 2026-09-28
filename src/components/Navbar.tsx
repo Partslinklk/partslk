@@ -7,6 +7,7 @@ import { SearchBar } from "./SearchBar";
 import { TopBar } from "./TopBar";
 import { AccountMenu } from "./AccountMenu";
 import { CategoryBar } from "./CategoryBar";
+import { TopDealsDrawer } from "./TopDealsDrawer";
 
 export function Navbar() {
   const { cartCount } = useUI();
@@ -91,6 +92,8 @@ export function Navbar() {
           <CategoryBar />
         </div>
       </div>
+
+      <TopDealsDrawer />
     </header>
   );
 }
