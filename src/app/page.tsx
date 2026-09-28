@@ -4,6 +4,7 @@ import { BrandStrip } from "@/components/BrandStrip";
 import { ShopByCategories } from "@/components/ShopByCategories";
 import { DealOfWeek } from "@/components/DealOfWeek";
 import { Testimonials } from "@/components/Testimonials";
+import { PopularProducts } from "@/components/PopularProducts";
 import { ScrollTop } from "@/components/ScrollTop";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ShopByCategories />
       <DealOfWeek />
       <Testimonials />
+      <PopularProducts />
       <ScrollTop />
     </div>
   );
