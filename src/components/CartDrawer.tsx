@@ -4,12 +4,9 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useUI } from "./UIProvider";
 import { ImageSlot } from "./ImageSlot";
+import { formatPrice } from "@/lib/format-price";
 
 const FREE_DELIVERY_THRESHOLD = 100;
-
-function formatPrice(value: number) {
-  return `$${value.toLocaleString()}`;
-}
 
 export function CartDrawer() {
   const { cartOpen, closeCart, cartItems, removeFromCart } = useUI();

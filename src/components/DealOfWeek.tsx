@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { ImageSlot } from "./ImageSlot";
 import { WEEKLY_DEALS, FEATURED_PRODUCTS, type FeaturedProduct } from "@/lib/weekly-deals";
+import { formatPrice, formatProductPrice } from "@/lib/format-price";
 
 const PAGE_SIZE = 6;
 
@@ -33,14 +34,6 @@ function StarRow({ rating }: { rating: number }) {
       ))}
     </div>
   );
-}
-
-function formatPrice(product: FeaturedProduct) {
-  if (product.priceRange) {
-    const [min, max] = product.priceRange;
-    return `$${min} - $${max}`;
-  }
-  return `$${product.price}`;
 }
 
 function useCountdown(endsInMs: number) {
@@ -96,7 +89,7 @@ function FeaturedRow({ product }: { product: FeaturedProduct }) {
       <div className="dow-frow-body">
         <p className="dow-frow-name">{product.name}</p>
         <StarRow rating={product.rating} />
-        <span className="dow-frow-price">{formatPrice(product)}</span>
+        <span className="dow-frow-price">{formatProductPrice(product)}</span>
         <a className="dow-link" href="#">
           {product.ctaLabel}
         </a>
@@ -142,8 +135,8 @@ export function DealOfWeek() {
               <p className="dow-card-name">{deal.name}</p>
               <StarRow rating={deal.rating} />
               <div className="dow-card-price">
-                {deal.originalPrice ? <span className="price-was">${deal.originalPrice}</span> : null}
-                <span className="dow-price">${deal.price}</span>
+                {deal.originalPrice ? <span className="price-was">{formatPrice(deal.originalPrice)}</span> : null}
+                <span className="dow-price">{formatPrice(deal.price)}</span>
               </div>
               <CountdownBoxes key={deal.id} endsInMs={deal.endsInMs} />
               <button type="button" className="dow-cta">

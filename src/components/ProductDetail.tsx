@@ -7,6 +7,7 @@ import { ProductRelated } from "./ProductRelated";
 import { ProductTabs } from "./ProductTabs";
 import { useUI } from "./UIProvider";
 import { CATEGORY_OPTIONS, COLOR_OPTIONS, discountPct, type ShopProduct } from "@/lib/products-catalog";
+import { formatPrice } from "@/lib/format-price";
 
 const THUMB_COUNT = 4;
 const PAY_METHODS: { name: string; logo?: string }[] = [
@@ -320,8 +321,8 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
               <h1>{product.name}</h1>
 
               <div className="pdp-pricerow">
-                <span className="pdp-price">${product.price}</span>
-                {product.originalPrice ? <span className="pdp-was">${product.originalPrice}</span> : null}
+                <span className="pdp-price">{formatPrice(product.price)}</span>
+                {product.originalPrice ? <span className="pdp-was">{formatPrice(product.originalPrice)}</span> : null}
                 {pct ? <span className="pdp-save">-{pct}%</span> : null}
                 <span className="pdp-rating">
                   <StarRow rating={product.rating} size={13} /> ({product.reviewCount} review{product.reviewCount === 1 ? "" : "s"})
@@ -405,7 +406,7 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
                   <CheckIcon /> Estimated Delivery : Up to 4 business days
                 </li>
                 <li>
-                  <CheckIcon /> Free Shipping &amp; Returns : On all orders over $200
+                  <CheckIcon /> Free Shipping &amp; Returns : On all orders over {formatPrice(200)}
                 </li>
               </ul>
 

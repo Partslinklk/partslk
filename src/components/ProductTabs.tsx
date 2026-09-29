@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ImageSlot } from "./ImageSlot";
 import { CATEGORY_OPTIONS, COLOR_OPTIONS, type ShopProduct } from "@/lib/products-catalog";
+import { formatPrice } from "@/lib/format-price";
 
 type TabKey = "description" | "info" | "reviews";
 
@@ -103,7 +104,7 @@ export function ProductTabs({ product, stock }: { product: ShopProduct; stock: n
     ["Category", categoryNames.join(", ") || "—"],
     ["Color Options", colorNames.join(", ") || "—"],
     ["Size", product.size],
-    ["Price", `$${product.price}`],
+    ["Price", formatPrice(product.price)],
     ["Rating", `${product.rating} / 5 (${product.reviewCount} ${reviewWord})`],
     ["Stock Status", `${stock} in stock`],
   ];
@@ -147,7 +148,7 @@ export function ProductTabs({ product, stock }: { product: ShopProduct; stock: n
             <p>{product.description}</p>
             <p>
               Every {product.brand} part in our catalog is inspected before it ships, backed by our lowest-price
-              guarantee and free returns on orders over $200.
+              guarantee and free returns on orders over {formatPrice(200)}.
             </p>
 
             <div className="pdp-tabbanner">

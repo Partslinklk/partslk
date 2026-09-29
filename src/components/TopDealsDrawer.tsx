@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useUI } from "./UIProvider";
 import { ImageSlot } from "./ImageSlot";
 import { FEATURED_PRODUCTS, type FeaturedProduct } from "@/lib/weekly-deals";
+import { formatProductPrice } from "@/lib/format-price";
 
 const TOP_DEAL_IDS = [
   "wheel-cover-universal",
@@ -16,14 +17,6 @@ const TOP_DEAL_IDS = [
 const TOP_DEAL_PRODUCTS = TOP_DEAL_IDS.map((id) =>
   FEATURED_PRODUCTS.find((product) => product.id === id)
 ).filter((product): product is FeaturedProduct => Boolean(product));
-
-function formatPrice(product: FeaturedProduct) {
-  if (product.priceRange) {
-    const [min, max] = product.priceRange;
-    return `$${min} - $${max}`;
-  }
-  return `$${product.price}`;
-}
 
 function StarRow({ rating }: { rating: number }) {
   const full = Math.round(rating);
@@ -72,7 +65,7 @@ export function TopDealsDrawer() {
               <div className="topdeal-body">
                 <p className="topdeal-name">{product.name}</p>
                 <StarRow rating={product.rating} />
-                <span className="topdeal-price">{formatPrice(product)}</span>
+                <span className="topdeal-price">{formatProductPrice(product)}</span>
               </div>
             </div>
           ))}

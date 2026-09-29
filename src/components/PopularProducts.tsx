@@ -1,7 +1,9 @@
 "use client";
 
 import { ImageSlot } from "./ImageSlot";
+import { CompareIcon, EyeIcon, HeartIcon } from "./ProductCard";
 import { POPULAR_PRODUCTS, type PopularProduct } from "@/lib/popular-products";
+import { formatPrice, formatProductPrice } from "@/lib/format-price";
 
 function ChevronLeft() {
   return (
@@ -32,27 +34,31 @@ function StarRow({ rating }: { rating: number }) {
   );
 }
 
-function formatPrice(product: PopularProduct) {
-  if (product.priceRange) {
-    const [min, max] = product.priceRange;
-    return `$${min} - $${max}`;
-  }
-  return `$${product.price}`;
-}
-
 function ProductCard({ product }: { product: PopularProduct }) {
   return (
     <div className="pp-card">
       <div className="pp-media">
         {product.discountPct ? <span className="pp-badge">-{product.discountPct}%</span> : null}
+        <div className="sr-icon-stack">
+          <button type="button" className="sr-wish" aria-label="Add to wishlist">
+            <HeartIcon />
+          </button>
+          <button type="button" className="sr-compare" aria-label="Compare">
+            <CompareIcon />
+          </button>
+          <button type="button" className="sr-quickview" aria-label="Quick view">
+            <EyeIcon />
+          </button>
+        </div>
         <ImageSlot src={product.image} alt={product.name} shape="rect" />
+        <div className="sr-quick">Quick View</div>
       </div>
       <div className="pp-body">
         <p className="pp-name">{product.name}</p>
         <StarRow rating={product.rating} />
         <div className="pp-price">
-          {product.originalPrice ? <span className="pp-price-was">${product.originalPrice}</span> : null}
-          <span className="pp-price-now">{formatPrice(product)}</span>
+          {product.originalPrice ? <span className="pp-price-was">{formatPrice(product.originalPrice)}</span> : null}
+          <span className="pp-price-now">{formatProductPrice(product)}</span>
         </div>
         <button type="button" className="pp-cta">
           {product.ctaLabel}

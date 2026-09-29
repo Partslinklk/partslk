@@ -8,8 +8,8 @@ export function TopBar() {
         <nav className="topbar-links" aria-label="Utility">
           <Link href="/">About Us</Link>
           <Link href="/">Blog</Link>
-          <Link href="/">Contact Us</Link>
-          <Link href="/">FAQs</Link>
+          <Link href="/contact-us">Contact Us</Link>
+          <Link href="/faqs">FAQs</Link>
         </nav>
       </div>
     </div>

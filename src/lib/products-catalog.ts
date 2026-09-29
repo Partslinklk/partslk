@@ -57,11 +57,11 @@ export const BRAND_OPTIONS = [
 ];
 
 export const PRICE_BANDS: PriceBand[] = [
-  { id: "under-50", label: "Under $50", min: 0, max: 50 },
-  { id: "50-100", label: "$50 - $100", min: 50, max: 100 },
-  { id: "100-200", label: "$100 - $200", min: 100, max: 200 },
-  { id: "200-300", label: "$200 - $300", min: 200, max: 300 },
-  { id: "300-plus", label: "$300 & Above", min: 300, max: Infinity },
+  { id: "under-50", label: "Under LKR 50", min: 0, max: 50 },
+  { id: "50-100", label: "LKR 50 - LKR 100", min: 50, max: 100 },
+  { id: "100-200", label: "LKR 100 - LKR 200", min: 100, max: 200 },
+  { id: "200-300", label: "LKR 200 - LKR 300", min: 200, max: 300 },
+  { id: "300-plus", label: "LKR 300 & Above", min: 300, max: Infinity },
 ];
 
 function img(n: number) {

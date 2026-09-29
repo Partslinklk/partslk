@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ImageSlot } from "./ImageSlot";
 import { discountPct, type ShopProduct } from "@/lib/products-catalog";
+import { formatPrice } from "@/lib/format-price";
 
 export function StarRow({ rating, size = 13 }: { rating: number; size?: number }) {
   const full = Math.round(rating);
@@ -15,7 +16,7 @@ export function StarRow({ rating, size = 13 }: { rating: number; size?: number }
   );
 }
 
-function HeartIcon() {
+export function HeartIcon() {
   return (
     <svg viewBox="0 0 24 24">
       <path d="M20.8 7.6c0 4.4-8.8 10.8-8.8 10.8S3.2 12 3.2 7.6a4.6 4.6 0 0 1 8.8-1.9 4.6 4.6 0 0 1 8.8 1.9Z" />
@@ -23,7 +24,7 @@ function HeartIcon() {
   );
 }
 
-function CompareIcon() {
+export function CompareIcon() {
   return (
     <svg viewBox="0 0 24 24">
       <path d="M7 3v18M17 3v18M4 9h6M14 15h6" />
@@ -31,7 +32,7 @@ function CompareIcon() {
   );
 }
 
-function EyeIcon() {
+export function EyeIcon() {
   return (
     <svg viewBox="0 0 24 24">
       <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z" />
@@ -73,8 +74,8 @@ export function ProductCard({ product, view = "grid" }: { product: ShopProduct; 
           {view === "grid" ? <span>({product.reviewCount})</span> : null}
         </div>
         <div className="sr-price-row">
-          {product.originalPrice ? <span className="sr-was">${product.originalPrice}</span> : null}
-          <span className="sr-price">${product.price}</span>
+          {product.originalPrice ? <span className="sr-was">{formatPrice(product.originalPrice)}</span> : null}
+          <span className="sr-price">{formatPrice(product.price)}</span>
         </div>
         {view === "list" ? <p className="sr-desc">{product.description}</p> : null}
         <button type="button" className="sr-cta">
