@@ -17,12 +17,15 @@ export type CartItem = {
   qty: number;
 };
 
+export type AuthMode = "login" | "register";
+
 type CartProduct = { id: string; name: string; image: string; price: number };
 
 type UIContextValue = {
   /** Buyer auth drawer */
   authOpen: boolean;
-  openAuth: () => void;
+  authMode: AuthMode;
+  openAuth: (mode?: AuthMode) => void;
   closeAuth: () => void;
   /** Today's Deal side drawer */
   topDealsOpen: boolean;
@@ -43,11 +46,15 @@ const UIContext = createContext<UIContextValue | null>(null);
 
 export function UIProvider({ children }: { children: ReactNode }) {
   const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [topDealsOpen, setTopDealsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const openAuth = useCallback(() => setAuthOpen(true), []);
+  const openAuth = useCallback((mode: AuthMode = "login") => {
+    setAuthMode(mode);
+    setAuthOpen(true);
+  }, []);
   const closeAuth = useCallback(() => setAuthOpen(false), []);
   const openTopDeals = useCallback(() => setTopDealsOpen(true), []);
   const closeTopDeals = useCallback(() => setTopDealsOpen(false), []);
@@ -79,6 +86,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       authOpen,
+      authMode,
       openAuth,
       closeAuth,
       topDealsOpen,
@@ -94,6 +102,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
     }),
     [
       authOpen,
+      authMode,
       openAuth,
       closeAuth,
       topDealsOpen,

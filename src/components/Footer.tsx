@@ -8,7 +8,7 @@ const PAY_METHODS = [
 
 const QUICK_LINKS = [
   { label: "Contact Us", href: "/contact-us" },
-  { label: "About Us", href: "/" },
+  { label: "About Us", href: "/about-us" },
   { label: "Careers", href: "/" },
   { label: "Our Stories", href: "/" },
   { label: "Report Abuse", href: "/" },

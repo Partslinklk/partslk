@@ -9,6 +9,7 @@ import { AccountMenu } from "./AccountMenu";
 import { CategoryBar } from "./CategoryBar";
 import { TopDealsDrawer } from "./TopDealsDrawer";
 import { CartDrawer } from "./CartDrawer";
+import { AuthModal } from "./AuthModal";
 
 export function Navbar() {
   const { cartCount, openCart } = useUI();
@@ -96,6 +97,7 @@ export function Navbar() {
 
       <TopDealsDrawer />
       <CartDrawer />
+      <AuthModal />
     </header>
   );
 }

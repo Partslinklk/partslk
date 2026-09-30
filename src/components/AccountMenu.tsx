@@ -9,7 +9,7 @@ type Item = { label: string; href: string; icon: ReactNode };
 const PRIMARY: Item[] = [
   {
     label: "My Orders",
-    href: "#",
+    href: "/my-account",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M7 4h10l1 4H6l1-4Z" />
@@ -50,7 +50,7 @@ const PRIMARY: Item[] = [
   },
   {
     label: "Wish List",
-    href: "#",
+    href: "/my-account",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M12 20s-7-4.6-7-9.4A3.6 3.6 0 0 1 12 7a3.6 3.6 0 0 1 7 3.6C19 15.4 12 20 12 20Z" />
@@ -67,17 +67,6 @@ const PRIMARY: Item[] = [
       </svg>
     ),
   },
-];
-
-const SECONDARY = [
-  "Settings",
-  "PASS Business",
-  "DS Center",
-  "Seller Log In",
-  "Return & refund policy",
-  "Help Center",
-  "Disputes & Reports",
-  "Report IPR infringement",
 ];
 
 export function AccountMenu() {
@@ -109,9 +98,9 @@ export function AccountMenu() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setOpen(false), 160);
   }
-  function startAuth() {
+  function startAuth(mode: "login" | "register" = "login") {
     setOpen(false);
-    openAuth();
+    openAuth(mode);
   }
 
   return (
@@ -126,7 +115,7 @@ export function AccountMenu() {
         type="button"
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={startAuth}
+        onClick={() => startAuth()}
       >
         <svg className="nav-act-ico" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="3.4" />
@@ -140,10 +129,10 @@ export function AccountMenu() {
       </button>
 
       <div className="account-pop" role="menu" aria-label="Account menu">
-        <button className="acct-signin" type="button" onClick={startAuth}>
+        <button className="acct-signin" type="button" onClick={() => startAuth("login")}>
           Sign in
         </button>
-        <button className="acct-register" type="button" onClick={startAuth}>
+        <button className="acct-register" type="button" onClick={() => startAuth("register")}>
           Register
         </button>
 
@@ -155,18 +144,6 @@ export function AccountMenu() {
               <Link className="acct-item" href={it.href} role="menuitem">
                 <span className="acct-ico">{it.icon}</span>
                 {it.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-
-        <div className="acct-divider" />
-
-        <ul className="acct-list acct-list-text">
-          {SECONDARY.map((label) => (
-            <li key={label}>
-              <Link className="acct-link" href="#" role="menuitem">
-                {label}
               </Link>
             </li>
           ))}

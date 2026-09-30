@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import "./pass-styles.css";
 import { UIProvider } from "@/components/UIProvider";
+import { SalesToast } from "@/components/SalesToast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <UIProvider>{children}</UIProvider>
+        <SalesToast />
       </body>
     </html>
   );
