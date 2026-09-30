@@ -72,7 +72,7 @@ export function PopularProducts() {
   return (
     <section className="pp">
       <div className="wrap">
-        <div className="pp-head">
+        <div className="pp-head" data-reveal="left">
           <h2>Popular Products</h2>
           <div className="dow-nav">
             <button type="button" className="arrow-btn" aria-label="Previous products">
@@ -83,7 +83,7 @@ export function PopularProducts() {
             </button>
           </div>
         </div>
-        <div className="pp-grid">
+        <div className="pp-grid" data-reveal="right">
           {POPULAR_PRODUCTS.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}

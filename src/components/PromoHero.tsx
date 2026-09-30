@@ -12,7 +12,7 @@ export function PromoHero() {
     <section className="promo-hero">
       <div className="wrap">
         <div className="promo-grid">
-          <div className="promo-card promo-main">
+          <div className="promo-card promo-main" data-enter="left">
             <ImageSlot
               className="promo-media"
               shape="rect"
@@ -38,7 +38,7 @@ export function PromoHero() {
             </div>
           </div>
 
-          <div className="promo-card promo-mid">
+          <div className="promo-card promo-mid" data-enter="up" style={{ "--delay": ".15s" } as React.CSSProperties}>
             <ImageSlot
               className="promo-media"
               shape="rect"
@@ -55,7 +55,7 @@ export function PromoHero() {
             </div>
           </div>
 
-          <div className="promo-stack">
+          <div className="promo-stack" data-enter="right" style={{ "--delay": ".3s" } as React.CSSProperties}>
             <div className="promo-card promo-small">
               <ImageSlot
                 className="promo-media"

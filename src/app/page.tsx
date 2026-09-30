@@ -7,10 +7,11 @@ import { Testimonials } from "@/components/Testimonials";
 import { PopularProducts } from "@/components/PopularProducts";
 import { Footer } from "@/components/Footer";
 import { ScrollTop } from "@/components/ScrollTop";
-
+import { ScrollReveal } from "@/components/ScrollReveal";
+import { NewsletterPopup } from "@/components/NewsletterPopup";
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen overflow-x-clip bg-white">
       <Navbar />
       <PromoHero />
       <BrandStrip />
@@ -20,6 +21,8 @@ export default function Home() {
       <PopularProducts />
       <Footer />
       <ScrollTop />
+      <NewsletterPopup />
+      <ScrollReveal />
     </div>
   );
 }

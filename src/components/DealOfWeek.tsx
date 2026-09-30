@@ -115,7 +115,7 @@ export function DealOfWeek() {
     <section className="dow">
       <div className="wrap">
         <div className="dow-grid">
-          <div className="dow-deal">
+          <div className="dow-deal" data-reveal="left">
             <div className="dow-head">
               <h2>Deal Of The Week</h2>
               <div className="dow-nav">
@@ -145,7 +145,7 @@ export function DealOfWeek() {
             </div>
           </div>
 
-          <div className="dow-featured">
+          <div className="dow-featured" data-reveal="right">
             <div className="dow-head">
               <h2>Featured Products</h2>
               <div className="dow-nav">

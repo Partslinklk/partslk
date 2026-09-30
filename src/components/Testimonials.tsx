@@ -1,4 +1,5 @@
 import { ImageSlot } from "./ImageSlot";
+import { getUnsplashPhoto } from "@/lib/unsplash";
 
 type Testimonial = {
   id: string;
@@ -6,6 +7,7 @@ type Testimonial = {
   name: string;
   meta: string;
   rating: number;
+  avatarQuery: string;
 };
 
 const TESTIMONIALS: Testimonial[] = [
@@ -16,6 +18,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Marcus Reyes",
     meta: "Verified Buyer · Ford F-150",
     rating: 5,
+    avatarQuery: "latino man portrait headshot",
   },
   {
     id: "priya",
@@ -24,6 +27,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Priya Nandakumar",
     meta: "Verified Buyer · Honda Civic",
     rating: 5,
+    avatarQuery: "indian woman portrait headshot",
   },
   {
     id: "diego",
@@ -32,6 +36,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Diego Alvarez",
     meta: "Verified Buyer · Jeep Wrangler",
     rating: 4,
+    avatarQuery: "hispanic man smiling portrait",
   },
 ];
 
@@ -56,24 +61,36 @@ function StarRow({ rating }: { rating: number }) {
   );
 }
 
-export function Testimonials() {
+export async function Testimonials() {
+  const avatars = await Promise.all(TESTIMONIALS.map((t) => getUnsplashPhoto(t.avatarQuery, { width: 120 })));
+
   return (
     <section className="testi">
       <div className="wrap">
-        <div className="testi-head">
+        <div className="testi-head" data-reveal="up">
           <h2>What Our Customers Say</h2>
           <p>Join thousands of drivers who trust us for genuine parts, fair prices, and fast shipping</p>
         </div>
         <div className="testi-grid">
-          {TESTIMONIALS.map((t) => (
-            <div className="testi-card" key={t.id}>
+          {TESTIMONIALS.map((t, i) => (
+            <div
+              className="testi-card"
+              key={t.id}
+              data-reveal={i === 0 ? "left" : i === 2 ? "right" : "up"}
+              style={{ "--delay": `${i * 0.2}s` } as React.CSSProperties}
+            >
               <span className="testi-quote-icon">
                 <QuoteIcon />
               </span>
               <StarRow rating={t.rating} />
               <p className="testi-quote">{t.quote}</p>
               <div className="testi-person">
-                <ImageSlot shape="circle" placeholder="" />
+                <ImageSlot
+                  shape="circle"
+                  placeholder=""
+                  src={avatars[i]?.url}
+                  alt={`${t.name}${avatars[i] ? ` — photo by ${avatars[i]!.credit} on Unsplash` : ""}`}
+                />
                 <div>
                   <p className="testi-name">{t.name}</p>
                   <p className="testi-meta">{t.meta}</p>

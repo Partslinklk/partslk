@@ -31,7 +31,7 @@ export function ShopByCategories() {
   return (
     <section className="shop-cat">
       <div className="wrap">
-        <div className="dow-head">
+        <div className="dow-head" data-reveal="left">
           <h2>Shop By Categories</h2>
           <div className="dow-nav">
             <button
@@ -55,7 +55,7 @@ export function ShopByCategories() {
           </div>
         </div>
 
-        <div className="shop-cat-grid">
+        <div className="shop-cat-grid" data-reveal="right">
           {visible.map((cat) => (
             <div className="shop-cat-card" key={cat.id}>
               <div className="shop-cat-media">
