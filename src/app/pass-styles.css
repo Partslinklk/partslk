@@ -3588,3 +3588,81 @@ body.cart-drawer-open { overflow: hidden; }
   .sale-toast { left: 12px; bottom: 12px; padding: 12px 32px 14px 12px; }
   .sale-toast-img { flex-basis: 48px; width: 48px; height: 48px; }
 }
+
+/* ============================================================
+   Checkout page
+   ============================================================ */
+.ck-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 560px); gap: 40px; align-items: start; padding: 20px 0 70px;  }
+.ck-title { font-size: 22px; line-height: 28px; font-weight: 800; letter-spacing: -0.4px; margin-bottom: 16px; }
+.ck-card { background: var(--brand-white); border: 1px solid var(--n-border); border-radius: var(--r-card); padding: 20px 24px; }
+.ck-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ck-field { margin-bottom: 12px; }
+.ck-field label { display: block; font-size: 13px; font-weight: 600; color: var(--brand-text); margin-bottom: 6px; }
+.ck-req { color: #d33; }
+.ck-opt { color: var(--n-mid); font-weight: 500; }
+.ck-field input, .ck-field select, .ck-field textarea {
+  width: 100%; height: 42px; padding: 0 12px; border: 1px solid var(--n-border); border-radius: var(--r-tile);
+  font: 500 14px var(--font); color: var(--brand-text); background: var(--brand-white);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.ck-field textarea { height: auto; min-height: 88px; padding: 10px 12px; resize: vertical; }
+.ck-field input:focus, .ck-field select:focus, .ck-field textarea:focus { outline: none; border-color: var(--brand-primary); box-shadow: 0 0 0 3px var(--primary-tint); }
+.ck-field [aria-invalid="true"] { border-color: #d33; }
+.ck-error { margin-top: 4px; font-size: 12px; color: #d33; }
+.ck-card > .ck-field:last-child { margin-bottom: 0; }
+.ck-check { display: flex; align-items: center; gap: 8px; margin: 22px 0 14px; font-size: 15px; font-weight: 600; cursor: pointer; }
+.ck-check input { width: 16px; height: 16px; accent-color: var(--brand-primary); }
+.ck-ship-card { margin-bottom: 16px; }
+
+.ck-progress { border: 1px dashed var(--brand-primary); border-radius: var(--r-card); padding: 18px 20px; margin-bottom: 18px; }
+.ck-progress p { margin-top: 12px; text-align: center; font-size: 13px; font-weight: 600; color: var(--brand-dark); }
+.ck-order { background: #fafafa; padding: 0; overflow: hidden; }
+.ck-order-title { font-size: 18px; font-weight: 800; padding: 16px 24px 12px; border-bottom: 1px solid var(--n-border); }
+.ck-section { padding: 12px 24px; border-bottom: 1px solid var(--n-border); }
+.ck-section h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+.ck-item { display: flex; align-items: center; gap: 12px; padding: 6px 0; }
+.ck-item-media { position: relative; flex: 0 0 44px; width: 44px; height: 44px; }
+.ck-item-media .image-slot { width: 44px; height: 44px; }
+.ck-item-qty { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--brand-dark); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; z-index: 1; }
+.ck-item-name { flex: 1; font-size: 13px; font-weight: 500; line-height: 1.4; }
+.ck-item-price { font-size: 13px; font-weight: 700; color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+.ck-radio { display: flex; align-items: center; gap: 10px; padding: 5px 0; font-size: 13px; cursor: pointer; }
+.ck-radio input { width: 16px; height: 16px; accent-color: var(--brand-primary); }
+.ck-radio span { flex: 1; }
+.ck-radio em { font-style: normal; font-weight: 700; color: var(--brand-primary); }
+.ck-radio-lg { font-size: 15px; padding: 6px 0; }
+.ck-total { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 24px; font-size: 16px; font-weight: 800; }
+.ck-total strong { color: var(--brand-primary); font-variant-numeric: tabular-nums; }
+.ck-promo { margin: 0 24px 12px; padding: 12px 14px; background: #ececec; border-radius: 4px; font-size: 13px; color: var(--n-mid); }
+.ck-promo > button { color: var(--brand-primary); font: inherit; font-weight: 600; text-decoration: underline; }
+.ck-promo-form { display: flex; gap: 8px; margin-top: 10px; }
+.ck-promo-form input { flex: 1; height: 38px; padding: 0 10px; border: 1px solid var(--n-border); border-radius: var(--r-tile); font: 500 13px var(--font); }
+.ck-promo-apply { padding: 0 16px; border-radius: var(--r-tile); background: var(--brand-primary); color: #fff; font: 700 13px var(--font); }
+.ck-promo-apply:disabled { opacity: .5; cursor: not-allowed; }
+.ck-pay { padding: 8px 24px 18px; border-top: 1px solid var(--n-border); }
+.ck-pay-note { font-size: 12px; line-height: 1.6; color: var(--n-mid); margin: 0 0 8px 26px; }
+.ck-privacy { font-size: 12px; line-height: 1.6; color: var(--n-mid); margin: 10px 0 14px; }
+.ck-privacy a { color: var(--brand-primary); }
+.ck-place { border-radius: var(--r-tile); letter-spacing: .4px; }
+.ck-secure { margin-top: 14px; text-align: center; font-size: 12px; font-weight: 600; color: var(--brand-text); }
+.ck-secure-logos { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 8px; }
+.ck-secure-logos img { height: 20px; width: auto; }
+.ck-confidence { margin-top: 20px; padding: 20px 24px; border-radius: var(--r-card); background: var(--primary-tint); }
+.ck-confidence h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.ck-confidence p { font-size: 12px; color: var(--n-mid); margin-bottom: 12px; }
+.ck-confidence li { list-style: none; font-size: 13px; padding: 4px 0 4px 22px; position: relative; }
+.ck-confidence li::before { content: "\2713"; position: absolute; left: 0; color: var(--brand-primary); font-weight: 800; }
+.ck-empty { max-width: 460px; margin: 40px auto 80px; text-align: center; }
+.ck-empty h2 { font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+.ck-empty p { color: var(--n-mid); margin-bottom: 22px; }
+.ck-empty-btn { display: inline-flex; align-items: center; justify-content: center; width: 220px; border-radius: 10px; }
+
+@media (max-width: 900px) {
+  .ck-layout { grid-template-columns: 1fr; }
+  .ck-row { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* billing form stays locked in view while the (taller) order column scrolls past */
+.ck-right { margin-top: 44px; }
+@media (min-width: 901px) { .ck-left[data-lock="1"] { position: sticky; } }
+@media (max-width: 900px) { .ck-right { margin-top: 0; } }

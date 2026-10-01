@@ -40,6 +40,7 @@ type UIContextValue = {
   cartCount: number;
   addToCart: (product: CartProduct, qty?: number) => void;
   removeFromCart: (id: string) => void;
+  clearCart: () => void;
 };
 
 const UIContext = createContext<UIContextValue | null>(null);
@@ -78,6 +79,8 @@ export function UIProvider({ children }: { children: ReactNode }) {
     setCartItems((items) => items.filter((item) => item.id !== id));
   }, []);
 
+  const clearCart = useCallback(() => setCartItems([]), []);
+
   const cartCount = useMemo(
     () => cartItems.reduce((sum, item) => sum + item.qty, 0),
     [cartItems]
@@ -99,6 +102,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
       cartCount,
       addToCart,
       removeFromCart,
+      clearCart,
     }),
     [
       authOpen,
@@ -115,6 +119,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
       cartCount,
       addToCart,
       removeFromCart,
+      clearCart,
     ]
   );
 
