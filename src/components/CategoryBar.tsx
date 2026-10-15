@@ -1,65 +1,58 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useUI } from "./UIProvider";
 
-function ChevronDown() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-      <path d="M6 9l6 6 6-6" />
-    </svg>
-  );
+function pad(n: number) {
+  return String(n).padStart(2, "0");
+}
+
+// Time left until the end of today, as HH:MM:SS (client-only to avoid hydration drift).
+function useCountdown() {
+  const [text, setText] = useState("");
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date();
+      const end = new Date(now);
+      end.setHours(23, 59, 59, 999);
+      const s = Math.max(0, Math.floor((end.getTime() - now.getTime()) / 1000));
+      setText(`${pad(Math.floor(s / 3600))}:${pad(Math.floor((s % 3600) / 60))}:${pad(s % 60)}`);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return text;
 }
 
 export function CategoryBar() {
   const { openTopDeals } = useUI();
+  const countdown = useCountdown();
 
   return (
     <nav className="nav-links" aria-label="Categories">
-      <div className="cat-menu">
-        <button className="nav-cat all-cat" type="button">
-          <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-          Shop By Categories
-          <svg className="all-cat-chev" viewBox="0 0 24 24" fill="none" strokeWidth={2}>
-            <path d="M6 9l6 6 6-6" />
-          </svg>
-        </button>
-      </div>
-
-      <Link className="nav-link" href="/">
-        Home
-      </Link>
-      <button className="nav-link" type="button">
-        Shop
-        <ChevronDown />
-      </button>
-      <button className="nav-link" type="button">
-        Categories
-        <span className="nav-badge nav-badge-sale">Sale</span>
-        <ChevronDown />
-      </button>
-      <button className="nav-link" type="button">
-        Products
-        <span className="nav-badge nav-badge-hot">Hot</span>
-        <ChevronDown />
-      </button>
-      <button className="nav-link" type="button">
-        Top deals
-        <ChevronDown />
-      </button>
-      <button className="nav-link" type="button">
-        Elements
-        <ChevronDown />
-      </button>
-
-      <button className="nav-link nav-today" type="button" onClick={openTopDeals}>
-        <svg viewBox="0 0 24 24" fill="none" strokeWidth={1.8}>
-          <circle cx="12" cy="12" r="9" />
-          <path d="M12 7v5l3 3" />
+      <button className="nav-vehicle" type="button">
+        <span className="nav-vehicle-text">
+          SET YOUR
+          <br />
+          VEHICLE:
+        </span>
+        <svg viewBox="0 0 48 32" fill="none" strokeWidth={1.8} aria-hidden="true">
+          <path d="M7 16l3-8a3 3 0 0 1 3-2h22a3 3 0 0 1 3 2l3 8" />
+          <rect x="4" y="16" width="40" height="10" rx="4" />
+          <circle cx="12" cy="21" r="2" />
+          <circle cx="36" cy="21" r="2" />
+          <path d="M19 20h10M19 23h10" />
+          <path d="M9 26v3M39 26v3" />
         </svg>
-        Today&apos;s Deal
+      </button>
+
+      <p className="nav-ship">
+        Order in the next <span>{countdown || "--:--:--"}</span> and get same day shipping*!
+      </p>
+
+      <button className="nav-categories" type="button" onClick={openTopDeals}>
+        CATEGORIES
       </button>
     </nav>
   );

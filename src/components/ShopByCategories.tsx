@@ -57,22 +57,22 @@ export function ShopByCategories() {
 
         <div className="shop-cat-grid" data-reveal="right">
           {visible.map((cat) => (
-            <div className="shop-cat-card" key={cat.id}>
+            <Link href="/products" className="shop-cat-card" key={cat.id}>
               <div className="shop-cat-media">
                 <ImageSlot src={cat.image} alt={cat.name} shape="rect" />
               </div>
-              <div className="shop-cat-body">
-                <p className="shop-cat-title">{cat.name}</p>
-                <div className="shop-cat-links">
-                  {cat.links.map((link) => (
-                    <Link href="/products" key={link}>
-                      {link}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+              <p className="shop-cat-title">{cat.name}</p>
+            </Link>
           ))}
+        </div>
+
+        <div className="shop-cat-all">
+          <Link className="shop-cat-all-btn" href="/products">
+            Shop All Categories
+            <svg viewBox="0 0 24 24" fill="none" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

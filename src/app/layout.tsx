@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Hanken_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Arimo, Barlow, Orbitron } from "next/font/google";
 import "./globals.css";
 import "./pass-styles.css";
 import { UIProvider } from "@/components/UIProvider";
@@ -15,10 +15,25 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const hanken = Hanken_Grotesk({
+const arimo = Arimo({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-hanken",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-arimo",
+  display: "swap",
+});
+
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-barlow",
+  display: "swap",
+});
+
+// Eurostile Bold isn't on Google Fonts; Orbitron is the closest squared, technical match.
+const heading = Orbitron({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -31,7 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${hanken.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${arimo.variable} ${barlow.variable} ${heading.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <UIProvider>{children}</UIProvider>

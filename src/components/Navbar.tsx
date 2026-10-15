@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useUI } from "./UIProvider";
 import { SearchBar } from "./SearchBar";
-import { TopBar } from "./TopBar";
 import { AccountMenu } from "./AccountMenu";
 import { CategoryBar } from "./CategoryBar";
 import { TopDealsDrawer } from "./TopDealsDrawer";
@@ -53,8 +52,8 @@ export function Navbar() {
 
   return (
     <header className="nav">
-      <TopBar />
 
+      <div className="nav-main">
       <div className="wrap">
         <div className="nav-top">
           <Link className="logo" href="/" aria-label="Automize home">
@@ -64,10 +63,16 @@ export function Navbar() {
 
           <SearchBar />
 
-          <a className="nav-help" href="tel:+19876543210">
-            <span className="nav-help-label">Need Help?</span>
-            <strong className="nav-help-num">9876-543-210</strong>
-          </a>
+          <div className="nav-info">
+            <div className="nav-info-item">
+              <span className="nav-info-label">Country/Region</span>
+              <strong>Sri Lanka (LKR Rs)</strong>
+            </div>
+            <Link className="nav-info-item" href="/contact-us">
+              <span className="nav-info-label">Questions</span>
+              <strong>Help &amp; Support</strong>
+            </Link>
+          </div>
 
           <div className="nav-actions">
             <AccountMenu />
@@ -87,6 +92,7 @@ export function Navbar() {
             </button>
           </div>
         </div>
+      </div>
       </div>
 
       <div ref={catbarRef} className={`catbar${isSticky ? " is-sticky" : ""}`}>

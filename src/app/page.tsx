@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { PromoHero } from "@/components/PromoHero";
 import { BrandStrip } from "@/components/BrandStrip";
+import { ServiceStrip } from "@/components/ServiceStrip";
 import { ShopByCategories } from "@/components/ShopByCategories";
 import { DealOfWeek } from "@/components/DealOfWeek";
 import { Testimonials } from "@/components/Testimonials";
@@ -14,9 +15,10 @@ export default function Home() {
     <div className="min-h-screen overflow-x-clip bg-white">
       <Navbar />
       <PromoHero />
-      <BrandStrip />
+      <ServiceStrip />
       <ShopByCategories />
       <DealOfWeek />
+      <BrandStrip />
       <Testimonials />
       <PopularProducts />
       <Footer />

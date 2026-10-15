@@ -5,10 +5,6 @@ const BRANDS = [
   { src: "/princess-auto.png", alt: "MINI" },
   { src: "/thaco-bus.png", alt: "Bentley" },
   { src: "/bentley.png", alt: "Thaco Bus" },
-  { src: "/mini.png", alt: "Princess Auto" },
-  { src: "/honda.png", alt: "Auto Fast" },
-  { src: "/jeep.png", alt: "Taggart" },
-  { src: "/jj-corporate.png", alt: "JJ Corporate" },
 ];
 
 export function BrandStrip() {

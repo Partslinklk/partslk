@@ -122,9 +122,8 @@ export function AccountMenu() {
           <path d="M5 20c0-3.6 3-6.2 7-6.2s7 2.6 7 6.2" />
         </svg>
         <span className="nav-act-text">
-          Welcome
-          <br />
-          <strong>Sign in / Register</strong>
+          <span className="nav-info-label">Login / Signup</span>
+          <strong>My Account</strong>
         </span>
       </button>
 

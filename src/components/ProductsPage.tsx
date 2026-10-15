@@ -77,13 +77,29 @@ function FilterGroup({
   );
 }
 
-export function ProductsPage({ initialQuery }: { initialQuery?: string }) {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+export function ProductsPage({
+  initialQuery,
+  initialCategory,
+  initialBrand,
+  initialPrice,
+}: {
+  initialQuery?: string;
+  initialCategory?: string;
+  initialBrand?: string;
+  initialPrice?: string;
+}) {
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    CATEGORY_OPTIONS.some((c) => c.id === initialCategory) ? [initialCategory!] : [],
+  );
   const [highlight, setHighlight] = useState<HighlightKey>("all");
   const [selectedColors, setSelectedColors] = useState<string[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<string[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [priceBand, setPriceBand] = useState<string | null>(null);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>(
+    initialBrand && BRAND_OPTIONS.includes(initialBrand) ? [initialBrand] : [],
+  );
+  const [priceBand, setPriceBand] = useState<string | null>(
+    PRICE_BANDS.some((b) => b.id === initialPrice) ? initialPrice! : null,
+  );
   const [minRating, setMinRating] = useState(0);
   const [sort, setSort] = useState<SortKey>("relevance");
   const [view, setView] = useState<ViewMode>("grid");
