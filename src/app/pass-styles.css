@@ -3702,8 +3702,8 @@ body.cart-drawer-open { overflow: hidden; }
 .nav-links { justify-content: space-between; gap: 24px; padding: 0; min-height: 52px; flex-wrap: nowrap; }
 .nav-vehicle { display: flex; align-items: center; gap: 12px; color: var(--brand-white); }
 .nav-vehicle-text { font-size: 13px; font-weight: 700; line-height: 1.6; text-align: left; }
-.nav-vehicle svg { width: 44px; height: 30px; stroke: var(--brand-white); }
-.nav-vehicle:hover svg { stroke: #BFE6F7; }
+.nav-vehicle-ico { width: 40px; height: 40px; object-fit: contain; filter: invert(1); }
+.nav-vehicle:hover .nav-vehicle-ico { opacity: .8; }
 .nav-ship { flex: 1; text-align: center; font-size: 16px; color: var(--brand-white); }
 .nav-ship span { font-variant-numeric: tabular-nums; }
 .nav-categories { font-size: 15px; font-weight: 700; letter-spacing: .2px; color: var(--brand-white); padding: 14px 4px; }
@@ -3809,3 +3809,16 @@ body.cart-drawer-open { overflow: hidden; }
 .sr-titleband .sr-crumb .crumb-now { color: var(--brand-white); }
 .sr-titleband .sr-resulthead h1 { color: var(--brand-white); }
 .sr-titleband .sr-resulthead h1 span { color: #8FD3F4; }
+
+/* Vehicle Categories page */
+.vc-crumbband { border-bottom: 1px solid #e5e5e5; padding: 18px 0 2px; }
+.vc-title { text-align: center; font-size: 56px; font-weight: 800; letter-spacing: -1px; margin: 48px 0 40px; }
+.vc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px 36px; padding-bottom: 72px; }
+.vc-card { position: relative; display: block; aspect-ratio: 16 / 9; overflow: hidden; background: #2a2a2a; border-radius: 2px; }
+.vc-card .vc-card-img { position: absolute; inset: 0; transition: transform .4s ease; }
+.vc-card::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,.45); transition: background .25s ease; }
+.vc-card:hover .vc-card-img { transform: scale(1.06); }
+.vc-card:hover::after { background: rgba(0,0,0,.3); }
+.vc-card-name { position: absolute; inset: 0; z-index: 1; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; color: #fff; font-size: 34px; font-weight: 800; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,.5); }
+@media (max-width: 1024px) { .vc-grid { grid-template-columns: repeat(2, 1fr); } .vc-title { font-size: 42px; } }
+@media (max-width: 640px) { .vc-grid { grid-template-columns: 1fr; gap: 20px; } .vc-title { font-size: 32px; margin: 32px 0 24px; } .vc-card-name { font-size: 26px; } }

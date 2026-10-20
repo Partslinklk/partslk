@@ -1,7 +1,7 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useUI } from "./UIProvider";
 
 function pad(n: number) {
   return String(n).padStart(2, "0");
@@ -26,7 +26,6 @@ function useCountdown() {
 }
 
 export function CategoryBar() {
-  const { openTopDeals } = useUI();
   const countdown = useCountdown();
 
   return (
@@ -37,23 +36,17 @@ export function CategoryBar() {
           <br />
           VEHICLE:
         </span>
-        <svg viewBox="0 0 48 32" fill="none" strokeWidth={1.8} aria-hidden="true">
-          <path d="M7 16l3-8a3 3 0 0 1 3-2h22a3 3 0 0 1 3 2l3 8" />
-          <rect x="4" y="16" width="40" height="10" rx="4" />
-          <circle cx="12" cy="21" r="2" />
-          <circle cx="36" cy="21" r="2" />
-          <path d="M19 20h10M19 23h10" />
-          <path d="M9 26v3M39 26v3" />
-        </svg>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img className="nav-vehicle-ico" src="/suv-car.png" alt="" aria-hidden="true" />
       </button>
 
       <p className="nav-ship">
         Order in the next <span>{countdown || "--:--:--"}</span> and get same day shipping*!
       </p>
 
-      <button className="nav-categories" type="button" onClick={openTopDeals}>
+      <Link className="nav-categories" href="/categories">
         CATEGORIES
-      </button>
+      </Link>
     </nav>
   );
 }
