@@ -33,6 +33,8 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
   const [promo, setPromo] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [placing, setPlacing] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   // Lock the billing form while the taller order column scrolls past, as long as it fits
   // fully on screen below the sticky header.
@@ -64,7 +66,7 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
   const activeShipping = options.find((o) => o.id === shipping) ?? options[0];
   const total = subtotal + activeShipping.cost;
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
     const get = (k: string) => String(data.get(k) ?? "").trim();
@@ -77,13 +79,41 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
     if (!get("postcode")) next.postcode = "Please enter your postcode.";
     if (!/^\S+@\S+\.\S+$/.test(get("email"))) next.email = "Please enter a valid email address.";
     setErrors(next);
+    setSubmitError(null);
     if (Object.keys(next).length > 0) {
       document.getElementById(`ck-${Object.keys(next)[0]}`)?.focus();
       return;
     }
 
-    setOrderId(`PL-${Date.now().toString().slice(-6)}`);
-    clearCart();
+    setPlacing(true);
+    try {
+      const paymentMethod = PAYMENT_METHODS.find((m) => m.id === payment);
+      const res = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          customer: { firstName: get("firstName"), lastName: get("lastName"), email: get("email"), phone: get("phone") },
+          address: {
+            country: get("country"),
+            address: shipDifferent && get("shipAddress") ? get("shipAddress") : get("address"),
+            city: shipDifferent ? get("shipCity") : "",
+            postcode: shipDifferent && get("shipPostcode") ? get("shipPostcode") : get("postcode"),
+          },
+          items: cartItems.map(({ id, name, image, price, qty }) => ({ id, name, image, price, qty })),
+          shipping: { label: activeShipping.label, cost: activeShipping.cost },
+          payment: paymentMethod?.label ?? payment,
+          note: get("notes"),
+        }),
+      });
+      const json = (await res.json()) as { id?: string; error?: string };
+      if (!res.ok || !json.id) throw new Error(json.error || "Could not place the order.");
+      setOrderId(json.id);
+      clearCart();
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : "Could not place the order.");
+    } finally {
+      setPlacing(false);
+    }
   }
 
   const field = (id: keyof Errors, label: string, props: React.InputHTMLAttributes<HTMLInputElement> = {}) => (
@@ -302,8 +332,9 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
                   website, and for other purposes described in our <Link href="/faqs">privacy policy</Link>.
                 </p>
 
-                <button type="submit" className="checkout-btn ck-place">
-                  PLACE ORDER
+                {submitError && <p className="ck-error">{submitError}</p>}
+                <button type="submit" className="checkout-btn ck-place" disabled={placing}>
+                  {placing ? "PLACING ORDER…" : "PLACE ORDER"}
                 </button>
 
                 <div className="ck-secure">

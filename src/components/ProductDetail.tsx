@@ -6,7 +6,8 @@ import { ImageSlot } from "./ImageSlot";
 import { ProductRelated } from "./ProductRelated";
 import { ProductTabs } from "./ProductTabs";
 import { useUI } from "./UIProvider";
-import { CATEGORY_OPTIONS, COLOR_OPTIONS, discountPct, type ShopProduct } from "@/lib/products-catalog";
+import { COLOR_OPTIONS, discountPct, type ShopProduct } from "@/lib/products-catalog";
+import { useStoreData } from "@/lib/store-context";
 import { formatPrice } from "@/lib/format-price";
 
 const THUMB_COUNT = 4;
@@ -154,6 +155,7 @@ function CheckIcon() {
 }
 
 export function ProductDetail({ product }: { product: ShopProduct }) {
+  const { categories: CATEGORY_OPTIONS } = useStoreData();
   const { addToCart } = useUI();
   const [activeThumb, setActiveThumb] = useState(0);
   const [activeColor, setActiveColor] = useState<string | null>(product.colors[0] ?? null);
@@ -169,7 +171,7 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
     .map((id) => CATEGORY_OPTIONS.find((c) => c.id === id)?.name)
     .filter((name): name is string => Boolean(name));
 
-  const stock = useMemo(() => seededInt(`${product.id}:stock`, 12, 520), [product.id]);
+  const stock = useMemo(() => product.stock ?? seededInt(`${product.id}:stock`, 12, 520), [product.id, product.stock]);
   const soldRecently = useMemo(() => seededInt(`${product.id}:sold`, 3, 24), [product.id]);
   const viewingNow = useMemo(() => seededInt(`${product.id}:view`, 8, 54), [product.id]);
   const thumbs = useMemo(() => Array.from({ length: THUMB_COUNT }, () => product.image), [product.image]);

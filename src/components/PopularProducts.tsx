@@ -2,7 +2,8 @@
 
 import { ImageSlot } from "./ImageSlot";
 import { CompareIcon, EyeIcon, HeartIcon } from "./ProductCard";
-import { POPULAR_PRODUCTS, type PopularProduct } from "@/lib/popular-products";
+import { type PopularProduct } from "@/lib/popular-products";
+import { useStoreData } from "@/lib/store-context";
 import { formatPrice, formatProductPrice } from "@/lib/format-price";
 
 function ChevronLeft() {
@@ -69,6 +70,8 @@ function ProductCard({ product }: { product: PopularProduct }) {
 }
 
 export function PopularProducts() {
+  const { popular: POPULAR_PRODUCTS } = useStoreData();
+  if (POPULAR_PRODUCTS.length === 0) return null;
   return (
     <section className="pp">
       <div className="wrap">

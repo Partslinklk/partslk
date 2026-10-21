@@ -1,0 +1,32 @@
+[
+  {
+    "id": "jeep",
+    "name": "Jeep",
+    "logo": "/car-logo.png"
+  },
+  {
+    "id": "honda",
+    "name": "Honda",
+    "logo": "/jaguar.png"
+  },
+  {
+    "id": "jaguar",
+    "name": "Jaguar",
+    "logo": "/taggart.png"
+  },
+  {
+    "id": "mini",
+    "name": "MINI",
+    "logo": "/princess-auto.png"
+  },
+  {
+    "id": "bentley",
+    "name": "Bentley",
+    "logo": "/thaco-bus.png"
+  },
+  {
+    "id": "thaco-bus",
+    "name": "Thaco Bus",
+    "logo": "/bentley.png"
+  }
+]

@@ -1,0 +1,518 @@
+[
+  {
+    "id": "pilot-wheel-cover-red",
+    "name": "Pilot Automotive Universal Fit Wheel Cover Black Red Trim",
+    "image": "/product-1.png",
+    "description": "Give any vehicle a unique, aggressive look with a durable ABS wheel cover that resists weathering, cracking, and corrosion.",
+    "categories": [
+      "wheels-tires"
+    ],
+    "brand": "Pilot Automotive",
+    "colors": [
+      "black",
+      "red"
+    ],
+    "size": "Medium",
+    "price": 79,
+    "rating": 5,
+    "reviewCount": 26,
+    "action": "Add To Cart",
+    "highlight": "best-seller",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "omp-steering-spacer",
+    "name": "OMP Car Steering Aluminum Spacer Quick Release Kit",
+    "image": "/product-2.png",
+    "description": "Precision-machined aluminum spacer for quick-release steering hubs, built for a secure fit and smooth engagement.",
+    "categories": [
+      "ferrari-wheel"
+    ],
+    "brand": "OMP",
+    "colors": [
+      "black",
+      "gray"
+    ],
+    "size": "Small",
+    "price": 289,
+    "rating": 4,
+    "reviewCount": 11,
+    "action": "Select Options",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "th8s-shifter",
+    "name": "Thrustmaster TH8S Shifter Add-On Manual Gearbox",
+    "image": "/product-3.png",
+    "description": "Add true H-pattern and sequential shifting to your sim rig with a rugged metal shifter built for daily racing sessions.",
+    "categories": [
+      "gear-oil"
+    ],
+    "brand": "Thrustmaster",
+    "colors": [
+      "black",
+      "red"
+    ],
+    "size": "Medium",
+    "price": 40,
+    "rating": 5,
+    "reviewCount": 34,
+    "action": "Add To Cart",
+    "highlight": "best-seller",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "black-yellow-wheel-cover",
+    "name": "Black Yellow Wheel Cover 13 Inch Four-Wheel Set",
+    "image": "/product-4.png",
+    "description": "A bold four-wheel cover set that snaps on without tools and holds up to daily driving and weather.",
+    "categories": [
+      "wheels-tires"
+    ],
+    "brand": "RoadMaster",
+    "colors": [
+      "black",
+      "yellow"
+    ],
+    "size": "Medium",
+    "price": 130,
+    "rating": 4,
+    "reviewCount": 8,
+    "action": "Buy Product",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "esp-brake-rotor-kit",
+    "name": "ESP Brakes Slotted Drilled Brake Rotor Kit",
+    "image": "/product-5.png",
+    "description": "Slotted and drilled rotors paired with performance pads for stronger bite and better heat dissipation under hard braking.",
+    "categories": [
+      "brake-parts"
+    ],
+    "brand": "ESP Brakes",
+    "colors": [
+      "red",
+      "black"
+    ],
+    "size": "Medium",
+    "price": 210,
+    "originalPrice": 225,
+    "rating": 5,
+    "reviewCount": 19,
+    "action": "Add To Cart",
+    "highlight": "new-arrival",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "motul-engine-oil",
+    "name": "Motul 7100 10W50 Synthetic Engine Oil 4L",
+    "image": "/product-6.png",
+    "description": "Fully synthetic 10W50 engine oil formulated to protect high-revving engines under sustained load.",
+    "categories": [
+      "engine-oil",
+      "special-offer"
+    ],
+    "brand": "Motul",
+    "colors": [
+      "blue",
+      "white"
+    ],
+    "size": "Small",
+    "price": 64,
+    "originalPrice": 69,
+    "rating": 4,
+    "reviewCount": 22,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "esp-alternator",
+    "name": "ESP High Output Performance Alternator",
+    "image": "/product-7.png",
+    "description": "High-output alternator built to keep pace with demanding electrical loads and accessory upgrades.",
+    "categories": [
+      "engine-oil"
+    ],
+    "brand": "ESP Brakes",
+    "colors": [
+      "black",
+      "gray"
+    ],
+    "size": "Medium",
+    "price": 245,
+    "originalPrice": 255,
+    "rating": 4,
+    "reviewCount": 6,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "led-headlight-kit",
+    "name": "CarbonEdge LED Projector Headlight Assembly Pair",
+    "image": "/product-8.png",
+    "description": "Projector-style LED headlight assembly delivering a brighter, whiter beam with a factory-fit housing.",
+    "categories": [
+      "headlights"
+    ],
+    "brand": "CarbonEdge",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "size": "Medium",
+    "price": 189,
+    "rating": 5,
+    "reviewCount": 14,
+    "action": "Add To Cart",
+    "highlight": "best-seller",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "dash-cam-extension",
+    "name": "AUTO-VOX 9.8ft Extension Cord Dash Cam Rear",
+    "image": "/product-9.png",
+    "description": "Extend your dash cam's reach to the rear window without splicing wires or drilling new holes.",
+    "categories": [
+      "headlights"
+    ],
+    "brand": "RoadMaster",
+    "colors": [
+      "black"
+    ],
+    "size": "Small",
+    "price": 30,
+    "rating": 5,
+    "reviewCount": 41,
+    "action": "View Products",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "honda-pilot-radio",
+    "name": "Flexible Honda Pilot Radio 6 Disc CD Player",
+    "image": "/product-10.png",
+    "description": "A flexible 6-disc CD player retrofit that keeps a classic dash looking factory while adding modern playback.",
+    "categories": [
+      "special-offer"
+    ],
+    "brand": "TurboFlex",
+    "colors": [
+      "black"
+    ],
+    "size": "Medium",
+    "price": 135,
+    "originalPrice": 140,
+    "rating": 5,
+    "reviewCount": 7,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "yamaha-brake-pads",
+    "name": "Front Brake Disk + Brake Pads for Yamaha VINO",
+    "image": "/product-1.png",
+    "description": "Matched brake disk and pad set engineered for consistent stopping power on VINO scooters.",
+    "categories": [
+      "brake-parts"
+    ],
+    "brand": "ESP Brakes",
+    "colors": [
+      "gray",
+      "black"
+    ],
+    "size": "Medium",
+    "price": 110,
+    "rating": 5,
+    "reviewCount": 16,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "seat-cover-leather",
+    "name": "Premium Leather Seat Cover Full Set Universal",
+    "image": "/product-2.png",
+    "description": "Premium leather-look seat covers cut for a snug, tailored fit across the full cabin.",
+    "categories": [
+      "seat-cover"
+    ],
+    "brand": "CarbonEdge",
+    "colors": [
+      "black"
+    ],
+    "size": "Medium",
+    "price": 159,
+    "rating": 4,
+    "reviewCount": 29,
+    "action": "Select Options",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "seat-cover-mesh",
+    "name": "Breathable Mesh Seat Cover 2-Piece Front Set",
+    "image": "/product-3.png",
+    "description": "Breathable mesh front seat covers that keep drivers cool on long trips without sacrificing grip.",
+    "categories": [
+      "seat-cover"
+    ],
+    "brand": "RoadMaster",
+    "colors": [
+      "gray",
+      "blue"
+    ],
+    "size": "Small",
+    "price": 49,
+    "rating": 4,
+    "reviewCount": 17,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "seat-cover-camo",
+    "name": "Rugged Camo Seat Cover Set with Headrest",
+    "image": "/product-4.png",
+    "description": "Rugged camo-pattern seat covers with a matching headrest for a trail-ready cabin.",
+    "categories": [
+      "seat-cover"
+    ],
+    "brand": "TurboFlex",
+    "colors": [
+      "gray",
+      "orange"
+    ],
+    "size": "Medium",
+    "price": 89,
+    "rating": 3,
+    "reviewCount": 5,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "gear-oil-synthetic",
+    "name": "Motul Gear 300 75W90 Synthetic Gear Oil 1L",
+    "image": "/product-5.png",
+    "description": "Synthetic 75W90 gear oil that resists thermal breakdown for smoother, quieter shifting.",
+    "categories": [
+      "gear-oil",
+      "special-offer"
+    ],
+    "brand": "Motul",
+    "colors": [
+      "blue"
+    ],
+    "size": "Small",
+    "price": 24,
+    "originalPrice": 29,
+    "rating": 5,
+    "reviewCount": 38,
+    "action": "Add To Cart",
+    "highlight": "best-seller",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "ferrari-alloy-wheel",
+    "name": "Ferrari Style Forged Alloy Wheel 19-Inch",
+    "image": "/product-6.png",
+    "description": "A forged 19-inch alloy wheel styled after Ferrari's signature five-spoke design, built light and strong.",
+    "categories": [
+      "ferrari-wheel",
+      "wheels-tires"
+    ],
+    "brand": "OMP",
+    "colors": [
+      "black",
+      "red"
+    ],
+    "size": "Medium",
+    "price": 650,
+    "rating": 5,
+    "reviewCount": 4,
+    "action": "Buy Product",
+    "highlight": "new-arrival",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "ferrari-wheel-spacer",
+    "name": "Ferrari Wheel Spacer Hub Centric 15mm Pair",
+    "image": "/product-7.png",
+    "description": "Hub-centric wheel spacers that push your fitment out evenly without introducing vibration.",
+    "categories": [
+      "ferrari-wheel"
+    ],
+    "brand": "OMP",
+    "colors": [
+      "gray"
+    ],
+    "size": "Small",
+    "price": 59,
+    "rating": 4,
+    "reviewCount": 9,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "headlight-bumper-grill",
+    "name": "Off-Road Bumper Grill Guard with LED Bar",
+    "image": "/product-8.png",
+    "description": "Heavy-duty bumper grill guard with an integrated LED light bar for extra visibility off-road.",
+    "categories": [
+      "headlights"
+    ],
+    "brand": "RoadMaster",
+    "colors": [
+      "black",
+      "yellow"
+    ],
+    "size": "Medium",
+    "price": 320,
+    "rating": 4,
+    "reviewCount": 3,
+    "action": "Select Options",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "proximity-sensor-kit",
+    "name": "Rear Proximity Parking Sensor Kit 4-Sensor",
+    "image": "/product-9.png",
+    "description": "A four-sensor rear parking kit with audible alerts to help you judge distance in tight spaces.",
+    "categories": [
+      "gear-oil"
+    ],
+    "brand": "CarbonEdge",
+    "colors": [
+      "black",
+      "white"
+    ],
+    "size": "Small",
+    "price": 45,
+    "rating": 4,
+    "reviewCount": 21,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "engine-oil-filter",
+    "name": "Engine Oil Filter Extra Capacity For Motors",
+    "image": "/product-10.png",
+    "description": "Extra-capacity oil filter built to trap more contaminants between changes.",
+    "categories": [
+      "engine-oil",
+      "special-offer"
+    ],
+    "brand": "Motul",
+    "colors": [
+      "white",
+      "orange"
+    ],
+    "size": "Small",
+    "price": 19,
+    "originalPrice": 24,
+    "rating": 5,
+    "reviewCount": 52,
+    "action": "Add To Cart",
+    "highlight": "best-seller",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "dash-cam-front-rear",
+    "name": "TurboFlex Dual Channel Dash Cam Front and Rear",
+    "image": "/product-1.png",
+    "description": "Dual-channel dash cam that records the road ahead and behind in sync, all from one unit.",
+    "categories": [
+      "headlights"
+    ],
+    "brand": "TurboFlex",
+    "colors": [
+      "black"
+    ],
+    "size": "Small",
+    "price": 98,
+    "rating": 4,
+    "reviewCount": 13,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "wheel-tire-set",
+    "name": "All Terrain Wheel & Tire Combo Set of 4",
+    "image": "/product-2.png",
+    "description": "A matched set of all-terrain wheels and tires ready to mount straight out of the box.",
+    "categories": [
+      "wheels-tires"
+    ],
+    "brand": "RoadMaster",
+    "colors": [
+      "black",
+      "gray"
+    ],
+    "size": "Medium",
+    "price": 480,
+    "rating": 5,
+    "reviewCount": 6,
+    "action": "Buy Product",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "seat-cover-kids",
+    "name": "Comfort Seat Cover Set with Kids Booster Pad",
+    "image": "/product-3.png",
+    "description": "A comfort-focused seat cover set with a built-in booster pad for younger passengers.",
+    "categories": [
+      "seat-cover"
+    ],
+    "brand": "CarbonEdge",
+    "colors": [
+      "blue",
+      "white"
+    ],
+    "size": "Small",
+    "price": 69,
+    "rating": 3,
+    "reviewCount": 8,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  },
+  {
+    "id": "brake-caliper-paint-kit",
+    "name": "High-Temp Brake Caliper Paint Kit Red",
+    "image": "/product-4.png",
+    "description": "High-temperature caliper paint kit that resists fading and chipping from brake heat.",
+    "categories": [
+      "brake-parts",
+      "special-offer"
+    ],
+    "brand": "ESP Brakes",
+    "colors": [
+      "red"
+    ],
+    "size": "Small",
+    "price": 34,
+    "originalPrice": 39,
+    "rating": 4,
+    "reviewCount": 15,
+    "action": "Add To Cart",
+    "stock": 50,
+    "published": true
+  }
+]

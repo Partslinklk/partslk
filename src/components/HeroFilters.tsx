@@ -2,9 +2,11 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { BRAND_OPTIONS, CATEGORY_OPTIONS, PRICE_BANDS } from "@/lib/products-catalog";
+import { PRICE_BANDS } from "@/lib/products-catalog";
+import { useStoreData } from "@/lib/store-context";
 
 export function HeroFilters() {
+  const { brands: BRAND_OPTIONS, categories: CATEGORY_OPTIONS } = useStoreData();
   const router = useRouter();
   const [category, setCategory] = useState("");
   const [brand, setBrand] = useState("");

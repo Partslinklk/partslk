@@ -1,14 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useStoreData } from "@/lib/store-context";
 import { useMemo, useState } from "react";
 import { ProductCard, StarRow } from "./ProductCard";
 import {
-  BRAND_OPTIONS,
-  CATEGORY_OPTIONS,
   COLOR_OPTIONS,
   PRICE_BANDS,
-  SHOP_PRODUCTS,
   SIZE_OPTIONS,
 } from "@/lib/products-catalog";
 
@@ -88,6 +86,7 @@ export function ProductsPage({
   initialBrand?: string;
   initialPrice?: string;
 }) {
+  const { products: SHOP_PRODUCTS, categories: CATEGORY_OPTIONS, brands: BRAND_OPTIONS } = useStoreData();
   const [selectedCategories, setSelectedCategories] = useState<string[]>(
     CATEGORY_OPTIONS.some((c) => c.id === initialCategory) ? [initialCategory!] : [],
   );

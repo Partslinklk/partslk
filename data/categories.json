@@ -1,0 +1,88 @@
+[
+  {
+    "id": "headlights",
+    "name": "Headlights",
+    "image": "",
+    "links": [
+      "Bumpers",
+      "Dash Cam",
+      "Grills",
+      "Headlight"
+    ],
+    "featured": true
+  },
+  {
+    "id": "seat-cover",
+    "name": "Seat Cover",
+    "image": "",
+    "links": [
+      "Car Seats",
+      "Fuel",
+      "Gearbox",
+      "Steering Parts"
+    ],
+    "featured": true
+  },
+  {
+    "id": "engine-oil",
+    "name": "Engine Oil",
+    "image": "/product-3.png",
+    "links": [
+      "Brake Parts",
+      "Engine",
+      "Spark Plug",
+      "Transmission"
+    ],
+    "featured": true
+  },
+  {
+    "id": "ferrari-wheel",
+    "name": "Ferrari Wheel",
+    "image": "/product-4.png",
+    "links": [
+      "Alloy Wheels",
+      "Forged Wheels",
+      "Retro Polka",
+      "Steel Wheels"
+    ],
+    "featured": true
+  },
+  {
+    "id": "gear-oil",
+    "name": "Gear oil",
+    "image": "",
+    "links": [
+      "Airbag Sensors",
+      "Camshaft",
+      "Coolant Sensors",
+      "Proximity Sensor"
+    ],
+    "featured": true
+  },
+  {
+    "id": "wheels-tires",
+    "name": "Wheels & Tires",
+    "image": "/product-10.png",
+    "links": [
+      "Ammeter",
+      "Caliper",
+      "Clinometer",
+      "Dynamometer"
+    ],
+    "featured": true
+  },
+  {
+    "id": "brake-parts",
+    "name": "Brake Parts",
+    "image": "",
+    "links": [],
+    "featured": false
+  },
+  {
+    "id": "special-offer",
+    "name": "Special Offer",
+    "image": "",
+    "links": [],
+    "featured": false
+  }
+]

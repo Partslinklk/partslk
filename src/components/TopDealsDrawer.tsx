@@ -3,7 +3,8 @@
 import { useEffect } from "react";
 import { useUI } from "./UIProvider";
 import { ImageSlot } from "./ImageSlot";
-import { FEATURED_PRODUCTS, type FeaturedProduct } from "@/lib/weekly-deals";
+import { type FeaturedProduct } from "@/lib/weekly-deals";
+import { useStoreData } from "@/lib/store-context";
 import { formatProductPrice } from "@/lib/format-price";
 
 const TOP_DEAL_IDS = [
@@ -14,9 +15,6 @@ const TOP_DEAL_IDS = [
   "led-projector-headlights",
 ];
 
-const TOP_DEAL_PRODUCTS = TOP_DEAL_IDS.map((id) =>
-  FEATURED_PRODUCTS.find((product) => product.id === id)
-).filter((product): product is FeaturedProduct => Boolean(product));
 
 function StarRow({ rating }: { rating: number }) {
   const full = Math.round(rating);
@@ -32,6 +30,8 @@ function StarRow({ rating }: { rating: number }) {
 }
 
 export function TopDealsDrawer() {
+  const { featured: FEATURED_PRODUCTS } = useStoreData();
+  const TOP_DEAL_PRODUCTS = FEATURED_PRODUCTS.slice(0, TOP_DEAL_IDS.length);
   const { topDealsOpen, closeTopDeals } = useUI();
 
   useEffect(() => {

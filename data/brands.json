@@ -1,0 +1,34 @@
+[
+  {
+    "id": "pilot-automotive",
+    "name": "Pilot Automotive"
+  },
+  {
+    "id": "omp",
+    "name": "OMP"
+  },
+  {
+    "id": "thrustmaster",
+    "name": "Thrustmaster"
+  },
+  {
+    "id": "esp-brakes",
+    "name": "ESP Brakes"
+  },
+  {
+    "id": "motul",
+    "name": "Motul"
+  },
+  {
+    "id": "roadmaster",
+    "name": "RoadMaster"
+  },
+  {
+    "id": "turboflex",
+    "name": "TurboFlex"
+  },
+  {
+    "id": "carbonedge",
+    "name": "CarbonEdge"
+  }
+]

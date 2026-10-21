@@ -1,44 +1,6 @@
 import { ImageSlot } from "./ImageSlot";
-import { getUnsplashPhoto } from "@/lib/unsplash";
+import { readCollection, type Testimonial } from "@/lib/db";
 
-type Testimonial = {
-  id: string;
-  quote: string;
-  name: string;
-  meta: string;
-  rating: number;
-  avatarQuery: string;
-};
-
-const TESTIMONIALS: Testimonial[] = [
-  {
-    id: "marcus",
-    quote:
-      "Ordered a brake caliper set and it fit perfectly. Fast shipping and the price beat every other parts site I checked.",
-    name: "Marcus Reyes",
-    meta: "Verified Buyer · Ford F-150",
-    rating: 5,
-    avatarQuery: "latino man portrait headshot",
-  },
-  {
-    id: "priya",
-    quote:
-      "Their fitment guide saved me from ordering the wrong headlights twice. Customer support actually knows cars.",
-    name: "Priya Nandakumar",
-    meta: "Verified Buyer · Honda Civic",
-    rating: 5,
-    avatarQuery: "indian woman portrait headshot",
-  },
-  {
-    id: "diego",
-    quote:
-      "Been buying engine oil and filters here for two years. Never had a damaged package or a late delivery.",
-    name: "Diego Alvarez",
-    meta: "Verified Buyer · Jeep Wrangler",
-    rating: 4,
-    avatarQuery: "hispanic man smiling portrait",
-  },
-];
 
 function QuoteIcon() {
   return (
@@ -62,7 +24,8 @@ function StarRow({ rating }: { rating: number }) {
 }
 
 export async function Testimonials() {
-  const avatars = await Promise.all(TESTIMONIALS.map((t) => getUnsplashPhoto(t.avatarQuery, { width: 120 })));
+  const TESTIMONIALS = await readCollection<Testimonial>("testimonials");
+  if (TESTIMONIALS.length === 0) return null;
 
   return (
     <section className="testi">
@@ -88,8 +51,8 @@ export async function Testimonials() {
                 <ImageSlot
                   shape="circle"
                   placeholder=""
-                  src={avatars[i]?.url}
-                  alt={`${t.name}${avatars[i] ? ` — photo by ${avatars[i]!.credit} on Unsplash` : ""}`}
+                  src={t.avatar || undefined}
+                  alt={t.name}
                 />
                 <div>
                   <p className="testi-name">{t.name}</p>

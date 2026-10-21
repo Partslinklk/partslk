@@ -1,9 +1,12 @@
+"use client";
+
 import { ProductCard } from "./ProductCard";
-import { SHOP_PRODUCTS, type ShopProduct } from "@/lib/products-catalog";
+import { type ShopProduct } from "@/lib/products-catalog";
+import { useStoreData } from "@/lib/store-context";
 
 const RELATED_COUNT = 5;
 
-function relatedProducts(product: ShopProduct): ShopProduct[] {
+function relatedProducts(SHOP_PRODUCTS: ShopProduct[], product: ShopProduct): ShopProduct[] {
   const sameCategory = SHOP_PRODUCTS.filter(
     (p) => p.id !== product.id && p.categories.some((c) => product.categories.includes(c))
   );
@@ -14,7 +17,8 @@ function relatedProducts(product: ShopProduct): ShopProduct[] {
 }
 
 export function ProductRelated({ product }: { product: ShopProduct }) {
-  const related = relatedProducts(product);
+  const { products } = useStoreData();
+  const related = relatedProducts(products, product);
   if (!related.length) return null;
 
   return (

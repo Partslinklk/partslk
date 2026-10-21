@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { ImageSlot } from "./ImageSlot";
-import { CATEGORY_OPTIONS, COLOR_OPTIONS, type ShopProduct } from "@/lib/products-catalog";
+import { COLOR_OPTIONS, type ShopProduct } from "@/lib/products-catalog";
+import { useStoreData } from "@/lib/store-context";
 import { formatPrice } from "@/lib/format-price";
 
 type TabKey = "description" | "info" | "reviews";
@@ -66,6 +67,7 @@ function ratingBreakdown(rating: number, count: number) {
 }
 
 export function ProductTabs({ product, stock }: { product: ShopProduct; stock: number }) {
+  const { categories: CATEGORY_OPTIONS } = useStoreData();
   const [tab, setTab] = useState<TabKey>("description");
   const [newRating, setNewRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ImageSlot } from "./ImageSlot";
-import { SHOP_CATEGORIES } from "@/lib/shop-categories";
+import { useStoreData } from "@/lib/store-context";
 
 const PAGE_SIZE = 6;
 
@@ -24,6 +24,7 @@ function ChevronRight() {
 }
 
 export function ShopByCategories() {
+  const { shopCategories: SHOP_CATEGORIES } = useStoreData();
   const [page, setPage] = useState(0);
   const pageCount = Math.ceil(SHOP_CATEGORIES.length / PAGE_SIZE);
   const visible = SHOP_CATEGORIES.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);

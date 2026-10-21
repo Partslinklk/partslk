@@ -1,6 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { ImageSlot } from "./ImageSlot";
-import { CATEGORY_OPTIONS } from "@/lib/products-catalog";
+import { useStoreData } from "@/lib/store-context";
 
 const CATEGORY_IMAGES: Record<string, string> = {
   headlights: "/hero-headlights-banner.png",
@@ -14,6 +16,7 @@ const CATEGORY_IMAGES: Record<string, string> = {
 };
 
 export function CategoriesPage() {
+  const { categories: CATEGORY_OPTIONS } = useStoreData();
   return (
     <>
       <div className="vc-crumbband">

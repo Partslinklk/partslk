@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { ImageSlot } from "./ImageSlot";
-import { WEEKLY_DEALS, FEATURED_PRODUCTS, type FeaturedProduct } from "@/lib/weekly-deals";
+import { type FeaturedProduct } from "@/lib/weekly-deals";
+import { useStoreData } from "@/lib/store-context";
 import { formatPrice, formatProductPrice } from "@/lib/format-price";
 
 const PAGE_SIZE = 6;
@@ -99,10 +100,12 @@ function FeaturedRow({ product }: { product: FeaturedProduct }) {
 }
 
 export function DealOfWeek() {
+  const { weeklyDeals: WEEKLY_DEALS, featured: FEATURED_PRODUCTS } = useStoreData();
   const [dealIndex, setDealIndex] = useState(0);
   const [page, setPage] = useState(0);
 
   const deal = WEEKLY_DEALS[dealIndex];
+  if (!deal) return null;
   const pageCount = Math.ceil(FEATURED_PRODUCTS.length / PAGE_SIZE);
   const visibleFeatured = FEATURED_PRODUCTS.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
 

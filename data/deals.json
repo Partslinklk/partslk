@@ -1,0 +1,29 @@
+[
+  {
+    "id": "alternator-bosch",
+    "name": "Alternator Bosch Fits Fordd Hollanndd Models",
+    "image": "",
+    "rating": 4,
+    "price": 115,
+    "originalPrice": 120,
+    "endsAt": "2027-01-23T02:47:28.432Z"
+  },
+  {
+    "id": "brake-caliper-akebono",
+    "name": "Akebono Performance Front Brake Caliper Set",
+    "image": "/product-1.png",
+    "rating": 5,
+    "price": 189,
+    "originalPrice": 215,
+    "endsAt": "2026-11-02T15:19:22.432Z"
+  },
+  {
+    "id": "radiator-denso",
+    "name": "Denso Aluminum Radiator Direct Fit Replacement",
+    "image": "",
+    "rating": 4,
+    "price": 142,
+    "originalPrice": 160,
+    "endsAt": "2026-10-26T10:54:22.432Z"
+  }
+]

@@ -1,0 +1,110 @@
+[
+  {
+    "id": "wheel-cover-universal",
+    "name": "Pilot Automotive Universal Fit Black with Red Trim",
+    "image": "/product-2.png",
+    "rating": 5,
+    "price": 79,
+    "ctaLabel": "Add To Cart",
+    "priceMax": 0
+  },
+  {
+    "id": "engine-oil-7100",
+    "name": "Motul 7100 20W-50 API Fully Synthetic Engine Oil",
+    "image": "/product-3.png",
+    "rating": 4,
+    "price": 45,
+    "ctaLabel": "Add To Cart",
+    "priceMax": 0
+  },
+  {
+    "id": "omp-steering-spacer",
+    "name": "OMP Car Steering Aluminum Spacer Quick Steering",
+    "image": "/product-4.png",
+    "rating": 4,
+    "price": 289,
+    "ctaLabel": "Select Options",
+    "priceMax": 0
+  },
+  {
+    "id": "firestone-firehawk",
+    "name": "Firestone Firehawk Wide Oval AS For Four-Wheelers",
+    "image": "/product-8.png",
+    "rating": 4,
+    "price": 110,
+    "ctaLabel": "Select Options",
+    "priceMax": 0
+  },
+  {
+    "id": "wheel-cover-black-yellow",
+    "name": "Black Yellow Wheel Cover 13 Inch For Four-Wheel",
+    "image": "/product-6.png",
+    "rating": 4,
+    "price": 130,
+    "ctaLabel": "Buy Product",
+    "priceMax": 0
+  },
+  {
+    "id": "auto-vox-dash-cam",
+    "name": "AUTO-VOX 9.8ft Extension Cord Dash Cam Rear",
+    "rating": 5,
+    "ctaLabel": "View Products",
+    "image": "",
+    "price": 30,
+    "priceMax": 60
+  },
+  {
+    "id": "led-projector-headlights",
+    "name": "Autoparts LED Black Projector Headlights",
+    "rating": 5,
+    "ctaLabel": "Select Options",
+    "image": "",
+    "price": 189,
+    "priceMax": 192
+  },
+  {
+    "id": "car-alarm-tx100",
+    "name": "Technaxx Car Alarm With Charging Function TX-100",
+    "image": "/product-7.png",
+    "rating": 4,
+    "price": 38,
+    "ctaLabel": "Add To Cart",
+    "priceMax": 0
+  },
+  {
+    "id": "th8s-shifter",
+    "name": "Thrustmaster TH8S Shifter Add-On Manual Gearbox",
+    "rating": 5,
+    "price": 40,
+    "ctaLabel": "Add To Cart",
+    "image": "",
+    "priceMax": 0
+  },
+  {
+    "id": "roof-rack-crossbar",
+    "name": "Universal Aluminum Roof Rack Cross Bar Set",
+    "rating": 4,
+    "price": 98,
+    "ctaLabel": "Buy Product",
+    "image": "",
+    "priceMax": 0
+  },
+  {
+    "id": "floor-mats-allweather",
+    "name": "All-Weather Heavy Duty Floor Mats Full Set",
+    "rating": 5,
+    "price": 64,
+    "ctaLabel": "Add To Cart",
+    "image": "",
+    "priceMax": 0
+  },
+  {
+    "id": "brake-pad-ceramic",
+    "name": "Ceramic Brake Pad Set Front and Rear",
+    "image": "/product-9.png",
+    "rating": 4,
+    "ctaLabel": "Select Options",
+    "price": 55,
+    "priceMax": 89
+  }
+]

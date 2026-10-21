@@ -1,0 +1,52 @@
+[
+  {
+    "id": "engine-oil-filter-extra",
+    "name": "Engine Oil Filter Extra Capacity For Motors",
+    "image": "",
+    "rating": 5,
+    "price": 19,
+    "priceMax": 0,
+    "originalPrice": 24,
+    "ctaLabel": "Add To Cart"
+  },
+  {
+    "id": "auto-vox-dash-cam",
+    "name": "AUTO-VOX 9.8ft Extension Cord Dash Cam Rear",
+    "image": "",
+    "rating": 5,
+    "price": 30,
+    "priceMax": 60,
+    "originalPrice": 0,
+    "ctaLabel": "View Products"
+  },
+  {
+    "id": "honda-pilot-radio",
+    "name": "Flexible Honda Pilot Radio 6 Disc Cd Player",
+    "image": "",
+    "rating": 5,
+    "price": 135,
+    "priceMax": 0,
+    "originalPrice": 140,
+    "ctaLabel": "Add To Cart"
+  },
+  {
+    "id": "yamaha-vino-brake-pads",
+    "name": "Front Brake Disk + Brake pads for Yamaha VINO",
+    "image": "",
+    "rating": 5,
+    "price": 110,
+    "priceMax": 0,
+    "originalPrice": 0,
+    "ctaLabel": "Add To Cart"
+  },
+  {
+    "id": "th8s-shifter",
+    "name": "Thrustmaster TH8S Shifter Add-On Mannual Ge",
+    "image": "",
+    "rating": 5,
+    "price": 40,
+    "priceMax": 0,
+    "originalPrice": 0,
+    "ctaLabel": "Add To Cart"
+  }
+]
