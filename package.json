@@ -15,7 +15,7 @@
     "storage:migrate-uploads": "node scripts/storage.mjs migrate-uploads",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "db:backup": "node scripts/backup.mjs"
   },
   "dependencies": {
