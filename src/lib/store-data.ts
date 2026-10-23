@@ -49,6 +49,7 @@ export async function getStoreData(): Promise<StoreData> {
       .map((c) => ({ id: c.id, name: c.name, image: c.image || undefined, links: c.links })),
     brands: brands.map((b) => b.name),
     weeklyDeals: deals
+      .filter((d) => d.published !== false)
       .map((d) => ({
         id: d.id,
         name: d.name,
@@ -58,7 +59,7 @@ export async function getStoreData(): Promise<StoreData> {
         originalPrice: d.originalPrice || undefined,
         endsInMs: Math.max(0, new Date(d.endsAt).getTime() - now),
       })),
-    featured: featured.map((p) => {
+    featured: featured.filter((p) => p.published !== false).map((p) => {
       const r = range(p);
       return {
         id: p.id,
@@ -69,7 +70,7 @@ export async function getStoreData(): Promise<StoreData> {
         ctaLabel: p.ctaLabel,
       };
     }),
-    popular: popular.map((p) => {
+    popular: popular.filter((p) => p.published !== false).map((p) => {
       const r = range(p);
       const orig = p.originalPrice && p.originalPrice > p.price ? p.originalPrice : undefined;
       return {

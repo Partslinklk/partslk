@@ -4,6 +4,8 @@ import "./globals.css";
 import "./pass-styles.css";
 import { UIProvider } from "@/components/UIProvider";
 import { SalesToast } from "@/components/SalesToast";
+import { CustomerProvider } from "@/lib/customer-context";
+import { WishlistProvider } from "@/lib/wishlist-context";
 import { StoreDataProvider } from "@/lib/store-context";
 import { getStoreData } from "@/lib/store-data";
 
@@ -56,7 +58,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <StoreDataProvider data={data}>
-          <UIProvider>{children}</UIProvider>
+          <UIProvider>
+            <CustomerProvider>
+              <WishlistProvider>{children}</WishlistProvider>
+            </CustomerProvider>
+          </UIProvider>
         </StoreDataProvider>
         <SalesToast />
       </body>

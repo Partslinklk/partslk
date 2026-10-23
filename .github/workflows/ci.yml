@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Type-check
+        run: npm run typecheck
+      - name: Lint (server, API, lib, tests)
+        run: npx eslint src/server src/app/api src/lib tests e2e
+      - name: Tests (real Postgres, throwaway schema)
+        # TEST_DATABASE_URL: a SEPARATE Supabase project (session pooler URL). Tests only touch the "vitest_run" schema,
+        # but never point this at production. Skipped on forks / when the secret isn't set.
+        if: ${{ env.HAS_TEST_DB == 'true' }}
+        env:
+          HAS_TEST_DB: ${{ secrets.TEST_DATABASE_URL != '' }}
+          MIGRATION_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
+        run: npm test
+      - name: Build
+        env:
+          DATABASE_URL: postgresql://placeholder:placeholder@localhost:5432/placeholder
+        run: npx next build

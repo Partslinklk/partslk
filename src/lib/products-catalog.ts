@@ -4,7 +4,10 @@ export type ProductHighlight = "best-seller" | "new-arrival";
 export type ShopProduct = {
   id: string;
   name: string;
+  /** Cover photo (always the first of `images`). */
   image: string;
+  /** Every photo of the product, cover first (front, back, sides...). */
+  images?: string[];
   description: string;
   categories: string[];
   brand: string;

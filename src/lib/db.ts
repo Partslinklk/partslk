@@ -1,12 +1,12 @@
-import { promises as fs } from "fs";
-import path from "path";
+import { pool } from "@/server/db";
+import { listResource } from "@/server/catalog";
+import { isResource } from "@/server/validation/catalog";
 
 /**
- * Tiny JSON-file store. Every collection lives in data/<name>.json.
- * Local/self-hosted only — hosts with a read-only file system (e.g. Vercel)
- * need a real database instead.
+ * Read side of the store (Postgres / Supabase). Catalogue reads and per-row writes live in
+ * src/server/catalog.ts; connection, pool and transactions in src/server/db.ts.
+ * readCollection keeps the JSON shape the storefront and admin already use.
  */
-const DATA_DIR = path.join(process.cwd(), "data");
 
 export const COLLECTIONS = [
   "products",
@@ -36,6 +36,8 @@ export type Deal = {
   price: number;
   originalPrice: number;
   endsAt: string;
+  /** False when the linked product is hidden from the shop. */
+  published?: boolean;
 };
 export type ListedProduct = {
   id: string;
@@ -47,6 +49,8 @@ export type ListedProduct = {
   priceMax: number;
   originalPrice?: number;
   ctaLabel: string;
+  /** False when the linked product is hidden from the shop. */
+  published?: boolean;
 };
 export type Testimonial = {
   id: string;
@@ -70,29 +74,58 @@ export type Order = {
   note: string;
   subtotal: number;
   total: number;
+  /** Payment method id (bank | check | cod | card) and whether the money has arrived. */
+  paymentMethod?: string | null;
+  paymentStatus?: "unpaid" | "paid" | "failed" | "refunded";
+  discount?: number;
+  couponCode?: string | null;
+  trackingNumber?: string | null;
 };
 
-const file = (name: CollectionName) => path.join(DATA_DIR, `${name}.json`);
-
-export async function readCollection<T = unknown>(name: CollectionName): Promise<T[]> {
-  try {
-    return JSON.parse(await fs.readFile(file(name), "utf8")) as T[];
-  } catch {
-    return [];
+async function readOrders(customerId?: string): Promise<Order[]> {
+  const [orders, items] = await Promise.all([
+    customerId
+      ? pool().query("select * from orders where customer_id = $1 order by created_at desc, id", [customerId])
+      : pool().query("select * from orders order by created_at desc, id"),
+    customerId
+      ? pool().query(
+          `select order_id, product_id, name, image, price, qty from order_items
+            where order_id in (select id from orders where customer_id = $1) order by order_id, position`,
+          [customerId],
+        )
+      : pool().query("select order_id, product_id, name, image, price, qty from order_items order by order_id, position"),
+  ]);
+  const byOrder = new Map<string, Order["items"]>();
+  for (const i of items.rows) {
+    const list = byOrder.get(i.order_id) ?? [];
+    list.push({ id: i.product_id, name: i.name, price: i.price, qty: i.qty, image: i.image });
+    byOrder.set(i.order_id, list);
   }
+  return orders.rows.map((r) => ({
+    id: r.id,
+    createdAt: new Date(r.created_at).toISOString(),
+    status: r.status,
+    customer: { firstName: r.first_name, lastName: r.last_name, email: r.email, phone: r.phone },
+    address: { country: r.country, address: r.address, city: r.city, postcode: r.postcode },
+    items: byOrder.get(r.id) ?? [],
+    shipping: { label: r.shipping_label, cost: r.shipping_cost },
+    payment: r.payment,
+    note: r.note,
+    subtotal: r.subtotal,
+    total: r.total,
+    paymentMethod: r.payment_method,
+    paymentStatus: r.payment_status,
+    discount: r.discount,
+    couponCode: r.coupon_code,
+    trackingNumber: r.tracking_number,
+  }));
 }
 
-// Serialise writes so concurrent saves can't interleave.
-let queue: Promise<unknown> = Promise.resolve();
+/** Orders placed while signed in as this customer, newest first. */
+export const readCustomerOrders = (customerId: string) => readOrders(customerId);
 
-export function writeCollection<T>(name: CollectionName, items: T[]): Promise<void> {
-  const run = async () => {
-    await fs.mkdir(DATA_DIR, { recursive: true });
-    const tmp = `${file(name)}.${process.pid}.tmp`;
-    await fs.writeFile(tmp, JSON.stringify(items, null, 2) + "\n", "utf8");
-    await fs.rename(tmp, file(name));
-  };
-  const next = queue.then(run, run);
-  queue = next.catch(() => undefined);
-  return next;
+export async function readCollection<T = unknown>(name: CollectionName): Promise<T[]> {
+  if (name === "orders") return (await readOrders()) as T[];
+  if (isResource(name)) return (await listResource(name)) as T[];
+  return [];
 }

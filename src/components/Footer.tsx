@@ -3,7 +3,6 @@ import Link from "next/link";
 const PAY_METHODS = [
   { name: "Visa", logo: "/Visa_Inc._logo_(2021–present).svg" },
   { name: "Mastercard", logo: "/Mastercard_2019_logo.svg" },
-  { name: "PayPal", logo: "/PayPal.svg" },
 ];
 
 const QUICK_LINKS = [

@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 import { Button } from '@/admin/components/ui/button'
 import { Input } from '@/admin/components/ui/input'
 
-/** Image URL/path input with an upload button (files land in /public/uploads). */
+/** Image URL/path input with an upload button (files are stored in Supabase Storage). */
 export function ImageField({
   value,
   onChange,

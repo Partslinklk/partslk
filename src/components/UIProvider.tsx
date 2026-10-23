@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -18,6 +19,8 @@ export type CartItem = {
 };
 
 export type AuthMode = "login" | "register";
+
+const CART_KEY = "partslk-cart-v1";
 
 type CartProduct = { id: string; name: string; image: string; price: number };
 
@@ -51,6 +54,31 @@ export function UIProvider({ children }: { children: ReactNode }) {
   const [topDealsOpen, setTopDealsOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartLoaded, setCartLoaded] = useState(false);
+
+  // Keep the cart across reloads and the round trip to Stripe's hosted payment page.
+  useEffect(() => {
+    try {
+      const saved = JSON.parse(localStorage.getItem(CART_KEY) ?? "[]");
+      if (Array.isArray(saved)) {
+        // One-time hydrate from an external store (localStorage), so it can't run during render.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setCartItems(saved.filter((i) => i && typeof i.id === "string" && Number.isFinite(i.qty) && i.qty > 0));
+      }
+    } catch {
+      /* storage unavailable or corrupt: start with an empty cart */
+    }
+    setCartLoaded(true);
+  }, []);
+
+  useEffect(() => {
+    if (!cartLoaded) return;
+    try {
+      localStorage.setItem(CART_KEY, JSON.stringify(cartItems));
+    } catch {
+      /* storage unavailable (private mode / quota) */
+    }
+  }, [cartItems, cartLoaded]);
 
   const openAuth = useCallback((mode: AuthMode = "login") => {
     setAuthMode(mode);

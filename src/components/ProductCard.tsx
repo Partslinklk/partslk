@@ -1,7 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { ImageSlot } from "./ImageSlot";
 import { discountPct, type ShopProduct } from "@/lib/products-catalog";
 import { formatPrice } from "@/lib/format-price";
+import { useWishlist } from "@/lib/wishlist-context";
 
 export function StarRow({ rating, size = 13 }: { rating: number; size?: number }) {
   const full = Math.round(rating);
@@ -43,12 +46,20 @@ export function EyeIcon() {
 
 export function ProductCard({ product, view = "grid" }: { product: ShopProduct; view?: "grid" | "list" }) {
   const pct = discountPct(product);
+  const wishlist = useWishlist();
+  const saved = wishlist.has(product.id);
   return (
     <div className="sr-card">
       <div className="sr-media">
         {pct ? <span className="sr-deal-pct">-{pct}%</span> : null}
         <div className="sr-icon-stack">
-          <button type="button" className="sr-wish" aria-label="Add to wishlist">
+          <button
+            type="button"
+            className={`sr-wish${saved ? " is-saved" : ""}`}
+            aria-label={saved ? "Remove from wishlist" : "Add to wishlist"}
+            aria-pressed={saved}
+            onClick={() => wishlist.toggle(product.id)}
+          >
             <HeartIcon />
           </button>
           <button type="button" className="sr-compare" aria-label="Compare">

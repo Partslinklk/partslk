@@ -14,7 +14,7 @@ const QA_ITEMS = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept Visa, Mastercard and PayPal at checkout. All payments are processed securely and your card details are never stored on our servers.",
+    a: "We accept Visa and Mastercard cards at checkout. All payments are processed securely and your card details are never stored on our servers.",
   },
   {
     q: "Do you offer bulk or trade pricing?",

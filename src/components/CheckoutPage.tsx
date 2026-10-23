@@ -1,40 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { api } from "@/lib/customer-context";
+import { openPayHere, type PayHerePayment } from "./PayHerePopup";
+import { StripeCardFields, type StripeCardApi } from "./StripeCardFields";
 import { useUI } from "./UIProvider";
 import { ImageSlot } from "./ImageSlot";
 import { formatPrice } from "@/lib/format-price";
 
-const FREE_DELIVERY_THRESHOLD = 100;
+const noopSubscribe = () => () => {};
+const cancelledFlag = () => new URLSearchParams(window.location.search).get("cancelled") === "1";
 
-const SHIPPING_OPTIONS = [
-  { id: "free", label: "Free shipping", cost: 0 },
-  { id: "pickup", label: "Local pickup", cost: 5 },
-  { id: "flat", label: "Flat rate", cost: 10 },
-] as const;
+type ShippingOption = { id: string; label: string; cost: number };
+type PaymentOption = { id: string; label: string; note: string };
+type AppliedCoupon = { code: string; discount: number };
+type PlacedOrder = { id: string; lookupToken: string; paymentUrl?: string; clientSecret?: string; payhere?: PayHerePayment; error?: string };
 
-const PAYMENT_METHODS = [
-  { id: "bank", label: "Direct bank transfer", note: "Make your payment directly into our bank account. Use your order ID as the payment reference." },
-  { id: "check", label: "Check payments", note: "Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode." },
-  { id: "cod", label: "Cash on delivery", note: "Pay with cash upon delivery." },
-] as const;
-
-type ShippingId = (typeof SHIPPING_OPTIONS)[number]["id"];
-type PaymentId = (typeof PAYMENT_METHODS)[number]["id"];
 type Errors = Partial<Record<"firstName" | "phone" | "country" | "address" | "postcode" | "email", string>>;
 
 export function CheckoutPage({ countries }: { countries: { code: string; name: string }[] }) {
   const { cartItems, clearCart } = useUI();
-  const [shipping, setShipping] = useState<ShippingId>("free");
-  const [payment, setPayment] = useState<PaymentId>("bank");
+  const [shippingOptions, setShippingOptions] = useState<ShippingOption[]>([]);
+  const [shippingId, setShippingId] = useState("");
+  const [paymentOptions, setPaymentOptions] = useState<PaymentOption[]>([]);
+  const [payment, setPayment] = useState("");
+  const [country, setCountry] = useState("LK");
   const [shipDifferent, setShipDifferent] = useState(false);
   const [promoOpen, setPromoOpen] = useState(false);
   const [promo, setPromo] = useState("");
+  const [coupon, setCoupon] = useState<AppliedCoupon | null>(null);
+  const [promoError, setPromoError] = useState("");
+  const [applying, setApplying] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [orderId, setOrderId] = useState<string | null>(null);
+  const [paidNote, setPaidNote] = useState<string | null>(null);
+  // true when Stripe sent the customer back with ?cancelled=1
+  const cancelledNote = useSyncExternalStore(noopSubscribe, cancelledFlag, () => false);
   const [placing, setPlacing] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  // Stripe card boxes on this page (null = still loading, false = not set up -> redirect to Stripe's hosted page)
+  const [stripeReady, setStripeReady] = useState<boolean | null>(null);
+  const stripeApi = useRef<StripeCardApi | null>(null);
+  const pendingRef = useRef<{ orderId: string; token: string } | null>(null);
 
   // Lock the billing form while the taller order column scrolls past, as long as it fits
   // fully on screen below the sticky header.
@@ -60,11 +68,78 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
   }, [hasCart, orderId]);
 
   const subtotal = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const freeEligible = subtotal >= FREE_DELIVERY_THRESHOLD;
+  // Display only: the server recomputes prices, shipping and the promo discount when the order is placed.
+  const activeShipping = shippingOptions.find((o) => o.id === shippingId) ?? shippingOptions[0];
+  const discount = coupon ? Math.min(coupon.discount, subtotal) : 0;
+  const total = subtotal - discount + (activeShipping?.cost ?? 0);
 
-  const options = SHIPPING_OPTIONS.filter((o) => o.id !== "free" || freeEligible);
-  const activeShipping = options.find((o) => o.id === shipping) ?? options[0];
-  const total = subtotal + activeShipping.cost;
+  // Payment methods (card only when Stripe is configured).
+  useEffect(() => {
+    api<PaymentOption[]>("/api/payment-methods")
+      .then((list) => {
+        setPaymentOptions(list);
+        setPayment((cur) => cur || list[0]?.id || "");
+      })
+      .catch(() => undefined);
+  }, []);
+
+  // Shipping options for this subtotal and destination.
+  useEffect(() => {
+    let cancelled = false;
+    api<ShippingOption[]>(`/api/shipping-methods?country=${encodeURIComponent(country)}&subtotal=${subtotal}`)
+      .then((list) => {
+        if (cancelled) return;
+        setShippingOptions(list);
+        setShippingId((cur) => (list.some((o) => o.id === cur) ? cur : list[0]?.id ?? ""));
+      })
+      .catch(() => undefined);
+    return () => {
+      cancelled = true;
+    };
+  }, [country, subtotal]);
+
+  // Back from Stripe: ?paid=<id>&token=<lookup token> (success) or ?cancelled=1.
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const paid = q.get("paid");
+    const token = q.get("token");
+    if (!paid || !token) return;
+    api<{ id: string; paymentStatus: string }>(`/api/orders/${encodeURIComponent(paid)}?token=${encodeURIComponent(token)}`)
+      .then((o) => {
+        setOrderId(o.id);
+        setPaidNote(o.paymentStatus === "paid" ? "Payment received - thank you!" : "We are confirming your payment; this can take a minute.");
+        clearCart();
+        window.history.replaceState(null, "", window.location.pathname);
+      })
+      .catch(() => undefined);
+  }, [clearCart]);
+
+  async function applyPromo() {
+    setApplying(true);
+    setPromoError("");
+    try {
+      const r = await api<{ code: string; discount: number }>("/api/coupons/validate", { method: "POST", body: { code: promo, subtotal } });
+      setCoupon({ code: r.code, discount: r.discount });
+    } catch (err) {
+      setCoupon(null);
+      setPromoError(err instanceof Error ? err.message : "That promo code is not valid.");
+    } finally {
+      setApplying(false);
+    }
+  }
+
+  /** The card was refused (or something failed) after stock was reserved: release the order straight away. */
+  async function abandonPending() {
+    const pending = pendingRef.current;
+    pendingRef.current = null;
+    if (pending) {
+      await fetch("/api/payments/abandon", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ orderId: pending.orderId, token: pending.token }),
+      }).catch(() => undefined);
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -85,31 +160,94 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
       return;
     }
 
+    const payload = {
+      customer: { firstName: get("firstName"), lastName: get("lastName"), email: get("email"), phone: get("phone") },
+      address: {
+        country: get("country"),
+        address: shipDifferent && get("shipAddress") ? get("shipAddress") : get("address"),
+        city: shipDifferent ? get("shipCity") : "",
+        postcode: shipDifferent && get("shipPostcode") ? get("shipPostcode") : get("postcode"),
+      },
+      items: cartItems.map(({ id, qty }) => ({ id, qty })),
+      shippingId: activeShipping?.id ?? "",
+      couponCode: coupon?.code,
+      payment,
+      note: get("notes"),
+    };
+
+    // Card typed into Stripe's boxes on this page: create the order + PaymentIntent, confirm in the browser, verify on the server.
+    if (payment === "card" && stripeReady) {
+      if (!stripeApi.current) return setSubmitError("The card fields are still loading, please try again in a moment.");
+      pendingRef.current = null;
+      setPlacing(true);
+      try {
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, cardFields: true }),
+        });
+        const placed = (await res.json()) as PlacedOrder;
+        if (!res.ok || !placed.id || !placed.clientSecret) throw new Error(placed.error || "Could not start the card payment.");
+        pendingRef.current = { orderId: placed.id, token: placed.lookupToken };
+        const paymentIntentId = await stripeApi.current.pay(placed.clientSecret, {
+          name: `${get("firstName")} ${get("lastName")}`.trim(),
+          email: get("email"),
+          phone: get("phone"),
+          address: { line1: get("address"), postal_code: get("postcode"), country: get("country") },
+        });
+        const done = await fetch("/api/stripe/confirm", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ orderId: placed.id, paymentIntentId }),
+        });
+        const result = (await done.json()) as { state?: string; error?: string };
+        if (!done.ok) throw new Error(result.error || "We couldn't confirm the payment.");
+        pendingRef.current = null;
+        setPaidNote(result.state === "paid" ? "Payment received - thank you!" : "We are confirming your payment; this can take a minute.");
+        setOrderId(placed.id);
+        clearCart();
+      } catch (err) {
+        await abandonPending();
+        setSubmitError(err instanceof Error && err.message ? err.message : "Your card couldn't be processed. Please check the details or try another card.");
+      } finally {
+        setPlacing(false);
+      }
+      return;
+    }
+
     setPlacing(true);
     try {
-      const paymentMethod = PAYMENT_METHODS.find((m) => m.id === payment);
-      const res = await fetch("/api/orders", {
+      const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          customer: { firstName: get("firstName"), lastName: get("lastName"), email: get("email"), phone: get("phone") },
-          address: {
-            country: get("country"),
-            address: shipDifferent && get("shipAddress") ? get("shipAddress") : get("address"),
-            city: shipDifferent ? get("shipCity") : "",
-            postcode: shipDifferent && get("shipPostcode") ? get("shipPostcode") : get("postcode"),
-          },
-          items: cartItems.map(({ id, name, image, price, qty }) => ({ id, name, image, price, qty })),
-          shipping: { label: activeShipping.label, cost: activeShipping.cost },
-          payment: paymentMethod?.label ?? payment,
-          note: get("notes"),
-        }),
+        body: JSON.stringify(payload),
       });
-      const json = (await res.json()) as { id?: string; error?: string };
+      const json = (await res.json()) as PlacedOrder;
       if (!res.ok || !json.id) throw new Error(json.error || "Could not place the order.");
+      if (json.payhere) {
+        // PayHere: its payment window opens on top of this page. The order is marked paid by PayHere's signed notification.
+        pendingRef.current = { orderId: json.id, token: json.lookupToken };
+        const outcome = await openPayHere(json.payhere);
+        if (outcome === "dismissed") {
+          await abandonPending();
+          setSubmitError("The payment window was closed before paying. Your order was not placed. You can try again.");
+          return;
+        }
+        pendingRef.current = null;
+        setPaidNote("Payment received - we are confirming it now; this can take a minute.");
+        setOrderId(json.id);
+        clearCart();
+        return;
+      }
+      if (json.paymentUrl) {
+        // Card: hand over to Stripe. The cart stays until the payment comes back successful.
+        window.location.href = json.paymentUrl;
+        return;
+      }
       setOrderId(json.id);
       clearCart();
     } catch (err) {
+      await abandonPending();
       setSubmitError(err instanceof Error ? err.message : "Could not place the order.");
     } finally {
       setPlacing(false);
@@ -150,7 +288,7 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
           <div className="ck-empty">
             <h2>Thank you! Your order has been placed.</h2>
             <p>
-              Order <strong>{orderId}</strong> is confirmed. We&apos;ll email you the details shortly.
+              Order <strong>{orderId}</strong> is confirmed. {paidNote ?? "We will email you the details shortly."}
             </p>
             <Link href="/products" className="checkout-btn ck-empty-btn">
               Continue Shopping
@@ -182,7 +320,20 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
     <>
       {titleBand}
       <div className="wrap">
-        <form className="ck-layout" onSubmit={handleSubmit} noValidate>
+        {cancelledNote && (
+          <p className="ck-error" style={{ margin: "16px 0" }}>
+            Your card payment was cancelled. Your items are still in your cart - you can try again or choose another payment method.
+          </p>
+        )}
+        <form
+          className="ck-layout"
+          onSubmit={handleSubmit}
+          onChange={(e) => {
+            const t = e.target;
+            if (t instanceof HTMLSelectElement && t.name === "country") setCountry(t.value);
+          }}
+          noValidate
+        >
           <div className="ck-left" ref={leftRef}>
             <h2 className="ck-title">Billing details</h2>
             <div className="ck-card">
@@ -272,20 +423,27 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
 
               <div className="ck-section">
                 <h3>Shipping</h3>
-                {options.map((o) => (
+                {shippingOptions.map((o) => (
                   <label className="ck-radio" key={o.id}>
                     <input
                       type="radio"
                       name="shipping"
-                      checked={activeShipping.id === o.id}
-                      onChange={() => setShipping(o.id)}
+                      checked={activeShipping?.id === o.id}
+                      onChange={() => setShippingId(o.id)}
                     />
                     <span>{o.label}</span>
                     {o.cost > 0 && <em>{formatPrice(o.cost)}</em>}
                   </label>
                 ))}
+                {!shippingOptions.length && <p className="ck-pay-note">No shipping method is available for this order.</p>}
               </div>
 
+              {coupon && (
+                <div className="ck-total" style={{ fontSize: 14 }}>
+                  <span>Promo {coupon.code}</span>
+                  <strong>-{formatPrice(discount)}</strong>
+                </div>
+              )}
               <div className="ck-total">
                 <span>Total</span>
                 <strong>{formatPrice(total)}</strong>
@@ -304,15 +462,16 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
                       placeholder="Promo code"
                       aria-label="Promo code"
                     />
-                    <button type="button" className="ck-promo-apply" disabled={!promo.trim()}>
-                      Apply
+                    <button type="button" className="ck-promo-apply" disabled={!promo.trim() || applying} onClick={applyPromo}>
+                      {applying ? "..." : "Apply"}
                     </button>
                   </div>
                 )}
+                {promoError && <p className="ck-error">{promoError}</p>}
               </div>
 
               <div className="ck-pay">
-                {PAYMENT_METHODS.map((m) => (
+                {paymentOptions.map((m) => (
                   <div key={m.id}>
                     <label className="ck-radio ck-radio-lg">
                       <input
@@ -324,6 +483,7 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
                       <span>{m.label}</span>
                     </label>
                     {payment === m.id && <p className="ck-pay-note">{m.note}</p>}
+                    {m.id === "card" && payment === "card" && <StripeCardFields apiRef={stripeApi} onReady={setStripeReady} />}
                   </div>
                 ))}
 
@@ -333,7 +493,7 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
                 </p>
 
                 {submitError && <p className="ck-error">{submitError}</p>}
-                <button type="submit" className="checkout-btn ck-place" disabled={placing}>
+                <button type="submit" className="checkout-btn ck-place" disabled={placing || !payment || !activeShipping || (payment === "card" && stripeReady === null)}>
                   {placing ? "PLACING ORDER…" : "PLACE ORDER"}
                 </button>
 
@@ -344,8 +504,6 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
                     <img src="/Visa_Inc._logo_(2021–present).svg" alt="Visa" />
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src="/Mastercard_2019_logo.svg" alt="Mastercard" />
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/PayPal.svg" alt="PayPal" />
                   </div>
                 </div>
               </div>

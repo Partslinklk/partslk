@@ -1,0 +1,8 @@
+{
+  "buildCommand": "node scripts/migrate.mjs --vercel-production-only && next build",
+  "crons": [
+    { "path": "/api/cron/cancel-unpaid", "schedule": "0 3 * * *" },
+    { "path": "/api/cron/send-emails", "schedule": "30 3 * * *" },
+    { "path": "/api/cron/maintenance", "schedule": "0 4 * * *" }
+  ]
+}

@@ -25,6 +25,7 @@ import {
   TableRow,
 } from '@/admin/components/ui/table'
 import { ImageField } from './image-field'
+import { ImagesField } from './images-field'
 import { uniqueId, useCollection, type CollectionName } from './use-collection'
 
 type Option = { value: string; label: string }
@@ -40,6 +41,7 @@ export type Field = {
     | 'multiselect'
     | 'checkbox'
     | 'image'
+    | 'images'
     | 'lines'
     | 'datetime'
   options?: Option[]
@@ -284,6 +286,13 @@ export function ResourceManager<T extends Item>({
             />
             {f.help}
           </label>
+        )
+      case 'images':
+        return (
+          <ImagesField
+            value={Array.isArray(value) ? (value as string[]) : []}
+            onChange={(v) => set(f.key, v)}
+          />
         )
       case 'image':
         return (

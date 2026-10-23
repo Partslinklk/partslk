@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { api } from "@/lib/customer-context";
 
 const STORE_ADDRESS = "60 29th Street San Francisco, 507-Union Trade Center";
 const MAP_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(STORE_ADDRESS)}&z=13&output=embed`;
@@ -58,10 +59,30 @@ const INFO_ITEMS = [
 
 export function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSubmitted(true);
+    const d = new FormData(e.currentTarget);
+    setSending(true);
+    setError("");
+    try {
+      await api("/api/contact", {
+        method: "POST",
+        body: {
+          name: String(d.get("name") ?? ""),
+          email: String(d.get("email") ?? ""),
+          message: String(d.get("message") ?? ""),
+          website: String(d.get("website") ?? ""),
+        },
+      });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not send your message.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -113,8 +134,20 @@ export function ContactPage() {
                   <textarea id="ct-message" name="message" rows={6} />
                 </div>
 
-                <button type="submit" className="pdp-reviewform-submit">
-                  Submit
+                {/* Honeypot: invisible to people, bots fill it in. */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }}
+                />
+
+                {error && <p className="authm-error">{error}</p>}
+
+                <button type="submit" className="pdp-reviewform-submit" disabled={sending}>
+                  {sending ? "Sending..." : "Submit"}
                 </button>
               </form>
             )}

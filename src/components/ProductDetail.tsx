@@ -9,12 +9,11 @@ import { useUI } from "./UIProvider";
 import { COLOR_OPTIONS, discountPct, type ShopProduct } from "@/lib/products-catalog";
 import { useStoreData } from "@/lib/store-context";
 import { formatPrice } from "@/lib/format-price";
+import { useWishlist } from "@/lib/wishlist-context";
 
-const THUMB_COUNT = 4;
 const PAY_METHODS: { name: string; logo?: string }[] = [
   { name: "Visa", logo: "/Visa_Inc._logo_(2021–present).svg" },
   { name: "Mastercard", logo: "/Mastercard_2019_logo.svg" },
-  { name: "PayPal", logo: "/PayPal.svg" },
 ];
 const ZOOM_FACTOR = 2.4;
 const LENS_PCT = 100 / ZOOM_FACTOR;
@@ -160,7 +159,8 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
   const [activeThumb, setActiveThumb] = useState(0);
   const [activeColor, setActiveColor] = useState<string | null>(product.colors[0] ?? null);
   const [qty, setQty] = useState(1);
-  const [wish, setWish] = useState(false);
+  const wishlist = useWishlist();
+  const wish = wishlist.has(product.id);
   const [compare, setCompare] = useState(false);
   const [addedLabel, setAddedLabel] = useState(false);
   const [shareLabel, setShareLabel] = useState(false);
@@ -174,7 +174,13 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
   const stock = useMemo(() => product.stock ?? seededInt(`${product.id}:stock`, 12, 520), [product.id, product.stock]);
   const soldRecently = useMemo(() => seededInt(`${product.id}:sold`, 3, 24), [product.id]);
   const viewingNow = useMemo(() => seededInt(`${product.id}:view`, 8, 54), [product.id]);
-  const thumbs = useMemo(() => Array.from({ length: THUMB_COUNT }, () => product.image), [product.image]);
+  // Every photo the admin uploaded, cover first. A product with a single photo shows just that one (no fake duplicates).
+  const thumbs = useMemo(
+    () => (product.images?.length ? product.images : product.image ? [product.image] : []),
+    [product.images, product.image],
+  );
+  const gallery = thumbs.length > 1;
+  const current = Math.min(activeThumb, Math.max(0, thumbs.length - 1));
 
   const handleQty = (next: number) => setQty(Math.min(stock, Math.max(1, next)));
 
@@ -245,7 +251,8 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
         <div className="pdp-body">
           <div className="pdp-top">
             <div className="pdp-gallery">
-              <div className="pdp-galleryrow">
+              <div className={`pdp-galleryrow${gallery ? "" : " is-single"}`}>
+                {gallery ? (
                 <div className="pdp-thumbrail">
                   <button
                     type="button"
@@ -260,8 +267,9 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
                       <button
                         key={i}
                         type="button"
-                        className={`pdp-thumb${activeThumb === i ? " is-active" : ""}`}
+                        className={`pdp-thumb${current === i ? " is-active" : ""}`}
                         onClick={() => setActiveThumb(i)}
+                        aria-current={current === i}
                         aria-label={`View image ${i + 1}`}
                       >
                         <ImageSlot src={src} alt={`${product.name} view ${i + 1}`} shape="rect" />
@@ -277,9 +285,10 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
                     <ChevronDownIcon />
                   </button>
                 </div>
+                ) : null}
                 <div className="pdp-stagewrap">
                   <div className="pdp-stage" onMouseMove={handleStageMove} onMouseLeave={clearZoom}>
-                    <ImageSlot src={thumbs[activeThumb]} alt={product.name} shape="rect" />
+                    <ImageSlot src={thumbs[current]} alt={`${product.name} - image ${current + 1} of ${thumbs.length}`} shape="rect" />
                     {zoomPos ? (
                       <div
                         className="pdp-lens"
@@ -291,7 +300,7 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
                     <div
                       className="pdp-zoompane"
                       style={{
-                        backgroundImage: `url(${thumbs[activeThumb]})`,
+                        backgroundImage: `url(${JSON.stringify(thumbs[current] ?? "")})`,
                         backgroundPosition: `${zoomPos.x}% ${zoomPos.y}%`,
                         backgroundSize: `${ZOOM_FACTOR * 100}%`,
                       }}
@@ -388,7 +397,7 @@ export function ProductDetail({ product }: { product: ShopProduct }) {
                 <button type="button" className={`pdp-action${compare ? " is-active" : ""}`} onClick={() => setCompare((c) => !c)}>
                   <CompareIcon /> Compare
                 </button>
-                <button type="button" className={`pdp-action${wish ? " is-active" : ""}`} onClick={() => setWish((w) => !w)}>
+                <button type="button" className={`pdp-action${wish ? " is-active" : ""}`} onClick={() => wishlist.toggle(product.id)} aria-pressed={wish}>
                   <HeartIcon /> Wishlist
                 </button>
                 <button type="button" className="pdp-action">

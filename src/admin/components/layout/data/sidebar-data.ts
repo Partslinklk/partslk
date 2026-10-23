@@ -1,5 +1,8 @@
 import {
   Boxes,
+  Inbox,
+  Mail,
+  Star,
   LayoutDashboard,
   MessageSquareQuote,
   Palette,
@@ -33,6 +36,8 @@ export const sidebarData: SidebarData = {
         { title: 'Dashboard', url: '/', icon: LayoutDashboard },
         { title: 'Orders', url: '/orders', icon: ShoppingCart },
         { title: 'Customers', url: '/customers', icon: Users },
+        { title: 'Messages', url: '/messages', icon: Inbox },
+        { title: 'Subscribers', url: '/subscribers', icon: Mail },
       ],
     },
     {
@@ -47,6 +52,7 @@ export const sidebarData: SidebarData = {
       title: 'Website',
       items: [
         { title: 'Deals & Homepage', url: '/deals', icon: Flame },
+        { title: 'Reviews', url: '/reviews', icon: Star },
         { title: 'Testimonials', url: '/testimonials', icon: MessageSquareQuote },
       ],
     },

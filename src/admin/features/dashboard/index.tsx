@@ -1,7 +1,8 @@
 'use client'
 
-import { useMemo } from 'react'
-import { Boxes, DollarSign, ShoppingCart, Tags } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Boxes, DollarSign, ShoppingCart, Users } from 'lucide-react'
+import { toast } from 'sonner'
 import {
   Area,
   AreaChart,
@@ -24,14 +25,13 @@ import {
   CardTitle,
 } from '@/admin/components/ui/card'
 import { Badge } from '@/admin/components/ui/badge'
+import { Button } from '@/admin/components/ui/button'
 import { Link } from '@/admin/lib/router'
 import { useIsMobile } from '@/admin/hooks/use-mobile'
 import { PageShell } from '@/admin/features/store/page-shell'
-import { useCollection } from '@/admin/features/store/use-collection'
 import { statusVariant } from '@/admin/features/store/orders-page'
 import { formatPrice } from '@/lib/format-price'
-import type { Category, Order } from '@/lib/db'
-import type { ShopProduct } from '@/lib/products-catalog'
+import type { OrderStatus } from '@/lib/db'
 
 const STATUS_COLORS: Record<string, string> = {
   pending: 'var(--chart-4)',
@@ -49,7 +49,33 @@ const tooltipStyle = {
   fontSize: 12,
 }
 
-const dayKey = (d: Date) => `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+type DashboardData = {
+  days: number
+  totals: {
+    revenue: number
+    paidRevenue: number
+    orders: number
+    pendingOrders: number
+    customers: number
+    newCustomers: number
+    products: number
+    lowStock: number
+    subscribers: number
+    pendingReviews: number
+    newMessages: number
+  }
+  daily: { day: string; revenue: number; orders: number; customers: number }[]
+  byStatus: { name: string; value: number }[]
+  topProducts: { id: string; name: string; units: number; revenue: number }[]
+  lowStock: { id: string; name: string; stock: number }[]
+  byCategory: { name: string; products: number }[]
+  recentOrders: { id: string; firstName: string; lastName: string; createdAt: string; status: OrderStatus; total: number }[]
+}
+
+const RANGES = [7, 14, 30, 90]
+
+const dayLabel = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
 
 function ChartEmpty({ children }: { children: string }) {
   return (
@@ -60,107 +86,94 @@ function ChartEmpty({ children }: { children: string }) {
 }
 
 export function Dashboard() {
-  const products = useCollection<ShopProduct>('products').items
-  const categories = useCollection<Category>('categories').items
-  const orders = useCollection<Order>('orders').items
   const isMobile = useIsMobile()
+  const [days, setDays] = useState(14)
+  const [data, setData] = useState<DashboardData | null>(null)
 
-  const revenue = orders
-    .filter((o) => o.status !== 'cancelled')
-    .reduce((sum, o) => sum + o.total, 0)
-  const pending = orders.filter((o) => o.status === 'pending').length
-  const lowStock = products.filter((p) => (p.stock ?? 0) <= 5)
-
-  // Revenue + order count for each of the last 14 days.
-  const daily = useMemo(() => {
-    const days = Array.from({ length: 14 }, (_, i) => {
-      const d = new Date()
-      d.setDate(d.getDate() - (13 - i))
-      return {
-        key: dayKey(d),
-        label: d.toLocaleDateString(undefined, {
-          month: 'short',
-          day: 'numeric',
-        }),
-        revenue: 0,
-        orders: 0,
-      }
-    })
-    for (const o of orders) {
-      const day = days.find((d) => d.key === dayKey(new Date(o.createdAt)))
-      if (!day) continue
-      day.orders += 1
-      if (o.status !== 'cancelled') day.revenue += o.total
+  useEffect(() => {
+    let cancelled = false
+    fetch(`/api/admin/dashboard?days=${days}`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(((await res.json().catch(() => ({}))) as { error?: string }).error || 'Could not load the dashboard.')
+        return (await res.json()) as DashboardData
+      })
+      .then((d) => !cancelled && setData(d))
+      .catch((e) => toast.error(e instanceof Error ? e.message : 'Could not load the dashboard.'))
+    return () => {
+      cancelled = true
     }
-    return days
-  }, [orders])
+  }, [days])
 
-  const byStatus = useMemo(() => {
-    const counts: Record<string, number> = {}
-    for (const o of orders) counts[o.status] = (counts[o.status] ?? 0) + 1
-    return Object.entries(counts).map(([name, value]) => ({ name, value }))
-  }, [orders])
-
-  const byCategory = useMemo(
-    () =>
-      categories.map((c) => ({
-        name: c.name,
-        products: products.filter((p) => p.categories.includes(c.id)).length,
-      })),
-    [categories, products]
-  )
-
-  // Best sellers by units sold (cancelled orders excluded).
-  const topProducts = useMemo(() => {
-    const units = new Map<string, { name: string; units: number }>()
-    for (const o of orders) {
-      if (o.status === 'cancelled') continue
-      for (const i of o.items) {
-        const cur = units.get(i.id)
-        units.set(i.id, { name: i.name, units: (cur?.units ?? 0) + i.qty })
-      }
-    }
-    return [...units.values()]
-      .sort((a, b) => b.units - a.units)
-      .slice(0, 5)
-      .map((p) => ({
-        ...p,
-        name: p.name.length > 28 ? `${p.name.slice(0, 27)}…` : p.name,
-      }))
-  }, [orders])
+  const t = data?.totals
+  const daily = (data?.daily ?? []).map((d) => ({ ...d, label: dayLabel(d.day) }))
+  const byStatus = data?.byStatus ?? []
+  const byCategory = data?.byCategory ?? []
+  const lowStock = data?.lowStock ?? []
+  const recentOrders = data?.recentOrders ?? []
+  const topProducts = (data?.topProducts ?? []).map((p) => ({
+    ...p,
+    name: p.name.length > 28 ? `${p.name.slice(0, 27)}…` : p.name,
+  }))
 
   const stats = [
     {
       label: 'Revenue',
-      value: formatPrice(revenue),
-      note: `${orders.length} orders`,
+      value: formatPrice(t?.revenue ?? 0),
+      note: `${formatPrice(t?.paidRevenue ?? 0)} paid · last ${days} days`,
       icon: DollarSign,
     },
     {
       label: 'Orders',
-      value: orders.length,
-      note: `${pending} pending`,
+      value: t?.orders ?? 0,
+      note: `${t?.pendingOrders ?? 0} pending right now`,
       icon: ShoppingCart,
     },
     {
-      label: 'Products',
-      value: products.length,
-      note: `${lowStock.length} low on stock`,
-      icon: Boxes,
+      label: 'Customers',
+      value: t?.customers ?? 0,
+      note: `${t?.newCustomers ?? 0} new in ${days} days`,
+      icon: Users,
     },
     {
-      label: 'Categories',
-      value: categories.length,
-      note: 'in the catalog',
-      icon: Tags,
+      label: 'Products',
+      value: t?.products ?? 0,
+      note: `${t?.lowStock ?? 0} low on stock`,
+      icon: Boxes,
     },
   ]
+  const attention = [
+    { label: 'reviews to approve', n: t?.pendingReviews ?? 0, to: '/reviews' },
+    { label: 'new messages', n: t?.newMessages ?? 0, to: '/messages' },
+    { label: 'pending orders', n: t?.pendingOrders ?? 0, to: '/orders' },
+  ].filter((a) => a.n > 0)
 
   return (
     <PageShell
       title='Dashboard'
       description='A quick look at how the shop is doing.'
+      actions={
+        <div className='flex gap-1'>
+          {RANGES.map((r) => (
+            <Button key={r} size='sm' variant={days === r ? 'default' : 'outline'} onClick={() => setDays(r)}>
+              {r}d
+            </Button>
+          ))}
+        </div>
+      }
     >
+      {attention.length > 0 && (
+        <div className='mb-4 flex flex-wrap gap-2 text-sm'>
+          {attention.map((a) => (
+            <Link
+              key={a.label}
+              to={a.to}
+              className='rounded-md border bg-card px-3 py-1.5 hover:bg-muted'
+            >
+              <strong>{a.n}</strong> {a.label}
+            </Link>
+          ))}
+        </div>
+      )}
       <div className='grid gap-4 sm:grid-cols-2 lg:grid-cols-4'>
         {stats.map((s) => (
           <Card key={s.label}>
@@ -181,7 +194,7 @@ export function Dashboard() {
           <CardHeader>
             <CardTitle>Revenue</CardTitle>
             <CardDescription>
-              Last 14 days (cancelled orders excluded)
+              Last {days} days (cancelled orders excluded)
             </CardDescription>
           </CardHeader>
           <CardContent className='h-72'>
@@ -239,7 +252,7 @@ export function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Orders by status</CardTitle>
-            <CardDescription>All time</CardDescription>
+            <CardDescription>Last {days} days</CardDescription>
           </CardHeader>
           <CardContent>
             <div className='h-56'>
@@ -288,7 +301,7 @@ export function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Orders per day</CardTitle>
-            <CardDescription>Last 14 days</CardDescription>
+            <CardDescription>Last {days} days</CardDescription>
           </CardHeader>
           <CardContent className='h-64'>
             <ResponsiveContainer width='100%' height='100%'>
@@ -330,7 +343,7 @@ export function Dashboard() {
         <Card>
           <CardHeader>
             <CardTitle>Best sellers</CardTitle>
-            <CardDescription>Units sold</CardDescription>
+            <CardDescription>Units sold, last {days} days</CardDescription>
           </CardHeader>
           <CardContent className='h-64'>
             {topProducts.length === 0 ? (
@@ -431,17 +444,17 @@ export function Dashboard() {
             </CardDescription>
           </CardHeader>
           <CardContent className='space-y-3'>
-            {orders.length === 0 && (
+            {recentOrders.length === 0 && (
               <p className='text-sm text-muted-foreground'>No orders yet.</p>
             )}
-            {orders.slice(0, 6).map((o) => (
+            {recentOrders.map((o) => (
               <div
                 key={o.id}
                 className='flex items-center justify-between gap-3 text-sm'
               >
                 <div className='min-w-0'>
                   <p className='font-medium'>
-                    {o.id} · {o.customer.firstName} {o.customer.lastName}
+                    {o.id} · {o.firstName} {o.lastName}
                   </p>
                   <p className='text-xs text-muted-foreground'>
                     {new Date(o.createdAt).toLocaleDateString()}
@@ -474,13 +487,13 @@ export function Dashboard() {
                 Everything is well stocked.
               </p>
             )}
-            {lowStock.slice(0, 6).map((p) => (
+            {lowStock.map((p) => (
               <div
                 key={p.id}
                 className='flex items-center justify-between gap-3 text-sm'
               >
                 <span className='truncate'>{p.name}</span>
-                <Badge variant='destructive'>{p.stock ?? 0} left</Badge>
+                <Badge variant='destructive'>{p.stock} left</Badge>
               </div>
             ))}
           </CardContent>
@@ -489,3 +502,4 @@ export function Dashboard() {
     </PageShell>
   )
 }
+

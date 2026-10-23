@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useCustomer } from "@/lib/customer-context";
 import { useUI } from "./UIProvider";
 
 type Item = { label: string; href: string; icon: ReactNode };
@@ -50,7 +52,7 @@ const PRIMARY: Item[] = [
   },
   {
     label: "Wish List",
-    href: "/my-account",
+    href: "/my-account?tab=wishlist",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M12 20s-7-4.6-7-9.4A3.6 3.6 0 0 1 12 7a3.6 3.6 0 0 1 7 3.6C19 15.4 12 20 12 20Z" />
@@ -71,6 +73,8 @@ const PRIMARY: Item[] = [
 
 export function AccountMenu() {
   const { openAuth } = useUI();
+  const { customer, logout } = useCustomer();
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -115,25 +119,41 @@ export function AccountMenu() {
         type="button"
         aria-haspopup="true"
         aria-expanded={open}
-        onClick={() => startAuth()}
+        onClick={() => (customer ? router.push("/my-account") : startAuth())}
       >
         <svg className="nav-act-ico" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="3.4" />
           <path d="M5 20c0-3.6 3-6.2 7-6.2s7 2.6 7 6.2" />
         </svg>
         <span className="nav-act-text">
-          <span className="nav-info-label">Login / Signup</span>
+          <span className="nav-info-label">{customer ? `Hello, ${customer.firstName || "there"}` : "Login / Signup"}</span>
           <strong>My Account</strong>
         </span>
       </button>
 
       <div className="account-pop" role="menu" aria-label="Account menu">
-        <button className="acct-signin" type="button" onClick={() => startAuth("login")}>
-          Sign in
-        </button>
-        <button className="acct-register" type="button" onClick={() => startAuth("register")}>
-          Register
-        </button>
+        {customer ? (
+          <button
+            className="acct-signin"
+            type="button"
+            onClick={async () => {
+              setOpen(false);
+              await logout();
+              router.push("/");
+            }}
+          >
+            Sign out
+          </button>
+        ) : (
+          <>
+            <button className="acct-signin" type="button" onClick={() => startAuth("login")}>
+              Sign in
+            </button>
+            <button className="acct-register" type="button" onClick={() => startAuth("register")}>
+              Register
+            </button>
+          </>
+        )}
 
         <div className="acct-divider" />
 

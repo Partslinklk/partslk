@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react'
 import { Eye, Trash2 } from 'lucide-react'
+import { toast } from 'sonner'
 import { Badge } from '@/admin/components/ui/badge'
 import { Button } from '@/admin/components/ui/button'
 import { Input } from '@/admin/components/ui/input'
@@ -49,7 +50,7 @@ const selectClass =
   'h-8 rounded-md border border-input bg-transparent px-2 text-sm capitalize shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50'
 
 export function OrdersPage() {
-  const { items, loading, saving, save } = useCollection<Order>('orders')
+  const { items, loading, saving, save, reload } = useCollection<Order>('orders')
   const [query, setQuery] = useState('')
   const [status, setStatus] = useState<'all' | OrderStatus>('all')
   const [viewing, setViewing] = useState<Order | null>(null)
@@ -66,6 +67,17 @@ export function OrdersPage() {
             .includes(q))
     )
   }, [items, query, status])
+
+  async function markPaid(order: Order) {
+    const res = await fetch(`/api/admin/orders/${encodeURIComponent(order.id)}/paid`, { method: 'POST' })
+    if (!res.ok) {
+      const json = (await res.json().catch(() => ({}))) as { error?: string }
+      return toast.error(json.error || 'Could not mark as paid.')
+    }
+    toast.success(`Order ${order.id} marked paid`)
+    setViewing(null)
+    await reload()
+  }
 
   const setOrderStatus = (order: Order, next: OrderStatus) =>
     save(
@@ -218,6 +230,12 @@ export function OrdersPage() {
                       <span>{formatPrice(i.price * i.qty)}</span>
                     </div>
                   ))}
+                  {!!viewing.discount && (
+                    <div className='flex justify-between p-2 text-muted-foreground'>
+                      <span>Promo {viewing.couponCode}</span>
+                      <span>-{formatPrice(viewing.discount)}</span>
+                    </div>
+                  )}
                   <div className='flex justify-between p-2 text-muted-foreground'>
                     <span>Shipping ({viewing.shipping.label})</span>
                     <span>{formatPrice(viewing.shipping.cost)}</span>
@@ -227,9 +245,27 @@ export function OrdersPage() {
                     <span>{formatPrice(viewing.total)}</span>
                   </div>
                 </div>
-                <p>
-                  <span className='font-medium'>Payment:</span> {viewing.payment}
-                </p>
+                <div className='flex flex-wrap items-center gap-2'>
+                  <span>
+                    <span className='font-medium'>Payment:</span> {viewing.payment}
+                  </span>
+                  <Badge
+                    variant={viewing.paymentStatus === 'paid' ? 'default' : 'outline'}
+                    className='capitalize'
+                  >
+                    {viewing.paymentStatus ?? 'unpaid'}
+                  </Badge>
+                  {viewing.paymentStatus !== 'paid' && viewing.status !== 'cancelled' && (
+                    <Button size='sm' variant='outline' onClick={() => markPaid(viewing)}>
+                      Mark as paid
+                    </Button>
+                  )}
+                </div>
+                {viewing.trackingNumber && (
+                  <p>
+                    <span className='font-medium'>Tracking:</span> {viewing.trackingNumber}
+                  </p>
+                )}
                 {viewing.note && (
                   <p>
                     <span className='font-medium'>Note:</span> {viewing.note}

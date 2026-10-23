@@ -16,7 +16,7 @@ export function ProductsPage() {
 
   const fields: Field[] = [
     { key: 'name', label: 'Name', type: 'text', required: true, wide: true },
-    { key: 'image', label: 'Image', type: 'image' },
+    { key: 'images', label: 'Images (front, back, sides, details…)', type: 'images', wide: true },
     { key: 'description', label: 'Description', type: 'textarea' },
     {
       key: 'categories',
@@ -97,6 +97,7 @@ export function ProductsPage() {
         blank={{
           name: '',
           image: '',
+          images: [],
           description: '',
           categories: [],
           brand: '',
@@ -111,6 +112,10 @@ export function ProductsPage() {
         }}
         normalize={(p) => {
           const next = { ...p }
+          // The first gallery photo is the cover shown on cards, in the cart and on orders.
+          const gallery = Array.isArray(next.images) ? next.images : []
+          next.images = gallery
+          next.image = gallery[0] ?? next.image ?? ''
           if (!next.highlight) delete next.highlight
           if (!next.originalPrice) delete next.originalPrice
           return next
@@ -121,14 +126,17 @@ export function ProductsPage() {
             cell: (p) => (
               <div className='flex items-center gap-3'>
                 <div className='size-10 shrink-0 overflow-hidden rounded border bg-muted'>
-                  {p.image && (
+                  {(p.images?.[0] || p.image) && (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={p.image} alt='' className='size-full object-contain' />
+                    <img src={p.images?.[0] || p.image} alt='' className='size-full object-contain' />
                   )}
                 </div>
                 <div className='min-w-0'>
                   <p className='max-w-xs truncate font-medium'>{p.name}</p>
-                  <p className='text-xs text-muted-foreground'>{p.brand || 'No brand'}</p>
+                  <p className='text-xs text-muted-foreground'>
+                    {p.brand || 'No brand'}
+                    {(p.images?.length ?? 0) > 1 ? ` · ${p.images?.length} photos` : ''}
+                  </p>
                 </div>
               </div>
             ),

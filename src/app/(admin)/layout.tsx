@@ -19,6 +19,9 @@ export const metadata: Metadata = {
   },
 };
 
+// Admin pages are per-user and carry a per-request CSP nonce (set in src/proxy.ts), so they must render dynamically.
+export const dynamic = "force-dynamic";
+
 export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`} suppressHydrationWarning>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type FormEvent } from "react";
+import { api } from "@/lib/customer-context";
 import Image from "next/image";
 
 const STORAGE_KEY = "newsletter-popup-dismissed";
@@ -10,6 +11,8 @@ export function NewsletterPopup() {
   const [email, setEmail] = useState("");
   const [dontShow, setDontShow] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,10 +47,20 @@ export function NewsletterPopup() {
     setOpen(false);
   }
 
-  function onSubmit(e: FormEvent) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email.trim()) return;
-    setSubmitted(true);
+    const website = String(new FormData(e.currentTarget).get("website") ?? "");
+    setSending(true);
+    setError("");
+    try {
+      await api("/api/newsletter", { method: "POST", body: { email: email.trim(), source: "popup", website } });
+      setSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not subscribe. Please try again.");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (!open) return null;
@@ -106,10 +119,19 @@ export function NewsletterPopup() {
                   placeholder="Your email address"
                   aria-label="Email address"
                 />
-                <button className="nl-btn" type="submit">
-                  NOTIFY ME
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }}
+                />
+                <button className="nl-btn" type="submit" disabled={sending}>
+                  {sending ? "..." : "NOTIFY ME"}
                 </button>
               </form>
+              {error && <p className="nl-note" style={{ color: "#dc2626" }}>{error}</p>}
               <p className="nl-note">By subscribing, you agree to our privacy policy.</p>
               <label className="nl-check">
                 <input
