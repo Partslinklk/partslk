@@ -7,8 +7,6 @@ import { buildPayHerePayment, payhereEnabled } from "./payhere";
 import { createCheckoutSession, createPaymentIntent, stripeEnabled, stripeInlineEnabled } from "./stripe";
 
 export const PAYMENT_METHODS = {
-  bank: "Direct bank transfer",
-  check: "Check payments",
   cod: "Cash on delivery",
   card: "Credit / debit card",
   payhere: "Card / online banking (PayHere)",
@@ -33,7 +31,7 @@ export const checkoutSchema = z.object({
     .max(100),
   shippingId: z.string().trim().min(1).max(50),
   couponCode: z.string().trim().max(50).optional(),
-  payment: z.enum(["bank", "check", "cod", "card", "payhere"]),
+  payment: z.enum(["cod", "card", "payhere"]),
   /**
    * The card is entered in Stripe's fields on our own page instead of redirecting:
    * returns a clientSecret, then /api/stripe/confirm.

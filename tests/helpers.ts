@@ -48,14 +48,14 @@ export async function addCoupon(c: {
 export const stockOf = async (id: string) =>
   (await query<{ stock: number }>("select stock from products where id = $1", [id])).rows[0].stock;
 
-/** A valid bank-transfer checkout for the given cart. */
+/** A valid cash-on-delivery checkout for the given cart. */
 export function checkoutInput(items: { id: string; qty: number }[], extra: Partial<CheckoutInput> = {}): CheckoutInput {
   return {
     customer: { firstName: "Test", lastName: "Buyer", email: "buyer@example.com", phone: "0400000000" },
     address: { country: "LK", address: "1 Test Street", city: "Colombo", postcode: "00100" },
     items,
     shippingId: "flat",
-    payment: "bank",
+    payment: "cod",
     note: "",
     cardFields: false,
     ...extra,

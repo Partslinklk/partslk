@@ -233,8 +233,15 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
           setSubmitError("The payment window was closed before paying. Your order was not placed. You can try again.");
           return;
         }
+        // Only show "order placed" once our server has PayHere's signed confirmation (poll for up to ~40s).
+        let paid = false;
+        for (let i = 0; i < 20 && !paid; i++) {
+          if (i) await new Promise((r) => setTimeout(r, 2000));
+          const o = await api<{ paymentStatus: string }>(`/api/orders/${encodeURIComponent(json.id)}?token=${encodeURIComponent(json.lookupToken)}`).catch(() => null);
+          paid = o?.paymentStatus === "paid";
+        }
         pendingRef.current = null;
-        setPaidNote("Payment received - we are confirming it now; this can take a minute.");
+        setPaidNote(paid ? "Payment received - thank you!" : "Payment received - we are still confirming it; this can take a minute.");
         setOrderId(json.id);
         clearCart();
         return;

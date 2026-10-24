@@ -83,8 +83,10 @@ async function readOrders(where: { customerId?: string; id?: string } = {}): Pro
   const params: unknown[] = [];
   if (where.customerId) clauses.push(`customer_id = $${params.push(where.customerId)}`);
   if (where.id) clauses.push(`id = $${params.push(where.id)}`);
+  // A card / PayHere order only counts as placed once the payment succeeds: hide the ones still awaiting payment from lists.
+  if (!where.id) clauses.push("not (payment_method in ('card', 'payhere') and payment_status = 'unpaid' and status = 'pending')");
   const filter = clauses.length ? `where ${clauses.join(" and ")}` : "";
-  const limit = clauses.length ? "" : `limit ${ADMIN_ORDER_LIMIT}`;
+  const limit = where.customerId || where.id ? "" : `limit ${ADMIN_ORDER_LIMIT}`;
 
   const orders = await pool().query(`select * from orders ${filter} order by created_at desc, id ${limit}`, params);
   const items = await pool().query(

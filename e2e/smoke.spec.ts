@@ -87,7 +87,7 @@ test("browse -> add to cart -> checkout (bank transfer) -> order placed", async 
   await page.locator("#ck-address").fill("12 Smoke Test Road");
   await page.locator("#ck-postcode").fill("00100");
   await page.locator("#ck-email").fill(EMAIL);
-  await page.getByRole("radio", { name: "Direct bank transfer" }).check();
+  await page.getByRole("radio", { name: "Cash on delivery" }).check();
   await page.getByRole("button", { name: "PLACE ORDER" }).click();
 
   await expect(page.getByText("Thank you! Your order has been placed.")).toBeVisible({ timeout: 20_000 });
