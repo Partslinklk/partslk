@@ -281,8 +281,14 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
           const o = await api<{ paymentStatus: string }>(`/api/orders/${encodeURIComponent(json.id)}?token=${encodeURIComponent(json.lookupToken)}`).catch(() => null);
           paid = o?.paymentStatus === "paid";
         }
+        if (!paid) {
+          // No signed confirmation from PayHere (card declined / payment failed): the order must not be placed.
+          await abandonPending();
+          setSubmitError("Your payment was not successful, so your order was not placed. Please check your card details or try another payment method.");
+          return;
+        }
         pendingRef.current = null;
-        setPaidNote(paid ? "Payment received - thank you!" : "Payment received - we are still confirming it; this can take a minute.");
+        setPaidNote("Payment received - thank you!");
         setOrderId(json.id);
         clearCart();
         return;
