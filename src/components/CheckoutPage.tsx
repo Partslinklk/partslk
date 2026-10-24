@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
-import { api } from "@/lib/customer-context";
+import { api, useCustomer } from "@/lib/customer-context";
 import { openPayHere, type PayHerePayment } from "./PayHerePopup";
 import { StripeCardFields, type StripeCardApi } from "./StripeCardFields";
 import { useUI } from "./UIProvider";
@@ -16,6 +16,8 @@ type ShippingOption = { id: string; label: string; cost: number };
 type PaymentOption = { id: string; label: string; note: string };
 type AppliedCoupon = { code: string; discount: number };
 type PlacedOrder = { id: string; lookupToken: string; paymentUrl?: string; clientSecret?: string; payhere?: PayHerePayment; error?: string };
+
+type SavedAddress = { firstName: string; lastName: string; phone: string; country: string; address: string; postcode: string; isDefault: boolean };
 
 type Errors = Partial<Record<"firstName" | "phone" | "country" | "address" | "postcode" | "email", string>>;
 
@@ -72,6 +74,45 @@ export function CheckoutPage({ countries }: { countries: { code: string; name: s
   const activeShipping = shippingOptions.find((o) => o.id === shippingId) ?? shippingOptions[0];
   const discount = coupon ? Math.min(coupon.discount, subtotal) : 0;
   const total = subtotal - discount + (activeShipping?.cost ?? 0);
+
+  // Signed-in customers: fill the billing form from their profile and default saved address (only fields still empty).
+  const { customer } = useCustomer();
+  const customerId = customer?.id;
+  const prefilledFor = useRef<string | null>(null);
+  useEffect(() => {
+    if (!customer || !customerId || prefilledFor.current === customerId || !hasCart || orderId) return;
+    prefilledFor.current = customerId;
+    let cancelled = false;
+    api<SavedAddress[]>("/api/me/addresses")
+      .catch(() => [] as SavedAddress[])
+      .then((list) => {
+        if (cancelled) return;
+        const a = list.find((x) => x.isDefault) ?? list[0];
+        const values: Record<string, string> = {
+          firstName: a?.firstName || customer.firstName,
+          lastName: a?.lastName || customer.lastName,
+          phone: a?.phone || customer.phone,
+          email: customer.email,
+          address: a?.address ?? "",
+          postcode: a?.postcode ?? "",
+        };
+        const form = leftRef.current?.closest("form");
+        if (!form) return;
+        for (const [name, value] of Object.entries(values)) {
+          const el = form.elements.namedItem(name);
+          if (el instanceof HTMLInputElement && !el.value && value) el.value = value;
+        }
+        const select = form.elements.namedItem("country");
+        if (a?.country && select instanceof HTMLSelectElement && countries.some((c) => c.code === a.country)) {
+          select.value = a.country;
+          setCountry(a.country);
+        }
+      });
+    return () => {
+      cancelled = true;
+      prefilledFor.current = null;
+    };
+  }, [customer, customerId, hasCart, orderId, countries]);
 
   // Payment methods (card only when Stripe is configured).
   useEffect(() => {
