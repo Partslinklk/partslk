@@ -4,7 +4,7 @@ import { handle, json } from "@/server/http";
 
 /** Audit trail, newest first. Owner only. ?limit= (max 200) &offset= &entity= &action= */
 export const GET = handle(async (request: Request) => {
-  await requireAdmin(request, "owner");
+  await requireAdmin(request);
   const p = new URL(request.url).searchParams;
   const limit = Math.min(200, Math.max(1, Number(p.get("limit")) || 50));
   const offset = Math.max(0, Number(p.get("offset")) || 0);

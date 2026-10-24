@@ -122,7 +122,7 @@ export function ProductsPage({
       counts[opt.id] = SHOP_PRODUCTS.filter((p) => p.categories.includes(opt.id)).length;
     }
     return counts;
-  }, []);
+  }, [CATEGORY_OPTIONS, SHOP_PRODUCTS]);
 
   const brandCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -130,7 +130,7 @@ export function ProductsPage({
       counts[brand] = SHOP_PRODUCTS.filter((p) => p.brand === brand).length;
     }
     return counts;
-  }, []);
+  }, [BRAND_OPTIONS, SHOP_PRODUCTS]);
 
   const filtered = useMemo(() => {
     let list = SHOP_PRODUCTS.filter((product) => {
@@ -169,7 +169,7 @@ export function ProductsPage({
         break;
     }
     return list;
-  }, [initialQuery, selectedCategories, highlight, selectedColors, selectedSizes, selectedBrands, priceBand, minRating, sort]);
+  }, [SHOP_PRODUCTS, initialQuery, selectedCategories, highlight, selectedColors, selectedSizes, selectedBrands, priceBand, minRating, sort]);
 
   const visible = filtered.slice(0, visibleCount);
   const total = filtered.length;

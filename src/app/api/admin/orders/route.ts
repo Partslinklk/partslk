@@ -3,6 +3,6 @@ import { requireAdmin } from "@/server/admin";
 import { handle, json } from "@/server/http";
 
 export const GET = handle(async (request: Request) => {
-  await requireAdmin(request, "staff");
+  await requireAdmin(request);
   return json(await readCollection("orders"));
 });

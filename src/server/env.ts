@@ -27,9 +27,6 @@ const schema = z.object({
   STRIPE_WEBHOOK_SECRET: z.string().min(8).optional(),
   /** Three-letter ISO code, lower-case (the storefront shows LKR). */
   STRIPE_CURRENCY: z.string().length(3).default("lkr"),
-  /** Bearer token Vercel Cron sends to /api/cron/*. */
-  CRON_SECRET: z.string().min(16).optional(),
-  EMAIL_PROVIDER: z.enum(["mailtrap"]).default("mailtrap"),
   MAILTRAP_API_TOKEN: z.string().min(8).optional(),
   /** Live sending API; the Sandbox is used instead when MAILTRAP_INBOX_ID is set. */
   MAILTRAP_API_URL: z.url().default("https://send.api.mailtrap.io"),
@@ -39,10 +36,12 @@ const schema = z.object({
   EMAIL_FROM_NAME: z.string().min(1).max(100).default("Partslk"),
   /** Where contact-form messages are sent. */
   STAFF_NOTIFY_EMAIL: z.email().optional(),
-  /** Signs unsubscribe links; falls back to ADMIN_SECRET. */
+  /** Signs unsubscribe links. */
   EMAIL_TOKEN_SECRET: z.string().min(16).optional(),
   SUPABASE_STORAGE_BUCKET: z.string().min(3).default("product-images"),
-  ADMIN_SECRET: z.string().min(16, "ADMIN_SECRET must be at least 16 characters").optional(),
+  /** The single admin login (kept in env, no database table). */
+  ADMIN_EMAIL: z.email().optional(),
+  ADMIN_PASSWORD: z.string().min(8, "ADMIN_PASSWORD must be at least 8 characters").optional(),
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 });
 
@@ -64,11 +63,12 @@ export function env(): Env {
     throw new Error(`Invalid environment configuration:\n${lines}`);
   }
   if (parsed.data.NODE_ENV === "production") {
-    // A production deploy that is missing any of these would fail in confusing ways later (broken emails, dead cron jobs...).
+    // A production deploy that is missing any of these would fail in confusing ways later (broken emails, no admin login...).
     const d = parsed.data;
     const missing: string[] = [];
-    if (!d.ADMIN_SECRET) missing.push("ADMIN_SECRET");
-    if (!d.CRON_SECRET) missing.push("CRON_SECRET");
+    if (!d.EMAIL_TOKEN_SECRET) missing.push("EMAIL_TOKEN_SECRET");
+    if (!d.ADMIN_EMAIL) missing.push("ADMIN_EMAIL");
+    if (!d.ADMIN_PASSWORD) missing.push("ADMIN_PASSWORD");
     if (!d.SUPABASE_URL) missing.push("SUPABASE_URL");
     if (!d.SUPABASE_SERVICE_ROLE_KEY) missing.push("SUPABASE_SERVICE_ROLE_KEY");
     if (!d.NEXT_PUBLIC_SITE_URL) missing.push("NEXT_PUBLIC_SITE_URL");

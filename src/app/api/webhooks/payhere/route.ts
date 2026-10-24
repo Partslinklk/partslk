@@ -34,7 +34,7 @@ export const POST = handle(async (request: Request) => {
       break;
     case "-2":
       await query("insert into order_events (order_id, kind, detail) values ($1, 'payment_failed', $2)", [n.order_id, JSON.stringify({ payment_id: n.payment_id })]);
-      break; // the customer may retry inside the same pop-up; stale unpaid orders are cancelled by the cron
+      break; // the customer may retry inside the same pop-up; stale unpaid orders are cancelled by src/server/housekeeping.ts
     case "-3":
       await query("insert into order_events (order_id, kind, detail) values ($1, 'chargeback', $2)", [n.order_id, JSON.stringify({ payment_id: n.payment_id })]);
       break;

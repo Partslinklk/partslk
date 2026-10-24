@@ -13,7 +13,6 @@ export const PAYMENT_METHODS = {
   card: "Credit / debit card",
   payhere: "Card / online banking (PayHere)",
 } as const;
-export type PaymentMethod = keyof typeof PAYMENT_METHODS;
 
 export const checkoutSchema = z.object({
   customer: z.object({
@@ -36,8 +35,8 @@ export const checkoutSchema = z.object({
   couponCode: z.string().trim().max(50).optional(),
   payment: z.enum(["bank", "check", "cod", "card", "payhere"]),
   /**
-   * The card is entered in provider-hosted fields on our own page instead of redirecting.
-   * "card" (Stripe): returns a clientSecret, then /api/stripe/confirm. "paypal_card": returns a paypalOrderId, then /api/paypal/capture.
+   * The card is entered in Stripe's fields on our own page instead of redirecting:
+   * returns a clientSecret, then /api/stripe/confirm.
    */
   cardFields: z.boolean().default(false),
   note: z.string().trim().max(1000).default(""),
@@ -286,7 +285,7 @@ function transitionTx(orderId: string, next: string, opts: { trackingNumber?: st
   });
 }
 
-/** Backstop for abandoned card checkouts (Stripe normally tells us via the `expired` webhook). */
+/** Backstop for abandoned card checkouts (Stripe normally tells us via the `expired` webhook); run by housekeeping. */
 export async function cancelStaleCardOrders(olderThanMinutes = 45): Promise<number> {
   const { rows } = await query<{ id: string }>(
     `select id from orders where payment_method in ('card', 'payhere') and payment_status = 'unpaid' and status = 'pending'

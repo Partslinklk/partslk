@@ -5,14 +5,14 @@ import { handle, HttpError, json, parseBody } from "@/server/http";
 type Ctx = RouteContext<"/api/admin/coupons/[code]">;
 
 export const GET = handle(async (request: Request, ctx: Ctx) => {
-  await requireAdmin(request, "manager");
+  await requireAdmin(request);
   const found = await getCoupon((await ctx.params).code);
   if (!found) throw new HttpError(404, "Coupon not found.");
   return json(found);
 });
 
 export const PUT = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { code } = await ctx.params;
   const coupon = await parseBody(request, couponSchema);
   if (coupon.code !== code.toUpperCase()) throw new HttpError(400, "The code in the body must match the URL.");
@@ -23,7 +23,7 @@ export const PUT = handle(async (request: Request, ctx: Ctx) => {
 });
 
 export const DELETE = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { code } = await ctx.params;
   const before = await getCoupon(code);
   if (!(await deleteCoupon(code))) throw new HttpError(404, "Coupon not found.");

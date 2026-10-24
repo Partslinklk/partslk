@@ -15,13 +15,17 @@ export function AuthModal() {
   const [done, setDone] = useState<Done | null>(null);
   const [busy, setBusy] = useState(false);
 
-  useEffect(() => {
-    if (authOpen) {
-      setMode(authMode);
+  // Start from a clean form each time the modal opens (or is re-opened in another mode).
+  const openKey = authOpen ? authMode : null;
+  const [seenKey, setSeenKey] = useState<AuthMode | null>(null);
+  if (openKey !== seenKey) {
+    setSeenKey(openKey);
+    if (openKey) {
+      setMode(openKey);
       setError("");
       setDone(null);
     }
-  }, [authOpen, authMode]);
+  }
 
   useEffect(() => {
     if (!authOpen) return;

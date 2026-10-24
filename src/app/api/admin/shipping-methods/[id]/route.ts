@@ -5,14 +5,14 @@ import { handle, HttpError, json, parseBody } from "@/server/http";
 type Ctx = RouteContext<"/api/admin/shipping-methods/[id]">;
 
 export const GET = handle(async (request: Request, ctx: Ctx) => {
-  await requireAdmin(request, "staff");
+  await requireAdmin(request);
   const found = await getShippingMethod((await ctx.params).id);
   if (!found) throw new HttpError(404, "Shipping method not found.");
   return json(found);
 });
 
 export const PUT = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { id } = await ctx.params;
   const method = await parseBody(request, shippingSchema);
   if (method.id !== id) throw new HttpError(400, "The id in the body must match the URL.");
@@ -23,7 +23,7 @@ export const PUT = handle(async (request: Request, ctx: Ctx) => {
 });
 
 export const DELETE = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { id } = await ctx.params;
   const before = await getShippingMethod(id);
   if (!(await deleteShippingMethod(id))) throw new HttpError(404, "Shipping method not found.");

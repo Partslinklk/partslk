@@ -9,7 +9,7 @@ const schema = z.object({ orderId: z.string().min(3).max(40), token: z.string().
 /**
  * The customer's card was refused (or they gave up) after we had already reserved stock for the order:
  * release it right away so a retry starts clean. Needs the order's private lookup token, only works on
- * unpaid PayPal orders, and never touches an order that has been paid.
+ * unpaid card / PayHere orders, and never touches an order that has been paid.
  */
 export const POST = handle(async (request: Request) => {
   const { orderId, token } = await parseBody(request, schema);

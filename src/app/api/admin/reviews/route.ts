@@ -4,6 +4,6 @@ import { adminReviews } from "@/server/reviews";
 
 /** All reviews, pending first. */
 export const GET = handle(async (request: Request) => {
-  await requireAdmin(request, "manager");
+  await requireAdmin(request);
   return json(await adminReviews());
 });

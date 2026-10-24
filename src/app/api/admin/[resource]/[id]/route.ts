@@ -13,7 +13,7 @@ async function target(ctx: Ctx) {
 }
 
 export const GET = handle(async (request: Request, ctx: Ctx) => {
-  await requireAdmin(request, "staff");
+  await requireAdmin(request);
   const { resource, id } = await target(ctx);
   const item = await getResource(resource, id);
   if (!item) throw new HttpError(404, "Not found.");
@@ -22,7 +22,7 @@ export const GET = handle(async (request: Request, ctx: Ctx) => {
 
 /** Full replace of the item's fields (optional fields left out are cleared). */
 export const PUT = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { resource, id } = await target(ctx);
   const item = (await parseBody(request, schemas[resource])) as Record<string, unknown>;
   if (item.id !== id) throw new HttpError(400, "The id in the body must match the URL.");
@@ -34,7 +34,7 @@ export const PUT = handle(async (request: Request, ctx: Ctx) => {
 });
 
 export const DELETE = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { resource, id } = await target(ctx);
   const before = await getResource(resource, id);
   if (!(await removeResource(resource, id))) throw new HttpError(404, "Not found.");

@@ -14,6 +14,8 @@ export function pool(): Pool {
       // With DATABASE_CA_CERT the server certificate is verified; without it the connection is encrypted but not verified.
       ssl: e.DATABASE_CA_CERT ? { ca: e.DATABASE_CA_CERT.replace(/\\n/g, "\n"), rejectUnauthorized: true } : { rejectUnauthorized: false },
       max: e.PG_POOL_MAX,
+      // Release idle connections quickly so dev reloads don't hold on to the pooler's limited slots.
+      idleTimeoutMillis: 10_000,
       // Integration tests run in their own schema (set at connection start) so they never touch real data.
       ...(e.PG_SCHEMA ? { options: `-c search_path=${e.PG_SCHEMA},extensions` } : {}),
     });

@@ -5,7 +5,7 @@ import { sniffImage, uploadImage } from "@/server/storage";
 const MAX_BYTES = 5 * 1024 * 1024;
 
 export const POST = handle(async (request: Request) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const form = await request.formData().catch(() => null);
   const file = form?.get("file");
   if (!(file instanceof File)) throw new HttpError(400, "No file.");

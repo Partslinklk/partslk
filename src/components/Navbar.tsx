@@ -47,7 +47,6 @@ export function Navbar() {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", measure);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

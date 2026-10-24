@@ -1,46 +1,45 @@
-import { describe, expect, it } from "vitest";
+import { afterAll, describe, expect, it } from "vitest";
 import { z } from "zod";
 import { NextRequest } from "next/server";
-import { fakeVerify, hashPassword, verifyPassword } from "@/server/password";
+import { signingKeys } from "@/server/admin-keys";
+import { closeDb } from "./helpers";
 import { errorResponse, HttpError, parseBody } from "@/server/http";
 import * as t from "@/server/email/templates";
 import { createSession, verifySession } from "@/lib/admin-auth";
 import { proxy } from "@/proxy";
 
-describe("passwords (scrypt)", () => {
-  it("verifies the right password and rejects wrong ones", async () => {
-    const hash = await hashPassword("correct horse battery");
-    expect(hash.startsWith("scrypt$")).toBe(true);
-    expect(await verifyPassword("correct horse battery", hash)).toBe(true);
-    expect(await verifyPassword("correct horse batterz", hash)).toBe(false);
-    expect(await verifyPassword("", hash)).toBe(false);
-  });
-
-  it("salts every hash and rejects malformed stored values", async () => {
-    expect(await hashPassword("same")).not.toBe(await hashPassword("same"));
-    expect(await verifyPassword("x", "not-a-hash")).toBe(false);
-    expect(await verifyPassword("x", "bcrypt$1$2$3$4$5")).toBe(false);
-    await expect(fakeVerify("anything")).resolves.toBeUndefined();
-  });
-});
-
 describe("admin session token", () => {
   const secret = "unit-test-secret-0123456789";
 
-  it("round-trips and exposes admin id + role", async () => {
-    const token = await createSession("11111111-1111-1111-1111-111111111111", "owner", secret);
-    expect(await verifySession(token, secret)).toMatchObject({ adminId: "11111111-1111-1111-1111-111111111111", role: "owner" });
+  it("round-trips and exposes the admin id", async () => {
+    const token = await createSession("env-admin", secret);
+    expect(await verifySession(token, secret)).toMatchObject({ adminId: "env-admin" });
+  });
+
+  it("accepts any of several keys (rotation grace period)", async () => {
+    const token = await createSession("env-admin", "old-key-0123456789abcdef");
+    expect(await verifySession(token, [secret, "old-key-0123456789abcdef"])).toMatchObject({ adminId: "env-admin" });
   });
 
   it("rejects tampering, a wrong secret, junk, and expired tokens", async () => {
-    const token = await createSession("abc", "staff", secret);
-    const [id, role, exp, sig] = token.split(".");
-    expect(await verifySession(`${id}.owner.${exp}.${sig}`, secret)).toBeNull(); // role escalation
+    const token = await createSession("abc", secret);
+    const [id, exp, sig] = token.split(".");
+    expect(await verifySession(`other.${exp}.${sig}`, secret)).toBeNull(); // different admin id
     expect(await verifySession(token, "another-secret-0123456789")).toBeNull();
     expect(await verifySession("junk", secret)).toBeNull();
     expect(await verifySession(undefined, secret)).toBeNull();
     expect(await verifySession(token, undefined)).toBeNull();
-    expect(await verifySession(`${id}.${role}.${Date.now() - 1000}.${sig}`, secret)).toBeNull();
+    expect(await verifySession(`${id}.${Date.now() - 1000}.${sig}`, secret)).toBeNull();
+  });
+});
+
+describe("admin signing keys", () => {
+  it("are created once, then reused", async () => {
+    const first = await signingKeys();
+    const second = await signingKeys();
+    expect(first.current).toHaveLength(64);
+    expect(second.current).toBe(first.current);
+    expect(first.all).toContain(first.current);
   });
 });
 
@@ -112,13 +111,12 @@ describe("proxy: CSRF, CSP and route guards", () => {
     }
   });
 
-  it("allows same-origin calls, missing Origin (non-browser clients), safe methods and webhooks/cron", async () => {
+  it("allows same-origin calls, missing Origin (non-browser clients), safe methods and webhooks", async () => {
     for (const r of [
       req("/api/checkout", { method: "POST", headers: { origin: "http://localhost:3000" } }),
       req("/api/checkout", { method: "POST" }),
       req("/api/products", { method: "GET", headers: { origin: "https://evil.example" } }),
       req("/api/webhooks/stripe", { method: "POST", headers: { origin: "https://stripe.example" } }),
-      req("/api/cron/maintenance", { method: "GET" }),
     ]) {
       expect((await proxy(r)).status).toBe(200);
     }
@@ -154,8 +152,10 @@ describe("proxy: CSRF, CSP and route guards", () => {
   });
 
   it("accepts a valid admin cookie", async () => {
-    const token = await createSession("abc", "owner", "vitest-admin-secret-0123456789");
+    const token = await createSession("env-admin", (await signingKeys()).current);
     const res = await proxy(req("/api/admin/orders", { headers: { cookie: `admin_session=${token}` } }));
     expect(res.status).toBe(200);
   });
 });
+
+afterAll(closeDb);

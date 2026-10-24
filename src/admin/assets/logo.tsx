@@ -10,8 +10,8 @@ export function Logo({
   className?: string
   alt?: string
 }) {
-  // eslint-disable-next-line @next/next/no-img-element
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={siteConfig.logo}
       alt={alt}

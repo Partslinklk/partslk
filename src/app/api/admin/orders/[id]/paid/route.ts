@@ -4,7 +4,7 @@ import { handle, HttpError, json } from "@/server/http";
 
 /** Marks an order paid by hand (bank transfer received, cash collected, ...). Manager or owner. */
 export const POST = handle(async (request: Request, ctx: RouteContext<"/api/admin/orders/[id]/paid">) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const { id } = await ctx.params;
   const result = await markOrderPaid(id, null, `admin:${admin.email}`);
   if (result === "missing") throw new HttpError(404, "Order not found.");

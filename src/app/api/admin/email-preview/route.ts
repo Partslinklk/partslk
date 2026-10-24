@@ -58,7 +58,7 @@ const templateSchema = z.enum(TEMPLATES);
 
 /** Owner only. Opens the rendered email in the browser: /api/admin/email-preview?template=order_confirmation */
 export const GET = handle(async (request: Request) => {
-  await requireAdmin(request, "owner");
+  await requireAdmin(request);
   const name = new URL(request.url).searchParams.get("template") ?? "";
   const parsed = templateSchema.safeParse(name);
   if (!parsed.success) {
@@ -71,7 +71,7 @@ const sendSchema = z.object({ template: templateSchema, to: z.email().trim().toL
 
 /** Owner only. Sends a sample email through the normal outbox: { "template": "...", "to": "you@example.com" } */
 export const POST = handle(async (request: Request) => {
-  const admin = await requireAdmin(request, "owner");
+  const admin = await requireAdmin(request);
   const { template, to } = await parseBody(request, sendSchema);
 
   const key = `email-test:${admin.id}`;

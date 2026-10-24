@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { signingKeys } from "@/server/admin-keys";
 import { SESSION_COOKIE, SESSION_MAX_AGE, createSession, verifySession } from "@/lib/admin-auth";
 
 const PUBLIC = ["/admin/sign-in", "/api/admin/login"];
 const CUSTOMER_REFRESH_COOKIE = "cust_refresh"; // keep in sync with src/server/customer-auth.ts
 const SAFE_METHODS = new Set(["GET", "HEAD", "OPTIONS"]);
-// Called by Stripe / Vercel Cron (no browser Origin) and authenticated by signature / bearer secret instead.
-const NO_ORIGIN_CHECK = ["/api/webhooks/", "/api/cron/"];
+// Called by Stripe (no browser Origin) and authenticated by signature instead.
+const NO_ORIGIN_CHECK = ["/api/webhooks/"];
 
 /** Content-Security-Policy with a per-request nonce (scripts need it; 'strict-dynamic' lets Next's own chunks load). */
 function buildCsp(nonce: string) {
@@ -78,13 +79,13 @@ export async function proxy(request: NextRequest) {
   const isAdminArea = pathname.startsWith("/admin") || pathname.startsWith("/api/admin");
   if (!isAdminArea || PUBLIC.includes(pathname)) return finish(next());
 
-  const secret = process.env.ADMIN_SECRET;
-  const session = await verifySession(request.cookies.get(SESSION_COOKIE)?.value, secret);
-  if (session && secret) {
+  const keys = await signingKeys();
+  const session = await verifySession(request.cookies.get(SESSION_COOKIE)?.value, keys.all);
+  if (session) {
     const res = next();
     // Sliding session: re-issue once less than half the lifetime is left.
     if (session.expires - Date.now() < (SESSION_MAX_AGE * 1000) / 2) {
-      res.cookies.set(SESSION_COOKIE, await createSession(session.adminId, session.role, secret), {
+      res.cookies.set(SESSION_COOKIE, await createSession(session.adminId, keys.current), {
         httpOnly: true,
         sameSite: "lax",
         secure: process.env.NODE_ENV === "production",

@@ -85,7 +85,7 @@ async function deliver(id: string): Promise<void> {
 
 /**
  * Records an email in the outbox and sends it after the response has gone out (so a slow mail
- * provider never delays checkout). If sending fails, the row stays 'failed' and the retry cron picks it up.
+ * provider never delays checkout). If sending fails, the row stays 'failed' and housekeeping (src/server/housekeeping.ts) retries it.
  */
 export async function queueEmail(m: Outgoing): Promise<string | null> {
   try {
@@ -167,8 +167,8 @@ export const sendWelcome = (to: string, firstName: string) =>
 // ---------------------------------------------------------------- newsletter links
 
 function tokenSecret() {
-  const s = env().EMAIL_TOKEN_SECRET ?? env().ADMIN_SECRET;
-  if (!s) throw new Error("Set ADMIN_SECRET (or EMAIL_TOKEN_SECRET) to sign unsubscribe links.");
+  const s = env().EMAIL_TOKEN_SECRET;
+  if (!s) throw new Error("Set EMAIL_TOKEN_SECRET to sign unsubscribe links.");
   return s;
 }
 

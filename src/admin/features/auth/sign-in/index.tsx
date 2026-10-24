@@ -1,6 +1,6 @@
 'use client'
 
-import { Link, useSearch } from '@/admin/lib/router'
+import { useSearch } from '@/admin/lib/router'
 import {
   Card,
   CardContent,

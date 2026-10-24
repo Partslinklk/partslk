@@ -8,22 +8,16 @@ import { isResource } from "@/server/validation/catalog";
  * readCollection keeps the JSON shape the storefront and admin already use.
  */
 
-export const COLLECTIONS = [
-  "products",
-  "categories",
-  "brands",
-  "makes",
-  "deals",
-  "featured",
-  "popular",
-  "testimonials",
-  "orders",
-] as const;
-export type CollectionName = (typeof COLLECTIONS)[number];
-
-export function isCollection(name: string): name is CollectionName {
-  return (COLLECTIONS as readonly string[]).includes(name);
-}
+export type CollectionName =
+  | "products"
+  | "categories"
+  | "brands"
+  | "makes"
+  | "deals"
+  | "featured"
+  | "popular"
+  | "testimonials"
+  | "orders";
 
 export type Category = { id: string; name: string; image: string; links: string[]; featured: boolean };
 export type Brand = { id: string; name: string };
@@ -61,7 +55,6 @@ export type Testimonial = {
   avatar: string;
 };
 export type OrderStatus = "pending" | "processing" | "shipped" | "delivered" | "cancelled";
-export const ORDER_STATUSES: OrderStatus[] = ["pending", "processing", "shipped", "delivered", "cancelled"];
 export type Order = {
   id: string;
   createdAt: string;
@@ -82,19 +75,23 @@ export type Order = {
   trackingNumber?: string | null;
 };
 
-async function readOrders(customerId?: string): Promise<Order[]> {
-  const [orders, items] = await Promise.all([
-    customerId
-      ? pool().query("select * from orders where customer_id = $1 order by created_at desc, id", [customerId])
-      : pool().query("select * from orders order by created_at desc, id"),
-    customerId
-      ? pool().query(
-          `select order_id, product_id, name, image, price, qty from order_items
-            where order_id in (select id from orders where customer_id = $1) order by order_id, position`,
-          [customerId],
-        )
-      : pool().query("select order_id, product_id, name, image, price, qty from order_items order by order_id, position"),
-  ]);
+/** Admin order list: newest first, capped so the page stays fast as the shop grows. */
+const ADMIN_ORDER_LIMIT = 1000;
+
+async function readOrders(where: { customerId?: string; id?: string } = {}): Promise<Order[]> {
+  const clauses: string[] = [];
+  const params: unknown[] = [];
+  if (where.customerId) clauses.push(`customer_id = $${params.push(where.customerId)}`);
+  if (where.id) clauses.push(`id = $${params.push(where.id)}`);
+  const filter = clauses.length ? `where ${clauses.join(" and ")}` : "";
+  const limit = clauses.length ? "" : `limit ${ADMIN_ORDER_LIMIT}`;
+
+  const orders = await pool().query(`select * from orders ${filter} order by created_at desc, id ${limit}`, params);
+  const items = await pool().query(
+    `select order_id, product_id, name, image, price, qty from order_items
+      where order_id = any($1::text[]) order by order_id, position`,
+    [orders.rows.map((r) => r.id)],
+  );
   const byOrder = new Map<string, Order["items"]>();
   for (const i of items.rows) {
     const list = byOrder.get(i.order_id) ?? [];
@@ -122,7 +119,10 @@ async function readOrders(customerId?: string): Promise<Order[]> {
 }
 
 /** Orders placed while signed in as this customer, newest first. */
-export const readCustomerOrders = (customerId: string) => readOrders(customerId);
+export const readCustomerOrders = (customerId: string) => readOrders({ customerId });
+
+/** One order by id (optionally only if it belongs to this customer). */
+export const readOrder = async (id: string, customerId?: string) => (await readOrders({ id, customerId }))[0];
 
 export async function readCollection<T = unknown>(name: CollectionName): Promise<T[]> {
   if (name === "orders") return (await readOrders()) as T[];

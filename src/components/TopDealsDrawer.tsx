@@ -3,7 +3,6 @@
 import { useEffect } from "react";
 import { useUI } from "./UIProvider";
 import { ImageSlot } from "./ImageSlot";
-import { type FeaturedProduct } from "@/lib/weekly-deals";
 import { useStoreData } from "@/lib/store-context";
 import { formatProductPrice } from "@/lib/format-price";
 

@@ -15,7 +15,7 @@ async function messageId(ctx: Ctx) {
 }
 
 export const PUT = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "staff");
+  const admin = await requireAdmin(request);
   const id = await messageId(ctx);
   const { status } = await parseBody(request, statusSchema);
   const r = await query("update contact_messages set status = $2 where id = $1", [id, status]);
@@ -25,7 +25,7 @@ export const PUT = handle(async (request: Request, ctx: Ctx) => {
 });
 
 export const DELETE = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const id = await messageId(ctx);
   const r = await query("delete from contact_messages where id = $1 returning name, email", [id]);
   if (!r.rowCount) throw new HttpError(404, "Message not found.");

@@ -15,7 +15,7 @@ async function reviewId(ctx: Ctx) {
 
 /** Approve / reject. The product's rating and review count are recomputed in the same transaction. */
 export const PUT = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const id = await reviewId(ctx);
   const { status } = await parseBody(request, statusSchema);
   if (!(await moderateReview(id, status))) throw new HttpError(404, "Review not found.");
@@ -24,7 +24,7 @@ export const PUT = handle(async (request: Request, ctx: Ctx) => {
 });
 
 export const DELETE = handle(async (request: Request, ctx: Ctx) => {
-  const admin = await requireAdmin(request, "manager");
+  const admin = await requireAdmin(request);
   const id = await reviewId(ctx);
   const removed = await deleteReview(id);
   if (!removed) throw new HttpError(404, "Review not found.");

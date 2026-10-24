@@ -14,6 +14,8 @@ export function SignOutDialog({ open, onOpenChange }: SignOutDialogProps) {
   const handleSignOut = async () => {
     auth.reset()
     await fetch('/api/admin/logout', { method: 'POST' }).catch(() => null)
+    // Full page load on purpose: it drops all in-memory admin state.
+    // eslint-disable-next-line @next/next/no-location-assign-relative-destination
     window.location.assign('/admin/sign-in')
   }
 

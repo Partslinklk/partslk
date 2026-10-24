@@ -1,5 +1,5 @@
 import { timingSafeEqual } from "crypto";
-import { readCollection, type Order } from "@/lib/db";
+import { readOrder } from "@/lib/db";
 import { query } from "@/server/db";
 import { handle, HttpError, json } from "@/server/http";
 
@@ -18,7 +18,7 @@ export const GET = handle(async (request: Request, ctx: RouteContext<"/api/order
   const b = Buffer.from(row?.lookup_token ?? "x".repeat(32));
   if (!row || a.length !== b.length || !timingSafeEqual(a, b)) throw new HttpError(404, "Order not found.");
 
-  const order = (await readCollection<Order>("orders")).find((o) => o.id === id);
+  const order = await readOrder(id);
   if (!order) throw new HttpError(404, "Order not found.");
   return json({ id: order.id, status: order.status, paymentStatus: row.payment_status, total: order.total, createdAt: order.createdAt });
 });

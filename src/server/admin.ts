@@ -1,12 +1,13 @@
 import { SESSION_COOKIE, verifySession } from "@/lib/admin-auth";
+import { signingKeys } from "./admin-keys";
 import { query } from "./db";
 import { env } from "./env";
 import { HttpError } from "./http";
 
-export type AdminRole = "owner" | "manager" | "staff";
-export type Admin = { id: string; email: string; role: AdminRole };
+export type Admin = { id: string; email: string };
 
-const RANK: Record<AdminRole, number> = { staff: 1, manager: 2, owner: 3 };
+/** The one admin lives in env (ADMIN_EMAIL / ADMIN_PASSWORD), not in the database; this is its session id. */
+export const ENV_ADMIN_ID = "env-admin";
 
 function readCookie(request: Request, name: string) {
   for (const part of (request.headers.get("cookie") ?? "").split(/;\s*/)) {
@@ -16,27 +17,17 @@ function readCookie(request: Request, name: string) {
   return undefined;
 }
 
-/**
- * Authenticates an admin request and enforces a minimum role (owner > manager > staff).
- * The proxy is the first gate; this re-checks the signature AND the database so a
- * deactivated or demoted admin loses access immediately.
- */
-export async function requireAdmin(request: Request, minRole: AdminRole = "staff"): Promise<Admin> {
-  const session = await verifySession(readCookie(request, SESSION_COOKIE), env().ADMIN_SECRET);
-  if (!session) throw new HttpError(401, "Unauthorized");
-  const { rows } = await query<Admin & { active: boolean }>(
-    "select id, email, role, active from admin_users where id = $1",
-    [session.adminId],
-  );
-  const admin = rows[0];
-  if (!admin || !admin.active) throw new HttpError(401, "Unauthorized");
-  if (RANK[admin.role] < RANK[minRole]) throw new HttpError(403, "You don't have permission to do that.");
-  return { id: admin.id, email: admin.email, role: admin.role };
+/** Authenticates an admin request from the signed session cookie. The proxy is the first gate; this re-checks the signature. */
+export async function requireAdmin(request: Request): Promise<Admin> {
+  const { ADMIN_EMAIL } = env();
+  const session = await verifySession(readCookie(request, SESSION_COOKIE), (await signingKeys()).all);
+  if (!session || session.adminId !== ENV_ADMIN_ID || !ADMIN_EMAIL) throw new HttpError(401, "Unauthorized");
+  return { id: ENV_ADMIN_ID, email: ADMIN_EMAIL.toLowerCase() };
 }
 
 /** Records an admin action. Never throws: a logging failure must not undo or fail the change itself. */
 export async function logAudit(
-  admin: Pick<Admin, "id" | "email">,
+  admin: Pick<Admin, "email">,
   action: string,
   entity: string,
   entityId?: string | null,
@@ -44,8 +35,8 @@ export async function logAudit(
 ) {
   try {
     await query(
-      "insert into audit_log (admin_id, admin_email, action, entity, entity_id, diff) values ($1,$2,$3,$4,$5,$6)",
-      [admin.id, admin.email, action, entity, entityId ?? null, diff === undefined ? null : JSON.stringify(diff)],
+      "insert into audit_log (admin_email, action, entity, entity_id, diff) values ($1,$2,$3,$4,$5)",
+      [admin.email, action, entity, entityId ?? null, diff === undefined ? null : JSON.stringify(diff)],
     );
   } catch (e) {
     console.error("audit log failed", e);
